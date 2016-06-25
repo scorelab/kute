@@ -36,7 +36,7 @@ public class SplashActivity extends Activity {
         mainlayout=(RelativeLayout)findViewById(R.id.splash_mainlayout);
         logindata=(RelativeLayout)findViewById(R.id.logincontent);
         logindata.setVisibility(View.INVISIBLE);
-        showup.setFillAfter(true);
+//        showup.setFillAfter(true);
         logindata.startAnimation(showup);
 
         new AnimationTimer().execute();
