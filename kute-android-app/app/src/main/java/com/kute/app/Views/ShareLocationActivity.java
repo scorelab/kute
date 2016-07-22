@@ -30,7 +30,7 @@ public class ShareLocationActivity extends AppCompatActivity {
 
         vehicleList = (Spinner) findViewById(R.id.itemListSpinner);
 
-        shareNow = (Button) findViewById(R.id.shareNow_button);
+        shareNow = (Button) findViewById(R.id.share_button);
         cancel = (Button) findViewById(R.id.cancel_button);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -42,7 +42,8 @@ public class ShareLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent share = new Intent(getApplicationContext(), IndividualShareLocationActivity.class);
+                Intent share = new Intent(getApplicationContext(),
+                        IndividualShareLocationActivity.class);
                 startActivity(share);
                 finish();
             }

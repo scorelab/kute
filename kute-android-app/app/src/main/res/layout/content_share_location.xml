@@ -48,10 +48,10 @@
             android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:layout_height="50dp"
-            android:text="@string/share_now"
+            android:text="@string/share"
             android:textColor="#000000"
             android:background="@drawable/roundbutton2"
-            android:id="@+id/shareNow_button"
+            android:id="@+id/share_button"
             android:layout_weight="1"
             android:layout_gravity="bottom" />
 

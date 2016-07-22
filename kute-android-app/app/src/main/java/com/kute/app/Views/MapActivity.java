@@ -54,7 +54,8 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent shareThis = new Intent(getApplicationContext(), ShareLocationActivity.class);
+                Intent shareThis = new Intent(getApplicationContext(),
+                        ShareLocationActivity.class);
                 startActivity(shareThis);
                 finish();
             }
@@ -64,7 +65,8 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent shareThis = new Intent(getApplicationContext(), ShareLocationActivity.class);
+                Intent shareThis = new Intent(getApplicationContext(),
+                        ShareLocationActivity.class);
                 startActivity(shareThis);
                 finish();
             }
@@ -74,7 +76,8 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent shareThis = new Intent(getApplicationContext(), ShareLocationActivity.class);
+                Intent shareThis = new Intent(getApplicationContext(),
+                        ShareLocationActivity.class);
                 startActivity(shareThis);
                 finish();
             }
@@ -102,7 +105,8 @@ public class MapActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.sign_out:
-                Intent goBack = new Intent(getApplicationContext(), SplashActivity.class);
+                Intent goBack = new Intent(getApplicationContext(),
+                        SplashActivity.class);
                 startActivity(goBack);
                 finish();
                 return true;

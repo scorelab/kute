@@ -69,23 +69,26 @@ public class SplashActivity extends Activity {
                 String user = userName.getText().toString();
                 String pass = passWord.getText().toString();
 
-                if (user.equalsIgnoreCase(logger.getUserName()) && (pass.contentEquals(logger.getPassword()))) {
+                if (user.equalsIgnoreCase(logger.getUserName())
+                        && (pass.contentEquals(logger.getPassword()))) {
                     logger.setUserLogged(true);
                     Intent mainac = new Intent(getApplicationContext(), MapActivity.class);
                     startActivity(mainac);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Welcome " + user, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Welcome "
+                            + user, Toast.LENGTH_LONG).show();
 
                 } else {
                     try {
                         if (!user.equalsIgnoreCase(logger.getUserName())) {
-                            userName.setError("Is this correct???");
+                            userName.setError("Incorrect! Please re-enter Username.");
                         }
                         if (!pass.contentEquals(logger.getPassword())) {
-                            passWord.setError("Can you check this again???");
+                            passWord.setError("Password Incorrect!");
                         }
                     } catch (NullPointerException e) {
-                        Toast.makeText(getApplicationContext(), "Please click Signup and try again! :)", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Please click Signup and try again! :)", Toast.LENGTH_LONG).show();
                     }
                 }
             }

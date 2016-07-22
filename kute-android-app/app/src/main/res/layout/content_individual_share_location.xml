@@ -26,23 +26,23 @@
             android:gravity="center|center_vertical"
             android:layout_centerHorizontal="true" />
 
-        <FrameLayout
-            android:id="@+id/mapArea"
-            android:layout_width="match_parent"
-            android:layout_height="310dp"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_below="@+id/vehicleID"
-            android:layout_centerHorizontal="true"/>
+            android:layout_width="match_parent"
+            android:layout_height="380dp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:text="Share"
+            android:text="Share Now"
             android:id="@+id/button"
             android:background="@drawable/roundbutton2"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/mapArea" />
+            android:layout_below="@+id/map" />
 
 
     </RelativeLayout>

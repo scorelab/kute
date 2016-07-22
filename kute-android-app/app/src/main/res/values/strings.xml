@@ -13,6 +13,7 @@
     <string name="share_location">Share \n Location</string>
     <string name="cancel">Cancel</string>
     <string name="share_now">Share Now!</string>
+    <string name="share">Share</string>
     <string name="share_location_header">Share Location</string>
 
     <string-array name="train_list">
