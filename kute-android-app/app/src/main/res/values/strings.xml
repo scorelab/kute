@@ -1,3 +1,38 @@
 <resources>
+
     <string name="app_name">Kute</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="sign_me_in">Sign me in!</string>
+    <string name="i_forgot_my_password">I forgot my password</string>
+    <string name="register">Register</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_share_location">Share Location</string>
+    <string name="title_activity_individual_share_location">Share Location</string>
+    <string name="show_location">Show \n Location</string>
+    <string name="share_location">Share \n Location</string>
+    <string name="cancel">Cancel</string>
+    <string name="share_now">Share Now!</string>
+    <string name="share_location_header">Share Location</string>
+
+    <string-array name="train_list">
+        <item>Train A</item>
+        <item>Train B</item>
+        <item>Train C</item>
+        <item>Train D</item>
+        <item>Train E</item>
+        <item>Train F</item>
+        <item>Train G</item>
+        <item>Train H</item>
+        <item>Train I</item>
+        <item>Train J</item>
+        <item>Train K</item>
+        <item>Train L</item>
+        <item>Train M</item>
+        <item>Train N</item>
+        <item>Train O</item>
+    </string-array>
+
+    <string name="sign_out">Sign Out</string>
+
 </resources>

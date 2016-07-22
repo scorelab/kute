@@ -2,10 +2,15 @@ package com.kute.app.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.kute.app.R;
 
@@ -14,9 +19,10 @@ import com.kute.app.R;
  */
 public class SplashActivity extends Activity {
 
-    Animation move;
+    Animation move,showup;
     ImageView myImageView;
-
+    RelativeLayout logindata;
+    RelativeLayout mainlayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,21 +30,17 @@ public class SplashActivity extends Activity {
 
         myImageView = (ImageView) findViewById(R.id.myImage);
         move = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move);
+        showup = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.loginshow);
         myImageView.startAnimation(move);
 
-        Thread timer = new Thread(){
-            public void run(){
-                try {
-                    sleep(2000);
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }finally {
-                    Intent openSignInActivity = new Intent("app.android.com.kute.app.SignInActivity");
-                    startActivity(openSignInActivity);
-                }
-            }
-        };
-        timer.start();
+        mainlayout=(RelativeLayout)findViewById(R.id.splash_mainlayout);
+        logindata=(RelativeLayout)findViewById(R.id.logincontent);
+        logindata.setVisibility(View.INVISIBLE);
+//        showup.setFillAfter(true);
+        logindata.startAnimation(showup);
+
+        new AnimationTimer().execute();
+
 
     }
 
@@ -46,4 +48,40 @@ public class SplashActivity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
+
+    class AnimationTimer extends AsyncTask<Void,String ,Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            logindata.setVisibility(View.INVISIBLE);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(getApplicationContext(),"Welcome to Kute",Toast.LENGTH_LONG).show();
+
+            logindata.setVisibility(View.VISIBLE);
+
+
+
+        }
+    }
+
 }
+

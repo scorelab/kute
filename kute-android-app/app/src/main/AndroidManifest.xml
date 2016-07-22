@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".Views.SplashActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +28,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Views.MapActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Views.ShareLocationActivity"
+            android:label="@string/title_activity_share_location"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Views.IndividualShareLocationActivity"
+            android:label="@string/title_activity_individual_share_location"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 
