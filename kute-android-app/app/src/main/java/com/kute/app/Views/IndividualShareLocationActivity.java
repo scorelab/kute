@@ -1,14 +1,19 @@
 package com.kute.app.Views;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,12 +43,19 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
+import com.kute.app.Helpers.DBLatLon;
+import com.kute.app.Views.LocationUpdateService;
 import com.kute.app.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,16 +74,28 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
     private double toLongitude, toLatitude;
     // A client object to handle calls in the API
     private GoogleApiClient google;
+    // From and To time
+    private long timeFrom, timeTo;
 
     private Button buttonSetTo;
     private Button buttonSetFrom;
     private Button buttonCalcDistance;
+    public DBLatLon db;
+    public MyReceiver myReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Initiate the activity with the layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_individual_share_location);
+
+        IntentFilter filter = new IntentFilter("com.pycitup.BroadcastReceiver");
+        myReceiver = new MyReceiver();
+        registerReceiver(myReceiver, filter);
+
+        startService(new Intent(this, LocationUpdateService.class));
+
+        db = new DBLatLon(getApplicationContext());
 
         // Get selected vehicle from previous intent and set it as the vehicle name
         TextView vehicleName = (TextView) findViewById(R.id.vehicleID);
@@ -190,7 +214,11 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         // Calculating the distance in meters
         Double distance = SphericalUtil.computeDistanceBetween(from, to);
         // Displaying the distance
-        Toast.makeText(this, String.valueOf(distance + " meters"), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, String.valueOf(distance + " meters"), Toast.LENGTH_SHORT).show();
+        long timeTaken = (Math.abs(timeTo - timeFrom)) * 1000;
+        Double speed = distance/timeTaken;
+        Toast.makeText(getApplicationContext(), "Speed is " + speed + " and distance is "+ distance
+                + " meters", Toast.LENGTH_LONG).show();
 
         try {
             final JSONObject json = new JSONObject(result);
@@ -200,10 +228,10 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
             String encodedString = overviewPolyLines.getString("points");
             List<LatLng> list = decodePoly(encodedString);
             mMap.addPolyline(new PolylineOptions()
-                    .addAll(list)
-                    .width(10)
-                    .color(Color.BLUE)
-                    .geodesic(true)
+                            .addAll(list)
+                            .width(10)
+                            .color(Color.BLUE)
+                            .geodesic(true)
             );
         } catch (JSONException e) {
             e.printStackTrace();
@@ -240,15 +268,40 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getApplicationContext(), "No permission",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "No permission", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void writeToFile(String data) throws IOException {
+
+        FileOutputStream fileout= openFileOutput("mytextfile.txt", MODE_PRIVATE);
+        OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+        outputWriter.write(data);
+        outputWriter.close();
+
+        //display file saved message
+        Toast.makeText(getBaseContext(), "File saved successfully!",
+                Toast.LENGTH_SHORT).show();
+        /*try {
+            File path = getApplicationContext().getFilesDir();
+            File file = new File(path, "Logger.txt");
+            FileOutputStream stream = new FileOutputStream(file);
+            try {
+                stream.write(data.getBytes());
+            } finally {
+                stream.close();
+            }
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }*/
     }
 
     @Override
     public void onClick(View v) {
 
         if (v == buttonSetFrom) {
+            timeFrom = System.currentTimeMillis();
             fromLatitude = latitude;
             fromLongitude = longitude;
             Toast.makeText(this, "From set to " + fromLatitude + " " + fromLongitude,
@@ -256,6 +309,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         }
 
         if (v == buttonSetTo) {
+            timeTo = System.currentTimeMillis();
             toLatitude = latitude;
             toLongitude = longitude;
             Toast.makeText(this, "To set to " + toLatitude + " " + toLongitude,
@@ -349,6 +403,9 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
 
         google.connect();
         super.onStart();
+        IntentFilter filter = new IntentFilter("com.pycitup.BroadcastReceiver");
+        myReceiver = new MyReceiver();
+        registerReceiver(myReceiver, filter);
 
         Action action = Action.newAction(
                 Action.TYPE_VIEW,
@@ -369,6 +426,26 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                 Uri.parse("android-app://com.kute.app/http/host/path")
         );
         AppIndex.AppIndexApi.end(google, action);
+    }
+
+    /***********************************************************************************************
+     * Broadcast receiver to catch new latitudes and longitudes and update map
+     **********************************************************************************************/
+    class MyReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (!DBLatLon.isRecord) {
+                return;
+            }
+            double lat = intent.getDoubleExtra("Lat", 0);
+            double lon = intent.getDoubleExtra("Lon", 0);
+            if (mMap != null) {
+                mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)));
+                Toast.makeText(getApplicationContext(), lat + " " + lon, Toast.LENGTH_LONG).show();
+                Log.d("Dilu", lat + " " + lon);
+            }
+        }
     }
 
     /***********************************************************************************************
@@ -393,9 +470,29 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                 finish();
                 return true;
 
+            case R.id.track:
+                db.addRecord(0, 0);
+                DBLatLon.isRecord = !DBLatLon.isRecord;
+                if (DBLatLon.isRecord) {
+                    item.setTitle("Stop Recording");
+                } else {
+                    item.setTitle("Start Recording");
+                }
+                return true;
+
+            case R.id.clear:
+                mMap.clear();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
     }
 
     @Override
