@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.kute.app.R;
 import com.kute.app.Helpers.Logger;
-import com.kute.app.activity.SignInActivity;
 
 /**
  * Created by charith on 6/18/16.

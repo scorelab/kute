@@ -35,5 +35,7 @@
     </string-array>
 
     <string name="sign_out">Sign Out</string>
+    <string name="login">Login</string>
+    <string name="signup">SignUp</string>
 
 </resources>

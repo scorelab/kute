@@ -5,4 +5,12 @@
         android:icon="@android:drawable/btn_dialog"
         android:title="@string/sign_out"/>
 
+    <item android:id="@+id/track"
+        android:icon="@android:drawable/btn_dialog"
+        android:title="@string/sign_out"/>
+
+    <item android:id="@+id/clear"
+        android:icon="@android:drawable/btn_dialog"
+        android:title="@string/sign_out"/>
+
 </menu>

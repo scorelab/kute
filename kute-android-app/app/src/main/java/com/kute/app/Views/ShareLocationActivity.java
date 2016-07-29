@@ -44,6 +44,9 @@ public class ShareLocationActivity extends AppCompatActivity {
 
                 Intent share = new Intent(getApplicationContext(),
                         IndividualShareLocationActivity.class);
+                Bundle selectedDetails = new Bundle();
+                selectedDetails.putString("Selected Vehicle", vehicleList.getSelectedItem().toString());
+                share.putExtra("bundle", selectedDetails);
                 startActivity(share);
                 finish();
             }
