@@ -14,7 +14,9 @@
     <string name="cancel">Cancel</string>
     <string name="share_now">Share Now!</string>
     <string name="share">Share</string>
+    <string name="show">Show</string>
     <string name="share_location_header">Share Location</string>
+    <string name="show_location_header">Show Location</string>
 
     <string-array name="train_list">
         <item>Train A</item>
@@ -37,5 +39,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="login">Login</string>
     <string name="signup">SignUp</string>
+    <string name="title_activity_show_location">ShowLocation</string>
+    <string name="title_activity_individual_show_location">IndividualShowLocationActivity</string>
 
 </resources>

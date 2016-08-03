@@ -46,7 +46,11 @@ public class MapActivity extends AppCompatActivity {
         showLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setStates(true);
+                //setStates(true);
+                Intent shareThis = new Intent(getApplicationContext(),
+                        ShowLocationActivity.class);
+                startActivity(shareThis);
+                finish();
             }
         });
 
