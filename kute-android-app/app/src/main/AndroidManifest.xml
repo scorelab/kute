@@ -57,6 +57,17 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".Views.ShowLocationActivity"
+            android:label="@string/title_activity_show_location"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Views.IndividualShowLocationActivity"
+            android:label="@string/title_activity_individual_show_location"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

@@ -164,7 +164,6 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
-
     /***********************************************************************************************
      * Get directions between two points
      **********************************************************************************************/
@@ -259,7 +258,8 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         mMap.setOnMarkerDragListener(this);
         mMap.setOnMapLongClickListener(this);
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(current).zoom(12).build();
+        CameraPosition cameraPosition =
+                new CameraPosition.Builder().target(current).zoom(12).build();
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
