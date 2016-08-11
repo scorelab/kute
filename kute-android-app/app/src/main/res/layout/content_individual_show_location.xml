@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingBottom="@dimen/activity_vertical_margin"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context="com.kute.app.activity.Views.IndividualShowLocationActivity"
+tools:showIn="@layout/activity_individual_show_location">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Train A"
+        android:id="@+id/vehicleID"
+        android:gravity="center|center_vertical"
+        android:layout_centerHorizontal="true" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@+id/vehicleID"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/map">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            android:text="@string/share_now"
+            android:textColor="#000000"
+            android:background="@drawable/roundbutton2"
+            android:id="@+id/show_button"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            android:background="@drawable/roundbutton1"
+            android:textColor="#000000"
+            android:text="@string/cancel"
+            android:id="@+id/cancel_button"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+</ScrollView>
