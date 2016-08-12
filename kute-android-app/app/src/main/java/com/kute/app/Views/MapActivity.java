@@ -95,6 +95,7 @@ public class MapActivity extends AppCompatActivity {
         carButton.setEnabled(state);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

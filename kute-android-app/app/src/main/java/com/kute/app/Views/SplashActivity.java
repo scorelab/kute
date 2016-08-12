@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.kute.app.R;
 import com.kute.app.Helpers.Logger;
 
@@ -22,7 +29,9 @@ import com.kute.app.Helpers.Logger;
  */
 
 public class SplashActivity extends Activity {
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private String TAG="Splash Activity";
     Animation move, showup;
     ImageView myImageView;
     RelativeLayout logindata;
@@ -30,7 +39,7 @@ public class SplashActivity extends Activity {
     EditText userName, passWord;
     Button login, register;
     TextView forgot;
-
+    boolean res;
     Logger logger;
 
     @Override
@@ -38,6 +47,8 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_activity);
+
+
 
         logger = new Logger(this);
 
@@ -59,6 +70,14 @@ public class SplashActivity extends Activity {
         logindata.startAnimation(showup);
 
         new AnimationTimer().execute();
+        initFirebase();
+
+
+        if(mAuth.getCurrentUser()!=null){
+            gotoNextView();
+        }
+
+
 
         // Login action
         login.setOnClickListener(new View.OnClickListener() {
@@ -68,27 +87,20 @@ public class SplashActivity extends Activity {
                 String user = userName.getText().toString();
                 String pass = passWord.getText().toString();
 
-                if (user.equalsIgnoreCase(logger.getUserName())
-                        && (pass.contentEquals(logger.getPassword()))) {
-                    logger.setUserLogged(true);
-                    Intent mainac = new Intent(getApplicationContext(), MapActivity.class);
-                    startActivity(mainac);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "Welcome "
-                            + user, Toast.LENGTH_LONG).show();
+                if (true) {
+                    doLogin(user,pass);
+                    if(res){
+                        Toast.makeText(getApplicationContext(), "Welcome " + user, Toast.LENGTH_LONG).show();
+                        logger.setUserLogged(true);
+                        gotoNextView();
+
+                    }
 
                 } else {
-                    try {
-                        if (!user.equalsIgnoreCase(logger.getUserName())) {
-                            userName.setError("Incorrect! Please re-enter Username.");
-                        }
-                        if (!pass.contentEquals(logger.getPassword())) {
-                            passWord.setError("Password Incorrect!");
-                        }
-                    } catch (NullPointerException e) {
+
                         Toast.makeText(getApplicationContext(),
                                 "Please click Signup and try again! :)", Toast.LENGTH_LONG).show();
-                    }
+
                 }
             }
         });
@@ -97,10 +109,103 @@ public class SplashActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO Implement signup and related tasks
-                logger.setUserName("Admin");
-                logger.setPassword("pass");
+                doRegister(userName.getText().toString(),passWord.getText().toString());
             }
         });
+    }
+
+    private void initFirebase(){
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    public void doRegister(String uname,String pwd){
+    Log.e(TAG,uname+" "+pwd);
+    mAuth.createUserWithEmailAndPassword(uname, pwd)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                    // If sign in fails, display a message to the user. If sign in succeeds
+                    // the auth state listener will be notified and logic to handle the
+                    // signed in user can be handled in the listener.
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Registration failed",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "You have successfully Registered",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    // ...
+                }
+            });
+}
+
+    public void doLogin(String email,String pwd){
+
+        mAuth.signInWithEmailAndPassword(email, pwd)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(SplashActivity.this, "Sorry Login failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        res = task.isSuccessful();
+
+
+                        // ...
+                    }
+                });
+
+    }
+    //ToDo set user logged in session to unlimited.
+    //ToDo username password validation pwd has spme required length
+    public void gotoNextView(){
+        Intent mainac = new Intent(getApplicationContext(), MapActivity.class);
+        startActivity(mainac);
+        finish();
+    }
+    public void authtestfunction(){
+
+
     }
 
     private class AnimationTimer extends AsyncTask<Void, String, Void> {
@@ -131,5 +236,6 @@ public class SplashActivity extends Activity {
             super.onPostExecute(aVoid);
         }
     }
+
 }
 

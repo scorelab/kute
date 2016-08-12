@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "978978828335",
-    "firebase_url": "https://project-2236457441890122934.firebaseio.com",
-    "project_id": "project-2236457441890122934",
-    "storage_bucket": "project-2236457441890122934.appspot.com"
+    "project_number": "823547099515",
+    "firebase_url": "https://kute-37f82.firebaseio.com",
+    "project_id": "kute-37f82",
+    "storage_bucket": "kute-37f82.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:978978828335:android:ee3ea1d2f4a734ed",
+        "mobilesdk_app_id": "1:823547099515:android:ee3ea1d2f4a734ed",
         "android_client_info": {
           "package_name": "com.kute.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "978978828335-2nfgucruqvgca8td0nj8fjuop3s14j7s.apps.googleusercontent.com",
+          "client_id": "823547099515-kmt5dncu1qn25bucourol9t7s78q075u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANgjVFXo5Vdm603Ac9NRZWOXLQLVYVXI8"
+          "current_key": "AIzaSyC7ZZG728BkftDVxHy70TWZtTENjvL1dHw"
         }
       ],
       "services": {

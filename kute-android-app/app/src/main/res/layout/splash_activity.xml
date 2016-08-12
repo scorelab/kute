@@ -54,6 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:text="nrv.rox.u@gmail.com"
                     android:lines="1"
                     android:singleLine="true" />
 
