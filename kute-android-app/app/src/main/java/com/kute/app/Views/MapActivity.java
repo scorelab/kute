@@ -10,8 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.google.firebase.database.DatabaseError;
+import com.kute.app.Bussiness.Train;
 import com.kute.app.R;
+
+import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -23,6 +32,8 @@ public class MapActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        Firebase.setAndroidContext(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMap);
         setSupportActionBar(toolbar);
@@ -86,6 +97,38 @@ public class MapActivity extends AppCompatActivity {
                 finish();
             }
         });
+        setTrains();
+       // getTrains();
+
+
+    }
+    public void setTrains(){
+        Firebase ref = new Firebase("https://kute-37f82.firebaseio.com/android/TrainsNo/TrainData");
+        Firebase alanRef = ref.child("SrilankanTrains").child("1");
+        alanRef.child("fullName").setValue("UdarataManike");
+        alanRef.child("Start").setValue("Colombo");
+        alanRef.child("StartTime").setValue("5.00");
+        alanRef.child("End").setValue("Badulla");
+        alanRef.child("EndTime").setValue("7.00");
+
+        alanRef = ref.child("SrilankanTrains").child("2");
+        alanRef.child("fullName").setValue("Galukumari");
+        alanRef.child("Start").setValue("Colombo");
+        alanRef.child("StartTime").setValue("6.00");
+        alanRef.child("End").setValue("Galle");
+        alanRef.child("EndTime").setValue("8.00");
+
+        alanRef = ref.child("SrilankanTrains").child("3");
+        alanRef.child("fullName").setValue("Sudu");
+        alanRef.child("Start").setValue("Colombo");
+        alanRef.child("StartTime").setValue("6.00");
+        alanRef.child("End").setValue("Mathara");
+        alanRef.child("EndTime").setValue("8.00");
+
+
+
+        alanRef.push();
+
     }
 
     private void setStates(Boolean state) {
