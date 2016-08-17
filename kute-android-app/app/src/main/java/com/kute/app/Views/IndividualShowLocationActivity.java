@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.kute.app.Activities.SplashActivity;
 import com.kute.app.R;
 
 public class IndividualShowLocationActivity extends AppCompatActivity
@@ -66,7 +67,8 @@ public class IndividualShowLocationActivity extends AppCompatActivity
         switch (item.getItemId()) {
 
             case R.id.sign_out:
-                Intent goBack = new Intent(getApplicationContext(), SplashActivity.class);
+                Intent goBack = new Intent(getApplicationContext(),
+                        SplashActivity.class);
                 startActivity(goBack);
                 finish();
                 return true;
