@@ -1,6 +1,7 @@
 package com.kute.app.Views;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -79,6 +80,16 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
             }
         });
 
+        Button cancel = (Button) findViewById(R.id.cancel_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent cancelled = new Intent(getApplicationContext(), ShareLocationActivity.class);
+                startActivity(cancelled);
+                finish();
+            }
+        });
         stationList = new ArrayList<>();
     }
 
