@@ -34,8 +34,6 @@ public class IndividualShowLocationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_show_location);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarIndividual);
-        //setSupportActionBar(toolbar);
         cancel = (Button) findViewById(R.id.cancel_button);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -82,7 +80,6 @@ public class IndividualShowLocationActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker and move the camera
         LatLng current = new LatLng(7.206950, 79.841290);
 
         mMap.addMarker(new MarkerOptions()
@@ -101,15 +98,9 @@ public class IndividualShowLocationActivity extends AppCompatActivity
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setZoomGesturesEnabled(true);

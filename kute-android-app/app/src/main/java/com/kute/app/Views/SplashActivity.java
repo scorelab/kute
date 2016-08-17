@@ -29,8 +29,6 @@ public class SplashActivity extends Activity {
     RelativeLayout mainlayout;
     EditText userName, passWord;
     Button login, register;
-    TextView forgot;
-
     Logger logger;
 
     @Override
@@ -48,7 +46,6 @@ public class SplashActivity extends Activity {
         passWord = (EditText) findViewById(R.id.password_input);
         login = (Button) findViewById(R.id.login_btn);
         register = (Button) findViewById(R.id.register_btn);
-        //forgot = (TextView) findViewById(R.id.txtForgotPassword);
 
         myImageView = (ImageView) findViewById(R.id.myImage);
         myImageView.startAnimation(move);
@@ -64,7 +61,7 @@ public class SplashActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Implement login validation and related tasks
+
                 String user = userName.getText().toString();
                 String pass = passWord.getText().toString();
 
@@ -96,7 +93,7 @@ public class SplashActivity extends Activity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Implement signup and related tasks
+
                 logger.setUserName("Admin");
                 logger.setPassword("pass");
             }

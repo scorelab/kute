@@ -11,13 +11,22 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.kute.app.Bussiness.Train;
 import com.kute.app.R;
+
+import java.util.ArrayList;
 
 public class ShareLocationActivity extends AppCompatActivity {
 
     private Spinner vehicleList;
     private Button shareNow, cancel;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -33,11 +42,12 @@ public class ShareLocationActivity extends AppCompatActivity {
         shareNow = (Button) findViewById(R.id.share_button);
         cancel = (Button) findViewById(R.id.cancel_button);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.train_list, android.R.layout.select_dialog_item);
+
+        ArrayList<String> lst = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(ShareLocationActivity.this, android.R.layout.simple_list_item_1, lst);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vehicleList.setAdapter(adapter);
-
+        getTrains();
         shareNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +73,42 @@ public class ShareLocationActivity extends AppCompatActivity {
         });
     }
 
+    public void getTrains(){
+        final ArrayList<Train> trains=new ArrayList<Train>();
+        //Firebase ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
+        Firebase ref = new Firebase("https://kute-37f82.firebaseio.com/android/TrainsNo/TrainData/SrilankanTrains");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                               @Override
+                                               public void onDataChange(DataSnapshot snapshot) {
+                                                   System.out.println("There are " + snapshot.getChildrenCount() + " blog posts");
+                                                   adapter.clear();
+                                                   for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                                       Train train = postSnapshot.getValue(Train.class);
+                                                       trains.add(train);
+                                                       adapter.add(train.getTrainname());
+                                                       adapter.notifyDataSetChanged();
+                                                   }
+
+                                                   vehicleList.setAdapter(adapter);
+
+
+                                                   // do some stuff once
+                                               }
+
+                                               @Override
+                                               public void onCancelled(FirebaseError firebaseError) {
+                                                   Toast.makeText(getApplicationContext(), firebaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                               }
+                                           }
+
+        );
+        for (Train train:trains) {
+            adapter.clear();
+            adapter.add(train.getTrainname());
+            adapter.notifyDataSetChanged();
+
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
