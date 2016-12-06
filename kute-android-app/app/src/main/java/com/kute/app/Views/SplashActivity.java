@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -38,6 +40,7 @@ public class SplashActivity extends Activity {
     RelativeLayout mainlayout;
     EditText userName, passWord;
     Button login, register;
+    FloatingActionButton helpFab;
     TextView forgot;
     boolean res;
     Logger logger;
@@ -60,6 +63,7 @@ public class SplashActivity extends Activity {
         login = (Button) findViewById(R.id.login_btn);
         register = (Button) findViewById(R.id.register_btn);
         //forgot = (TextView) findViewById(R.id.txtForgotPassword);
+        helpFab = (FloatingActionButton) findViewById(R.id.help_btn);
 
         myImageView = (ImageView) findViewById(R.id.myImage);
         myImageView.startAnimation(move);
@@ -150,6 +154,7 @@ public class SplashActivity extends Activity {
 
     public void doRegister(String uname,String pwd){
     Log.e(TAG,uname+" "+pwd);
+        Snackbar.make(helpFab, "Registering...", Snackbar.LENGTH_INDEFINITE).show();
     mAuth.createUserWithEmailAndPassword(uname, pwd)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -160,11 +165,11 @@ public class SplashActivity extends Activity {
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.
                     if (!task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Registration failed",
-                                Toast.LENGTH_SHORT).show();
+                        Snackbar.make(helpFab, "Registration failed",
+                                Snackbar.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "You have successfully Registered",
-                                Toast.LENGTH_SHORT).show();
+                        Snackbar.make(helpFab, "You have successfully Registered",
+                                Snackbar.LENGTH_SHORT).show();
                     }
 
                     // ...
@@ -174,6 +179,7 @@ public class SplashActivity extends Activity {
 
     public void doLogin(String email,String pwd){
 
+        Snackbar.make(helpFab, "Logging in...", Snackbar.LENGTH_INDEFINITE).show();
         mAuth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -185,8 +191,8 @@ public class SplashActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(SplashActivity.this, "Sorry Login failed",
-                                    Toast.LENGTH_SHORT).show();
+                            Snackbar.make(helpFab, "Sorry Login failed",
+                                    Snackbar.LENGTH_SHORT).show();
                         }
                         res = task.isSuccessful();
 
@@ -231,7 +237,6 @@ public class SplashActivity extends Activity {
         @Override
         protected void onPostExecute(Void aVoid) {
 
-            Toast.makeText(getApplicationContext(), "Welcome to Kute", Toast.LENGTH_LONG).show();
             logindata.setVisibility(View.VISIBLE);
             super.onPostExecute(aVoid);
         }
