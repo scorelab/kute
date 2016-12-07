@@ -10,8 +10,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.kute.app.Activities.Views.MapActivity"
-    tools:showIn="@layout/activity_map">
+    tools:context="com.kute.app.Views.MapActivity"
+    tools:showIn="@layout/activity_map"
+    android:animateLayoutChanges="true">
 
     <ImageButton
         android:id="@+id/train_button"
@@ -50,10 +51,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_above="@+id/train_button">
@@ -62,8 +63,10 @@
             android:id="@+id/share_button"
             style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:paddingTop="@dimen/button_vertical_padding"
+            android:paddingBottom="@dimen/button_vertical_padding"
             android:layout_weight="1"
             android:background="@drawable/rounded1"
             android:text="@string/share_location"
@@ -73,8 +76,10 @@
             android:id="@+id/show_button"
             style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:paddingTop="@dimen/button_vertical_padding"
+            android:paddingBottom="@dimen/button_vertical_padding"
             android:layout_weight="1"
             android:background="@drawable/rounded2"
             android:text="@string/show_location"

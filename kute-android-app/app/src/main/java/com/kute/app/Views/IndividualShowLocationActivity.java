@@ -1,13 +1,12 @@
 package com.kute.app.Views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +21,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.kute.app.Activities.SplashActivity;
+import com.kute.app.Views.SplashActivity;
 import com.kute.app.R;
 
 public class IndividualShowLocationActivity extends AppCompatActivity
@@ -30,6 +29,7 @@ public class IndividualShowLocationActivity extends AppCompatActivity
 
     private GoogleMap mMap;
     private Button cancel;
+    private AlertDialog aDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +46,30 @@ public class IndividualShowLocationActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent cancelled = new Intent(getApplicationContext(), MapActivity.class);
+                Intent cancelled = new Intent(getApplicationContext(), ShowLocationActivity.class);
                 startActivity(cancelled);
                 finish();
             }
         });
+
+        AlertDialog.Builder aBuilder=new AlertDialog.Builder(this);
+        aBuilder.setMessage("Are you sure to sign out?");
+        aBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent goBack = new Intent(getApplicationContext(),
+                        SplashActivity.class);
+                startActivity(goBack);
+                finish();
+            }
+        });
+        aBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        aDialog=aBuilder.create();
     }
 
     @Override
@@ -67,10 +86,7 @@ public class IndividualShowLocationActivity extends AppCompatActivity
         switch (item.getItemId()) {
 
             case R.id.sign_out:
-                Intent goBack = new Intent(getApplicationContext(),
-                        SplashActivity.class);
-                startActivity(goBack);
-                finish();
+                aDialog.show();
                 return true;
 
             default:
@@ -108,6 +124,12 @@ public class IndividualShowLocationActivity extends AppCompatActivity
         googleMap.getUiSettings().setZoomGesturesEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+    }
+
+    public void onBackPressed(){
+        Intent cancelled = new Intent(getApplicationContext(), ShowLocationActivity.class);
+        startActivity(cancelled);
+        finish();
     }
 }
 

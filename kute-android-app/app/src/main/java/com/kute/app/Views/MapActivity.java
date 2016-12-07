@@ -1,7 +1,9 @@
 package com.kute.app.Views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import com.firebase.client.Firebase;
-import com.kute.app.Activities.SplashActivity;
+import com.kute.app.Views.SplashActivity;
 import com.kute.app.R;
 
 
@@ -19,7 +21,7 @@ public class MapActivity extends AppCompatActivity {
 
     private Button shareLocation, showLocation;
     private ImageButton trainButton, busButton, carButton;
-
+    private AlertDialog aDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,7 +45,8 @@ public class MapActivity extends AppCompatActivity {
         shareLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setStates(true);
+                if(showLocation.getVisibility()==View.VISIBLE) setStates(true);
+                else setStates(false);
             }
         });
 
@@ -93,8 +96,26 @@ public class MapActivity extends AppCompatActivity {
         setTrains();
         // getTrains();
 
+        AlertDialog.Builder aBuilder=new AlertDialog.Builder(this);
+        aBuilder.setMessage("Are you sure to sign out?");
+        aBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent goBack = new Intent(getApplicationContext(),
+                        SplashActivity.class);
+                startActivity(goBack);
+                finish();
+            }
+        });
+        aBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+        aDialog=aBuilder.create();
     }
+
     public void setTrains(){
         Firebase ref = new Firebase("https://kute-37f82.firebaseio.com/android/TrainsNo/TrainData");
         Firebase alanRef = ref.child("SrilankanTrains").child("1");
@@ -125,10 +146,18 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void setStates(Boolean state) {
-
-        trainButton.setEnabled(state);
-        busButton.setEnabled(state);
-        carButton.setEnabled(state);
+        int trans, show;
+        if(state){
+            trans=View.VISIBLE;
+            show=View.INVISIBLE;
+        }else{
+            trans=View.GONE;
+            show=View.VISIBLE;
+        }
+        trainButton.setVisibility(trans);
+        busButton.setVisibility(trans);
+        carButton.setVisibility(trans);
+        showLocation.setVisibility(show);
     }
 
 
@@ -146,14 +175,17 @@ public class MapActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.sign_out:
-                Intent goBack = new Intent(getApplicationContext(),
-                        SplashActivity.class);
-                startActivity(goBack);
-                finish();
+                aDialog.show();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void onBackPressed(){
+        if(showLocation.getVisibility()==View.VISIBLE) aDialog.show();
+        else setStates(false);
+    }
+
 }

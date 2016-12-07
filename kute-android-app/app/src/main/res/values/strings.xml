@@ -39,8 +39,8 @@
     <string name="sign_out">Sign Out</string>
     <string name="login">Login</string>
     <string name="signup">SignUp</string>
-    <string name="title_activity_show_location">ShowLocation</string>
-    <string name="title_activity_individual_show_location">IndividualShowLocationActivity</string>
+    <string name="title_activity_show_location">Show Location</string>
+    <string name="title_activity_individual_show_location">Show Location</string>
     <string name="welcome">Welcome to Kute</string>
 
 </resources>
