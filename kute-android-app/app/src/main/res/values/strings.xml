@@ -15,8 +15,8 @@
     <string name="share_now">Share Now!</string>
     <string name="share">Share</string>
     <string name="show">Show</string>
-    <string name="share_location_header">Share Location</string>
-    <string name="show_location_header">Show Location</string>
+    <string name="share_location_header">Select vehicle to share</string>
+    <string name="show_location_header">Select vehicle to show</string>
 
     <string-array name="train_list">
         <item>Train A</item>

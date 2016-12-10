@@ -1,5 +1,6 @@
 package com.kute.app.Views;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class ShowLocationActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_location);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarShare);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarShow);
         setSupportActionBar(toolbar);
 
         vehicleList = (Spinner) findViewById(R.id.itemListSpinner);
@@ -99,6 +100,7 @@ public class ShowLocationActivity extends AppCompatActivity {
     }
 
     public void getTrains(){
+        final ProgressDialog loading = ProgressDialog.show(this, null, "Getting vehicle list...", false, false);
         final ArrayList<Train> trains=new ArrayList<Train>();
         //Firebase ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
         Firebase ref = new Firebase("https://kute-37f82.firebaseio.com/android/TrainsNo/TrainData/SrilankanTrains");
@@ -116,12 +118,14 @@ public class ShowLocationActivity extends AppCompatActivity {
 
                                                    vehicleList.setAdapter(adapter);
 
+                                                   loading.dismiss();
 
                                                    // do some stuff once
                                                }
 
                                                @Override
                                                public void onCancelled(FirebaseError firebaseError) {
+                                                   loading.dismiss();
                                                    Toast.makeText(getApplicationContext(), firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                }
                                            }
@@ -131,7 +135,6 @@ public class ShowLocationActivity extends AppCompatActivity {
             adapter.clear();
             adapter.add(train.getTrainname());
             adapter.notifyDataSetChanged();
-
         }
     }
     @Override

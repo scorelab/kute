@@ -1,5 +1,6 @@
 package com.kute.app.Views;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -97,6 +98,7 @@ public class ShareLocationActivity extends AppCompatActivity {
     }
 
     public void getTrains(){
+        final ProgressDialog loading = ProgressDialog.show(this, null, "Getting vehicle list...", false, false);
         final ArrayList<Train> trains=new ArrayList<Train>();
         //Firebase ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
         Firebase ref = new Firebase("https://kute-37f82.firebaseio.com/android/TrainsNo/TrainData/SrilankanTrains");
@@ -114,12 +116,15 @@ public class ShareLocationActivity extends AppCompatActivity {
 
                                                    vehicleList.setAdapter(adapter);
 
+                                                   loading.dismiss();
 
                                                    // do some stuff once
+
                                                }
 
                                                @Override
                                                public void onCancelled(FirebaseError firebaseError) {
+                                                   loading.dismiss();
                                                    Toast.makeText(getApplicationContext(), firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                }
                                            }
@@ -129,7 +134,6 @@ public class ShareLocationActivity extends AppCompatActivity {
             adapter.clear();
             adapter.add(train.getTrainname());
             adapter.notifyDataSetChanged();
-
         }
     }
     @Override
