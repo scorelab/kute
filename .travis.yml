@@ -1,1 +1,7 @@
-language: android
+{
+  "language": "android",
+  "group": "stable",
+  "dist": "precise",
+  "os": "linux"
+}
+
