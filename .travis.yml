@@ -1,7 +1,5 @@
 
-  "language": "android",
-  "group": "stable",
-  "dist": "precise",
-  "os": "linux"
+  language: android
+
 
 
