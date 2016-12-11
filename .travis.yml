@@ -1,5 +1,9 @@
 
   language: android
-
+  
+  group: stable
+  
+  dist: precise
+ 
 
 
