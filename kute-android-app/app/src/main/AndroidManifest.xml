@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Views.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".Activities.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,24 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.SignInActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="app.android.com.kute.app.SignInActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Views.MapActivity"
+            android:name=".Activities.MapActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Views.ShareLocationActivity"
-            android:label="@string/title_activity_share_location"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Views.IndividualShareLocationActivity"
+            android:name=".Views.StationUtils"
             android:label="@string/title_activity_individual_share_location"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -61,16 +49,6 @@
             android:exported="true" >
         </service>
 
-        <activity
-            android:name=".Views.ShowLocationActivity"
-            android:label="@string/title_activity_show_location"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Views.IndividualShowLocationActivity"
-            android:label="@string/title_activity_individual_show_location"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
     </application>
 
 </manifest>

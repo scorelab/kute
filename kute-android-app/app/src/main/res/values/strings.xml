@@ -36,6 +36,10 @@
         <item>Train O</item>
     </string-array>
 
+    <string name="vehicle_prompt">Select a vehicle</string>
+    <string name="train">Train</string>
+    <string name="bus">Bus</string>
+    <string name="car">Car</string>
     <string name="sign_out">Sign Out</string>
     <string name="login">Login</string>
     <string name="signup">SignUp</string>

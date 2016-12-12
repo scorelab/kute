@@ -14,7 +14,9 @@
         android:scaleType="fitXY"
         android:alpha="0.2" />
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,8 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="invisible">
-
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,6 +84,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:backgroundTint="@color/colorAccent"
                         android:id="@+id/login_btn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -107,5 +109,5 @@
 
             </LinearLayout>
         </RelativeLayout>
-    </FrameLayout>
+    </LinearLayout>
 </RelativeLayout>
