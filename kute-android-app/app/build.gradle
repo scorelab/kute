@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25"
 
     defaultConfig {
         applicationId "com.kute.app"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -16,6 +16,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
     }
 }
 
@@ -32,6 +39,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.0.3'
     compile 'com.google.firebase:firebase-database:9.0.0'
     compile 'com.google.firebase:firebase-auth:9.0.0'
+    compile 'com.github.paolorotolo:appintro:4.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
 
