@@ -1,18 +1,14 @@
 package com.kute.app.Views;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -20,20 +16,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.kute.app.Activities.MapActivity;
 import com.kute.app.R;
 
 import org.json.JSONArray;
@@ -43,8 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IndividualShareLocationActivity extends FragmentActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
+public class StationUtils implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnMarkerDragListener,
         GoogleMap.OnMapLongClickListener {
@@ -55,48 +47,22 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
     private double longitude;
     private double latitude;
 
-    private GoogleApiClient googleApiClient;
+    private Context context;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_individual_share_location);
+    public StationUtils(Context context) {
+        this.context = context;
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .addApi(AppIndex.API).build();
-
-        Button searchButton = (Button) findViewById(R.id.searchStations);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getStations(latitude, longitude);
-            }
-        });
-
-        Button cancel = (Button) findViewById(R.id.cancel_button);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent cancelled = new Intent(getApplicationContext(), ShareLocationActivity.class);
-                startActivity(cancelled);
-                finish();
-            }
-        });
         stationList = new ArrayList<>();
+    }
+
+    public void setMap(GoogleMap mMap) {
+        this.mMap = mMap;
     }
 
     private String stationGetURL(double lat, double lon) {
 
         StringBuilder urlString = new StringBuilder(
-                "https://maps.googleapis.com/maps/api/place/search/json?");
+                "https://maps.googleapis.com/maps/api/place/icon_search/json?");
         urlString.append("&location=");
         urlString.append(Double.toString(lat));
         urlString.append(",");
@@ -124,11 +90,13 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         return urlString.toString();
     }
 
-    private void getStations(double lat, double lon) {
+    public void getStations() {
+        double lat = latitude;
+        double lon = longitude;
         //Getting the URL
         String url = stationGetURL(lat, lon);
         //Showing a dialog till we get the list
-        final ProgressDialog loading = ProgressDialog.show(this, null, "Searching ...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(context, null, "Searching ...", false, false);
         //Creating a string request
         StringRequest stringRequest = new StringRequest(url,
                 new Response.Listener<String>() {
@@ -165,7 +133,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                             showDirection(nearestStation.getLatitude(), nearestStation.getLongitude());
 
                         } catch (IndexOutOfBoundsException | NullPointerException e) {
-                            Toast.makeText(getBaseContext(), "No stations found", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "No stations found", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -177,7 +145,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                 });
 
         //Adding the request to request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
 
@@ -186,7 +154,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .draggable(false)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_current_location)));
+                .icon(MapActivity.getMarkerIconFromDrawable(context.getDrawable(R.drawable.icon_current_location))));
 
         for (int i = 0; i < list.size(); i++) {
             // Create a LatLan object
@@ -196,7 +164,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                     .position(latLng)
                     .draggable(false)
                     .title(list.get(i).getStationName())
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_train)));
+                    .icon(MapActivity.getMarkerIconFromDrawable(MapActivity.getVehicleDrawable(2, context))));
         }
     }
 
@@ -205,7 +173,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         // Create the URL
         String url = pathGetURL(latitude, longitude, lat, lon);
         // Showing a dialog till we get the list
-        final ProgressDialog loading = ProgressDialog.show(this, null, "Drawing path ...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(context, null, "Drawing path ...", false, false);
         // Creating a string request
         StringRequest stringRequest = new StringRequest(url,
                 new Response.Listener<String>() {
@@ -221,8 +189,8 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
                         loading.dismiss();
                     }
                 });
-        // Adding the request to request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Adding the request to request queues
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
 
@@ -235,7 +203,7 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
             JSONObject overviewPolyLines = routes.getJSONObject("overview_polyline");
             JSONArray legs = routes.getJSONArray("legs");
             JSONObject distance = legs.getJSONObject(0).getJSONObject("distance");
-            Toast.makeText(getBaseContext(), "Station is " + distance.getString("text") + " away", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Station is " + distance.getString("text") + " away", Toast.LENGTH_LONG).show();
             String encodedString = overviewPolyLines.getString("points");
             List<LatLng> list = decodePoly(encodedString);
             mMap.addPolyline(new PolylineOptions()
@@ -281,39 +249,13 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         return poly;
     }
 
-    @Override
-    protected void onStart() {
-        googleApiClient.connect();
-        super.onStart();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "Maps Page",
-                Uri.parse("http://host/path"),
-                Uri.parse("android-app://com.kute.app/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(googleApiClient, viewAction);
-    }
-
-    @Override
-    protected void onStop() {
-        googleApiClient.disconnect();
-        super.onStop();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW,
-                "Maps Page",
-                Uri.parse("http://host/path"),
-                Uri.parse("android-app://com.kute.app/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(googleApiClient, viewAction);
-    }
-
     private void getCurrentLocation() {
         mMap.clear();
         // Creating a location object
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        Location location = LocationServices.FusedLocationApi.getLastLocation(((MapActivity) context).getGoogleApiClient());
         if (location != null) {
             //Getting longitude and latitude
             longitude = location.getLongitude();
@@ -335,24 +277,6 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         // Moving the camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        // Create a map
-        mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-        LatLng latLng = new LatLng(6.5, 78.5);
-        // Create a default location
-        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-        // Add listeners
-        mMap.setOnMarkerDragListener(this);
-        mMap.setOnMapLongClickListener(this);
     }
 
     @Override
