@@ -1,76 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kute.app" >
+    package="com.scorelab.kute.kute">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
     <application
+        android:name=".KuteApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/googlemapApi"/>
+
+        <activity android:name=".SplashActivity"></activity>
+
+        <activity android:name=".Activity.RegisterActivity" >
+
+        </activity>
+
         <activity
-            android:name=".Views.SplashActivity"
-            android:label="@string/app_name" >
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".Activity.MainActivity">
+
+        </activity>
+        <activity
+            android:name=".LandActivity"
+            android:label="@string/title_activity_land"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.SignInActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="app.android.com.kute.app.SignInActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Views.MapActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Views.ShareLocationActivity"
-            android:label="@string/title_activity_share_location"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Views.IndividualShareLocationActivity"
-            android:label="@string/title_activity_individual_share_location"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBmGyT_fdLQDuipPbIqGgN5bPsmjiuh8Hs" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <service
-            android:name=".Views.LocationUpdateService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
-
-        <activity
-            android:name=".Views.ShowLocationActivity"
-            android:label="@string/title_activity_show_location"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Views.IndividualShowLocationActivity"
-            android:label="@string/title_activity_individual_show_location"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+        <activity android:name=".Activity.TaskSelection"></activity>
+        <activity android:name=".Activity.VehicleSelection" ></activity>
+        <service android:name=".Services.BacKService"
+            android:process=":backservice"></service>
     </application>
 
 </manifest>

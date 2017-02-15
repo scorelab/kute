@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash"
+    android:layout_width="match_parent"
+    tools:context="com.scorelab.kute.kute.SplashActivity"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@color/splashBackground"
+        android:id="@+id/imageView2" />
+
+    <TextView
+        android:text="Kute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView"
+        android:textSize="36sp"
+        android:textColor="@android:color/background_light"
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif-smallcaps" />
+</RelativeLayout>
