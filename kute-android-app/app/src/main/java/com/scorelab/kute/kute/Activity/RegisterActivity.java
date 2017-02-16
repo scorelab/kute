@@ -40,6 +40,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.scorelab.kute.kute.R;
+import com.scorelab.kute.kute.SplashActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class RegisterActivity extends AppCompatActivity implements
@@ -131,6 +132,10 @@ public class RegisterActivity extends AppCompatActivity implements
                             Toast.makeText(RegisterActivity.this, "Authentication Done."+task.getResult().getUser().getDisplayName()+" - "+task.getResult().getUser().getDisplayName()+" - "+task.getResult().getUser().getEmail()+" - "+task.getResult().getUser().getPhotoUrl().getPath()+" - ",
                                     Toast.LENGTH_SHORT).show();
                             getImage(task.getResult().getUser().getPhotoUrl().toString());
+
+                            Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
+                            startActivity(intentdone);
+
                         }
                     }
                 });
@@ -176,6 +181,11 @@ public class RegisterActivity extends AppCompatActivity implements
                         Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                         Toast.makeText(getApplicationContext(), "Facebook  User " + user.getPhotoUrl(), Toast.LENGTH_LONG).show();
                         getImage(user.getPhotoUrl().toString());
+
+
+                        Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
+                        startActivity(intentdone);
+
 
                     } else {
                         // User is signed out

@@ -3,11 +3,13 @@ package com.scorelab.kute.kute;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.scorelab.kute.kute.Activity.RegisterActivity;
+import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -38,16 +40,16 @@ public class SplashActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
 
             SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
-            String userName = getResources().getString(R.string.sharedprefrenceusername);
+            Bitmap userpic = ImageHandler.getUserImage(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE));
 
-            if(userName==null){ //User is not registered in the system.
+            if(userpic==null){ //User is not registered in the system.
 
                 Intent regIntent =new Intent(SplashActivity.this, RegisterActivity.class);
                 startActivity(regIntent);
             }
             else{ //User registered in the system.
 
-                Intent regIntent =new Intent(SplashActivity.this, RegisterActivity.class);
+                Intent regIntent =new Intent(SplashActivity.this, LandActivity.class);
                 startActivity(regIntent);
             }
 

@@ -20,7 +20,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/googlemapApi"/>
 
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".Activity.RegisterActivity" >
 
@@ -38,11 +44,7 @@
             android:name=".LandActivity"
             android:label="@string/title_activity_land"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.TaskSelection"></activity>
         <activity android:name=".Activity.VehicleSelection" ></activity>
