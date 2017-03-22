@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    tools:context="com.kute.app.Activities.Views.ShareLocationActivity">
+    tools:context="com.kute.app.Views.ShareLocationActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -1,7 +1,10 @@
 package com.kute.app.Views;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,7 +20,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.kute.app.Activities.SplashActivity;
+import com.kute.app.Views.SplashActivity;
 import com.kute.app.Bussiness.Train;
 import com.kute.app.R;
 
@@ -28,6 +31,7 @@ public class ShareLocationActivity extends AppCompatActivity {
     private Spinner vehicleList;
     private Button shareNow, cancel;
     ArrayAdapter<String> adapter;
+    private AlertDialog aDialog;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -72,9 +76,29 @@ public class ShareLocationActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        AlertDialog.Builder aBuilder=new AlertDialog.Builder(this);
+        aBuilder.setMessage("Are you sure to sign out?");
+        aBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent goBack = new Intent(getApplicationContext(),
+                        SplashActivity.class);
+                startActivity(goBack);
+                finish();
+            }
+        });
+        aBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        aDialog=aBuilder.create();
     }
 
     public void getTrains(){
+        final ProgressDialog loading = ProgressDialog.show(this, null, "Getting vehicle list...", false, false);
         final ArrayList<Train> trains=new ArrayList<Train>();
         //Firebase ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
         Firebase ref = new Firebase("https://kute-37f82.firebaseio.com/android/TrainsNo/TrainData/SrilankanTrains");
@@ -92,12 +116,15 @@ public class ShareLocationActivity extends AppCompatActivity {
 
                                                    vehicleList.setAdapter(adapter);
 
+                                                   loading.dismiss();
 
                                                    // do some stuff once
+
                                                }
 
                                                @Override
                                                public void onCancelled(FirebaseError firebaseError) {
+                                                   loading.dismiss();
                                                    Toast.makeText(getApplicationContext(), firebaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                }
                                            }
@@ -107,7 +134,6 @@ public class ShareLocationActivity extends AppCompatActivity {
             adapter.clear();
             adapter.add(train.getTrainname());
             adapter.notifyDataSetChanged();
-
         }
     }
     @Override
@@ -124,14 +150,19 @@ public class ShareLocationActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.sign_out:
-                Intent goBack = new Intent(getApplicationContext(), SplashActivity.class);
-                startActivity(goBack);
-                finish();
+                aDialog.show();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void onBackPressed(){
+        Intent goBack = new Intent(getApplicationContext(),
+                MapActivity.class);
+        startActivity(goBack);
+        finish();
     }
 
 }

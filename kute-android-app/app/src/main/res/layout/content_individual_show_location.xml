@@ -10,7 +10,7 @@ android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-tools:context="com.kute.app.activity.Views.IndividualShowLocationActivity"
+tools:context="com.kute.app.Views.IndividualShowLocationActivity"
 tools:showIn="@layout/activity_individual_show_location">
 
 <RelativeLayout
@@ -36,10 +36,9 @@ tools:showIn="@layout/activity_individual_show_location">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/map">
+        android:layout_centerHorizontal="true">
 
         <Button
             android:layout_width="wrap_content"

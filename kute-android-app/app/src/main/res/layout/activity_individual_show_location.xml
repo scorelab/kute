@@ -1,25 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.kute.app.Views.IndividualShowLocationActivity">
+<FrameLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context="com.kute.app.Views.IndividualShowLocationActivity">
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:alpha="0.2"
+    android:scaleType="fitXY"
+    android:src="@drawable/background"/>
 
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
-    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Train A"
+        android:id="@+id/vehicleID"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center"/>
 
-    <include layout="@layout/content_individual_show_location" />
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        tools:context=".Views.IndividualShowLocationActivity"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="6"/>
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-</android.support.design.widget.CoordinatorLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="@string/share_now"
+            android:id="@+id/show_button"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/roundbutton2"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            android:background="@drawable/roundbutton1"
+            android:textColor="#000000"
+            android:text="@string/cancel"
+            android:id="@+id/cancel_button"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

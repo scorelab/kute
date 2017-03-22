@@ -1,6 +1,7 @@
 package com.kute.app.Views;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -10,7 +11,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -43,7 +49,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IndividualShareLocationActivity extends FragmentActivity implements OnMapReadyCallback,
+public class IndividualShareLocationActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnMarkerDragListener,
@@ -56,6 +62,8 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
     private double latitude;
 
     private GoogleApiClient googleApiClient;
+
+    private AlertDialog aDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,25 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
             }
         });
         stationList = new ArrayList<>();
+
+        AlertDialog.Builder aBuilder=new AlertDialog.Builder(this);
+        aBuilder.setMessage("Are you sure to sign out?");
+        aBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent goBack = new Intent(getApplicationContext(),
+                        SplashActivity.class);
+                startActivity(goBack);
+                finish();
+            }
+        });
+        aBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        aDialog=aBuilder.create();
     }
 
     private String stationGetURL(double lat, double lon) {
@@ -393,6 +420,12 @@ public class IndividualShareLocationActivity extends FragmentActivity implements
         longitude = marker.getPosition().longitude;
         // Center the map
         moveMap();
+    }
+
+    public void onBackPressed(){
+        Intent cancelled = new Intent(getApplicationContext(), ShareLocationActivity.class);
+        startActivity(cancelled);
+        finish();
     }
 
 }
