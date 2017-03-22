@@ -109,7 +109,11 @@ public class SplashActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO Implement signup and related tasks
-                doRegister(userName.getText().toString(),passWord.getText().toString());
+                if (!userName.getText().toString().isEmpty() & !passWord.getText().toString().isEmpty()) {
+                    doRegister(userName.getText().toString(), passWord.getText().toString());
+                } else {
+                    Toast.makeText(getBaseContext(), "Please enter username and password!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
