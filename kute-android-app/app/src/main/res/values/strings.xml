@@ -41,5 +41,7 @@
     <string name="signup">SignUp</string>
     <string name="title_activity_show_location">ShowLocation</string>
     <string name="title_activity_individual_show_location">IndividualShowLocationActivity</string>
+    <string name="track">Track</string>
+    <string name="clear">Clear</string>
 
 </resources>
