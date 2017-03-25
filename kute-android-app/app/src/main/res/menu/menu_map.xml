@@ -2,15 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/sign_out"
-        android:icon="@android:drawable/btn_dialog"
-        android:title="@string/sign_out"/>
+          android:orderInCategory="300"
+          android:icon="@android:drawable/btn_dialog"
+          android:title="@string/sign_out"/>
 
     <item android:id="@+id/track"
-        android:icon="@android:drawable/btn_dialog"
-        android:title="@string/sign_out"/>
+          android:orderInCategory="100"
+          android:icon="@android:drawable/btn_dialog"
+          android:title="@string/track"/>
 
     <item android:id="@+id/clear"
-        android:icon="@android:drawable/btn_dialog"
-        android:title="@string/sign_out"/>
+          android:orderInCategory="200"
+          android:icon="@android:drawable/btn_dialog"
+          android:title="@string/clear"/>
 
 </menu>

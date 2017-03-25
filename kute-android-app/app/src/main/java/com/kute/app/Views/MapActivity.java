@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kute.app.Activities.SplashActivity;
 import com.kute.app.R;
 
@@ -146,6 +147,7 @@ public class MapActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.sign_out:
+                FirebaseAuth.getInstance().signOut();
                 Intent goBack = new Intent(getApplicationContext(),
                         SplashActivity.class);
                 startActivity(goBack);
