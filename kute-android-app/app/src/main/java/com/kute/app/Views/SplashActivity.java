@@ -87,7 +87,7 @@ public class SplashActivity extends Activity {
                 String user = userName.getText().toString();
                 String pass = passWord.getText().toString();
 
-                if (true) {
+                if (!userName.getText().toString().isEmpty() & !passWord.getText().toString().isEmpty()) {
                     doLogin(user,pass);
                     if(res){
                         Toast.makeText(getApplicationContext(), "Welcome " + user, Toast.LENGTH_LONG).show();
@@ -99,7 +99,7 @@ public class SplashActivity extends Activity {
                 } else {
 
                         Toast.makeText(getApplicationContext(),
-                                "Please click Signup and try again! :)", Toast.LENGTH_LONG).show();
+                                "Username and password required!", Toast.LENGTH_LONG).show();
 
                 }
             }
