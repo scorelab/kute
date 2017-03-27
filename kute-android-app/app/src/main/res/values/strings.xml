@@ -2,6 +2,8 @@
     <string name="app_name">Kute</string>
     <string name="sharedprefrenceusername">username</string>
     <string name="firebase_url">https://kutenew-c36c1.firebaseio.com/</string>
+    <string name="facebook_app_id">sample</string>
+    <string name="googlemapApi">sample</string>
 
     <string-array name="planets_array">
         <item>Mercury</item>
