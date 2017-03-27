@@ -1,27 +1,30 @@
 {
   "project_info": {
-    "project_number": "978978828335",
-    "firebase_url": "https://project-2236457441890122934.firebaseio.com",
-    "project_id": "project-2236457441890122934",
-    "storage_bucket": "project-2236457441890122934.appspot.com"
+    "project_number": "512059903778",
+    "firebase_url": "https://kutenew-c36c1.firebaseio.com",
+    "project_id": "kutenew-c36c1",
+    "storage_bucket": "kutenew-c36c1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:978978828335:android:ee3ea1d2f4a734ed",
+        "mobilesdk_app_id": "1:512059903778:android:e5312257f7c86a49",
         "android_client_info": {
-          "package_name": "com.kute.app"
+          "package_name": "com.scorelab.kute.kute"
         }
       },
       "oauth_client": [
         {
-          "client_id": "978978828335-2nfgucruqvgca8td0nj8fjuop3s14j7s.apps.googleusercontent.com",
+          "client_id": "512059903778-uto3b2anj6phigvs60t99bbb1sl0oe7d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANgjVFXo5Vdm603Ac9NRZWOXLQLVYVXI8"
+          "current_key": "AIzaSyDrROeYR1glcHf4yPmneck3KbcS3fK4LAo"
+        },
+        {
+          "current_key": "AIzaSyCSZ7SOif62k5h3JSO4J9hhkFMsvzjJzO8"
         }
       ],
       "services": {
