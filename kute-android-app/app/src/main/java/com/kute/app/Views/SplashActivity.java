@@ -84,10 +84,12 @@ public class SplashActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //TODO Implement login validation and related tasks
-                String user = userName.getText().toString();
-                String pass = passWord.getText().toString();
+                    String user = userName.getText().toString();
+                    String pass = passWord.getText().toString();
 
-                if (true) {
+
+
+                if (validateCredentials(user,pass)) {
                     doLogin(user,pass);
                     if(res){
                         Toast.makeText(getApplicationContext(), "Welcome " + user, Toast.LENGTH_LONG).show();
@@ -96,12 +98,11 @@ public class SplashActivity extends Activity {
 
                     }
 
-                } else {
-
+                } /*else {
                         Toast.makeText(getApplicationContext(),
                                 "Please click Signup and try again! :)", Toast.LENGTH_LONG).show();
 
-                }
+                }*/
             }
         });
 
@@ -201,15 +202,34 @@ public class SplashActivity extends Activity {
 
     }
     //ToDo set user logged in session to unlimited.
-    //ToDo username password validation pwd has spme required length
+
     public void gotoNextView(){
         Intent mainac = new Intent(getApplicationContext(), MapActivity.class);
         startActivity(mainac);
         finish();
     }
-    public void authtestfunction(){
+    public Boolean validateCredentials(String user,String pass)
+    {
+        //Check for correct credentials of the user you can edit the required lengths
+        int username_length=0,password_length=0;
+        if(!(user.length()<=username_length) && !(pass.length()<=password_length))//Remove equality case when giving non zero lenght
+        {
+            return true;
+        }
+        else
+        {
+            if(user.length()<=username_length)
+            {
+                Toast.makeText(getApplicationContext(),"Please enter a valid Username",Toast.LENGTH_SHORT).show();
+                return false;
 
-
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),"Please enter a valid Password",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
     }
 
     private class AnimationTimer extends AsyncTask<Void, String, Void> {
