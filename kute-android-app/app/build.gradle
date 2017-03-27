@@ -1,60 +1,60 @@
 apply plugin: 'com.android.application'
 
-<<<<<<< HEAD
+
 android {
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
-=======
->>>>>>> c4f273d6790fd3ebc572ec46c76df7166dfc3a4c
 
-android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
-    defaultConfig {
-        applicationId "com.scorelab.kute.kute"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    android {
+        compileSdkVersion 25
+        buildToolsVersion "25.0.0"
+        defaultConfig {
+            applicationId "com.scorelab.kute.kute"
+            minSdkVersion 15
+            targetSdkVersion 25
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/LICENSE.txt'
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/LICENSE.txt'
+    dependencies {
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+
+
+
+        compile 'com.google.firebase:firebase-core:10.0.1'
+        compile 'com.google.firebase:firebase-auth:10.0.1'
+        compile 'com.google.firebase:firebase-database:10.0.1'
+        compile 'com.google.android.gms:play-services-auth:10.0.1'
+        compile 'com.google.android.gms:play-services-plus:10.0.1'
+        compile 'com.google.android.gms:play-services-maps:10.0.1'
+        compile 'com.google.android.gms:play-services-location:10.0.1'
+        compile 'com.facebook.android:facebook-android-sdk:4.11.0'
+        compile 'com.android.volley:volley:1.0.0'
+        compile 'com.android.support:appcompat-v7:25.0.0'
+        compile 'com.android.support:design:25.1.1'
+        compile 'de.hdodenhof:circleimageview:2.1.0'
+        testCompile 'junit:junit:4.12'
     }
+
+    apply plugin: 'com.google.gms.google-services'
 }
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-
-
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.google.firebase:firebase-auth:10.0.1'
-    compile 'com.google.firebase:firebase-database:10.0.1'
-    compile 'com.google.android.gms:play-services-auth:10.0.1'
-    compile 'com.google.android.gms:play-services-plus:10.0.1'
-    compile 'com.google.android.gms:play-services-maps:10.0.1'
-    compile 'com.google.android.gms:play-services-location:10.0.1'
-    compile 'com.facebook.android:facebook-android-sdk:4.11.0'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.1.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-    testCompile 'junit:junit:4.12'
-}
-
-apply plugin: 'com.google.gms.google-services'
