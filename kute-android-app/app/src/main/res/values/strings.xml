@@ -1,45 +1,26 @@
 <resources>
-
     <string name="app_name">Kute</string>
-    <string name="user_name">User Name</string>
-    <string name="password">Password</string>
-    <string name="sign_me_in">Sign me in!</string>
-    <string name="i_forgot_my_password">I forgot my password</string>
-    <string name="register">Register</string>
-    <string name="title_activity_map">MapActivity</string>
-    <string name="title_activity_share_location">Share Location</string>
-    <string name="title_activity_individual_share_location">Share Location</string>
-    <string name="show_location">Show \n Location</string>
-    <string name="share_location">Share \n Location</string>
-    <string name="cancel">Cancel</string>
-    <string name="share_now">Share Now!</string>
-    <string name="share">Share</string>
-    <string name="show">Show</string>
-    <string name="share_location_header">Share Location</string>
-    <string name="show_location_header">Show Location</string>
+    <string name="sharedprefrenceusername">username</string>
+    <string name="firebase_url">https://kutenew-c36c1.firebaseio.com/</string>
 
-    <string-array name="train_list">
-        <item>Train A</item>
-        <item>Train B</item>
-        <item>Train C</item>
-        <item>Train D</item>
-        <item>Train E</item>
-        <item>Train F</item>
-        <item>Train G</item>
-        <item>Train H</item>
-        <item>Train I</item>
-        <item>Train J</item>
-        <item>Train K</item>
-        <item>Train L</item>
-        <item>Train M</item>
-        <item>Train N</item>
-        <item>Train O</item>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
     </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="title_activity_land">LandActivity</string>
 
-    <string name="sign_out">Sign Out</string>
-    <string name="login">Login</string>
-    <string name="signup">SignUp</string>
-    <string name="title_activity_show_location">ShowLocation</string>
-    <string name="title_activity_individual_show_location">IndividualShowLocationActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="action_settings">Settings</string>
 </resources>
