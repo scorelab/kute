@@ -3,6 +3,7 @@ package com.scorelab.kute.kute.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,10 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -42,12 +39,13 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.scorelab.kute.kute.R;
 import com.scorelab.kute.kute.SplashActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public class RegisterActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener{
 
-    RequestQueue rq;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -255,8 +253,6 @@ public class RegisterActivity extends AppCompatActivity implements
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
-
-        rq= Volley.newRequestQueue(this);
     }
 
     @Override
@@ -321,17 +317,22 @@ public class RegisterActivity extends AppCompatActivity implements
         Toast.makeText(getApplicationContext(),"You have been Signout from the Kute",Toast.LENGTH_LONG).show();
         //updateUI(null);
     }
-public void getImage(String url){
-    ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
-        @Override
-        public void onResponse(Bitmap response) {
-            ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
-            ImageView iv=(ImageView)findViewById(R.id.imageView);
-            iv.setImageBitmap(response);
-        }
-    }, 0, 0, null, null);
-    rq.add(ir);
 
-}
+    public void getImage(String url){
+        Picasso.with(getApplicationContext()).load(url).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),bitmap);
+                ImageView iv=(ImageView)findViewById(R.id.imageView);
+                iv.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {/**/}
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {/**/}
+        });
+    }
 
 }
