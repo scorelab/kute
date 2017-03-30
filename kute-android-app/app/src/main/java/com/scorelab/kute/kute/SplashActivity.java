@@ -45,11 +45,13 @@ public class SplashActivity extends AppCompatActivity {
             if(userpic==null){ //User is not registered in the system.
 
                 Intent regIntent =new Intent(SplashActivity.this, RegisterActivity.class);
+                regIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(regIntent);
             }
             else{ //User registered in the system.
 
                 Intent regIntent =new Intent(SplashActivity.this, LandActivity.class);
+                regIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(regIntent);
             }
 
