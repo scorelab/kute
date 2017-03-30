@@ -10,21 +10,34 @@ People travel to the same destination on a regular basis for various reasons usi
 
 ## Installation
 
-1.Go to your terminal and execute this command
+1. Go to your terminal and execute this command
 
-git clone https://github.com/scorelab/kute.git
+   ```
+   git clone https://github.com/scorelab/kute.git
+   ```
+   or download the zip file
 
-or
+2. Launch android studio (version 1.4 above)
 
-download the zip file.
+3. Click on File, then New and then Import Project Or from the welcome screen of android studio click on Import project (If you wish to contribute, you can directly link to GitHub)
 
-2. Launch android studio(version 1.4 above)
-3. Click on File, then New and then Import Project Or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub)
-4. Browse to the directory where you cloned (extracte the zip) 
-5. Run and build the Gradle.
-6. If Gradle finishes to build without error run the project by clicking on the play button on the tool bar.
-7. Wait for a few seconds and the app should start on your device(android phone or emulator)
-8. Make sure you are connected to internet.
+4. Browse to the directory where you cloned (extracted the zip) 
+
+5. Update kute-android-app/app/src/main/res/values/strings.xml with a facebook app id and google maps api key
+   ```
+   ...
+    <string name="facebook_app_id">YOUR_FB_APP_ID</string>
+    <string name="googlemapApi">YOUR_GOOGLE_MAPS_API_KEY</string>
+   ...
+   ```
+   
+6. Run and build the Gradle
+
+7. If Gradle finishes to build without error run the project by clicking on the play button on the tool bar
+
+8. Wait for a few seconds and the app should start on your device (android phone or emulator)
+
+9. Make sure you are connected to internet
 
 ## License
 
