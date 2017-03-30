@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         try {
-            setContentView(R.layout.testreg);
+            setContentView(R.layout.signin);
 
             // Assign fields
             mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
