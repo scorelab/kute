@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="16dp"
             android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
 
-            app:srcCompat="@drawable/track"
-            android:id="@+id/trackVehicle" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/track1"
+                android:scaleType="centerCrop"
+                android:id="@+id/trackVehicle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TrackMyLocation"
                 android:fontFamily="sans-serif"
-                android:textSize="24sp" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -34,17 +40,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_margin="16dp"
             android:layout_weight="1">
-        <ImageView
-            android:layout_width="183dp"
-            android:layout_height="228dp"
-            app:srcCompat="@drawable/publish"
-            android:id="@+id/UpdateMe" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/publish"
+                android:id="@+id/UpdateMe" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PublishMyLocation"/>
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:text="PublishMyLocation"
+                android:ellipsize="end" />
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
