@@ -1,6 +1,7 @@
 package com.scorelab.kute.kute.Activity;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -10,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,13 +48,21 @@ import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class RegisterActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener{
+        View.OnClickListener {
 
     RequestQueue rq;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
     private SignInButton mSignInButton;
+
+    Button firebaseRegister;
+    Button firebaseLogin;
+    EditText userEmail;
+    EditText userPassword;
+
+    public ProgressDialog mDialog;
+
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -74,12 +85,23 @@ public class RegisterActivity extends AppCompatActivity implements
             case R.id.login_with_google:
                 signIn();
                 break;
+            //Added to register users with Firebase
+            case R.id.custom_signup_button:
+                Intent intent = new Intent(getBaseContext(), NewUserActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.custom_signin_button:
+                String email = userEmail.getText().toString();
+                String password = userPassword.getText().toString();
+                mDialog.show();
+                authWIthEmailPassword(email,password);
+                break;
         }
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-// An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
@@ -106,8 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements
                 // Google Sign In failed
                 Log.e(TAG, "Google Sign In failed.");
             }
-        }
-        else{
+        } else {
             mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -129,11 +150,11 @@ public class RegisterActivity extends AppCompatActivity implements
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Authentication Done."+task.getResult().getUser().getDisplayName()+" - "+task.getResult().getUser().getDisplayName()+" - "+task.getResult().getUser().getEmail()+" - "+task.getResult().getUser().getPhotoUrl().getPath()+" - ",
+                            Toast.makeText(RegisterActivity.this, "Authentication Done." + task.getResult().getUser().getDisplayName() + " - " + task.getResult().getUser().getDisplayName() + " - " + task.getResult().getUser().getEmail() + " - " + task.getResult().getUser().getPhotoUrl().getPath() + " - ",
                                     Toast.LENGTH_SHORT).show();
                             getImage(task.getResult().getUser().getPhotoUrl().toString());
 
-                            Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
+                            Intent intentdone = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intentdone);
 
                         }
@@ -151,9 +172,20 @@ public class RegisterActivity extends AppCompatActivity implements
 
             // Assign fields
             mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
+            firebaseRegister = (Button) findViewById(R.id.custom_signup_button);
+            firebaseLogin = (Button) findViewById(R.id.custom_signin_button);
+
+            userEmail = (EditText) findViewById(R.id.login_email);
+            userPassword = (EditText) findViewById(R.id.login_password);
+
+            mDialog = new ProgressDialog(this);
+            mDialog.setMessage("Processing...");
+            mDialog.setCancelable(false);
 
             // Set click listeners
             mSignInButton.setOnClickListener(this);
+            firebaseRegister.setOnClickListener(this);
+            firebaseLogin.setOnClickListener(this);
 
             // Configure Google Sign In
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -167,8 +199,6 @@ public class RegisterActivity extends AppCompatActivity implements
 
             // Initialize FirebaseAuth
             mFirebaseAuth = FirebaseAuth.getInstance();
-
-
             //Facebook
             mAuth = FirebaseAuth.getInstance();
             // [START auth_state_listener]
@@ -179,18 +209,17 @@ public class RegisterActivity extends AppCompatActivity implements
                     if (user != null) {
                         // User is signed in
                         Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                        Toast.makeText(getApplicationContext(), "Facebook  User " + user.getPhotoUrl(), Toast.LENGTH_LONG).show();
-                        getImage(user.getPhotoUrl().toString());
+                        Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
+                        //getImage(user.getPhotoUrl().toString());
 
-
-                        Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
+                        Intent intentdone = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intentdone);
 
 
                     } else {
                         // User is signed out
                         Log.d(TAG, "onAuthStateChanged:signed_out");
-                        Toast.makeText(getApplicationContext(), "Facebook  User signed out", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please Login", Toast.LENGTH_SHORT).show();
                     }
                     // [START_EXCLUDE]
 
@@ -211,8 +240,7 @@ public class RegisterActivity extends AppCompatActivity implements
                         Log.d(TAG, "facebook:onSuccess:" + loginResult);
 
                         handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
 
                     }
@@ -220,14 +248,13 @@ public class RegisterActivity extends AppCompatActivity implements
 
                 @Override
                 public void onCancel() {
-                    try{
-                    Log.d(TAG, "facebook:onCancel");
-                    // [START_EXCLUDE]
-                    Toast.makeText(getApplicationContext(), "Facebook  Cancel", Toast.LENGTH_LONG).show();
-                    //updateUI(null);
-                    // [END_EXCLUDE]
-                    }
-                    catch (Exception e){
+                    try {
+                        Log.d(TAG, "facebook:onCancel");
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(), "Facebook  Cancel", Toast.LENGTH_LONG).show();
+                        //updateUI(null);
+                        // [END_EXCLUDE]
+                    } catch (Exception e) {
                         e.printStackTrace();
 
                     }
@@ -235,28 +262,26 @@ public class RegisterActivity extends AppCompatActivity implements
 
                 @Override
                 public void onError(FacebookException error) {
-                    try{
+                    try {
 
-                    Log.d(TAG, "facebook:onError", error);
-                    // [START_EXCLUDE]
-                    Toast.makeText(getApplicationContext(), "Facebook  Error "+error.getMessage(), Toast.LENGTH_LONG).show();
-                    //updateUI(null);
-                    // [END_EXCLUDE]
-                    }
-                    catch (Exception e){
+                        Log.d(TAG, "facebook:onError", error);
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(), "Facebook  Error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        //updateUI(null);
+                        // [END_EXCLUDE]
+                    } catch (Exception e) {
                         e.printStackTrace();
 
                     }
                 }
             });
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        rq= Volley.newRequestQueue(this);
+        rq = Volley.newRequestQueue(this);
     }
 
     @Override
@@ -278,7 +303,7 @@ public class RegisterActivity extends AppCompatActivity implements
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
         // [START_EXCLUDE silent]
-        Toast.makeText(getApplicationContext(),"Facebook  show dialog",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Facebook  show dialog", Toast.LENGTH_LONG).show();
         //showProgressDialog();
         // [END_EXCLUDE]
 
@@ -287,24 +312,23 @@ public class RegisterActivity extends AppCompatActivity implements
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        try{
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                        try {
+                            Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "signInWithCredential", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                        // [START_EXCLUDE]
-                        Toast.makeText(getApplicationContext(),"Facebook  hide dialog",Toast.LENGTH_LONG).show();
-                        //hideProgressDialog();
-                        // [END_EXCLUDE]
-                        }
-                        catch (Exception e){
+                            // [START_EXCLUDE]
+                            Toast.makeText(getApplicationContext(), "Facebook  hide dialog", Toast.LENGTH_LONG).show();
+                            //hideProgressDialog();
+                            // [END_EXCLUDE]
+                        } catch (Exception e) {
                             e.printStackTrace();
 
                         }
@@ -318,20 +342,33 @@ public class RegisterActivity extends AppCompatActivity implements
     public void signOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
-        Toast.makeText(getApplicationContext(),"You have been Signout from the Kute",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "You have been Signout from the Kute", Toast.LENGTH_LONG).show();
         //updateUI(null);
     }
-public void getImage(String url){
-    ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
-        @Override
-        public void onResponse(Bitmap response) {
-            ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
-            ImageView iv=(ImageView)findViewById(R.id.imageView);
-            iv.setImageBitmap(response);
-        }
-    }, 0, 0, null, null);
-    rq.add(ir);
 
-}
+    public void getImage(String url) {
+        ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey, MODE_PRIVATE), response);
+                ImageView iv = (ImageView) findViewById(R.id.imageView);
+                iv.setImageBitmap(response);
+            }
+        }, 0, 0, null, null);
+        rq.add(ir);
+
+    }
+
+    private void authWIthEmailPassword(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                }
+                mDialog.hide();
+            }
+        });
+    }
 
 }
