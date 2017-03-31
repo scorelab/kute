@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements
     RequestQueue rq;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+    Button signinfirebase,signupfirebase;
 
     private SignInButton mSignInButton;
 
@@ -73,6 +75,9 @@ public class RegisterActivity extends AppCompatActivity implements
         switch (v.getId()) {
             case R.id.login_with_google:
                 signIn();
+                break;
+            case R.id.custom_signup_button:
+                signUpFirebase();
                 break;
         }
     }
@@ -168,6 +173,9 @@ public class RegisterActivity extends AppCompatActivity implements
             // Initialize FirebaseAuth
             mFirebaseAuth = FirebaseAuth.getInstance();
 
+            signinfirebase=(Button)findViewById(R.id.custom_signin_button);
+            signupfirebase=(Button)findViewById(R.id.custom_signup_button);
+            signupfirebase.setOnClickListener(this);
 
             //Facebook
             mAuth = FirebaseAuth.getInstance();
@@ -332,6 +340,11 @@ public void getImage(String url){
     }, 0, 0, null, null);
     rq.add(ir);
 
+}
+private void signUpFirebase()
+{
+    Intent i =new Intent(this,SignUpSliderActivity.class);
+    startActivity(i);
 }
 
 }

@@ -15,10 +15,10 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+            android:value="SAMPLE" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/googlemapApi"/>
+            android:value="SAMPLE"/>
 
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -51,6 +51,9 @@
         <activity android:name=".Activity.VehicleSelection" ></activity>
         <service android:name=".Services.BacKService"
             android:process=":backservice"></service>
+        <activity android:name=".Activity.SignUpSliderActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
+
 
 </manifest>
