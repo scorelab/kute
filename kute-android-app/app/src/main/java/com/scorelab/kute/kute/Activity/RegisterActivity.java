@@ -296,21 +296,25 @@ public class RegisterActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         try{
-                            Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
-                            if (!task.isSuccessful()) {
-                                Log.w(TAG, "signInWithCredential", task.getException());
-                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                            // [START_EXCLUDE]
-                            Toast.makeText(getApplicationContext(),"Facebook  hide dialog",Toast.LENGTH_LONG).show();
-                            //hideProgressDialog();
-                            // [END_EXCLUDE]
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            //make user partial login to logout
+                            signOut();
+                            Log.w(TAG, "signInWithCredential", task.getException());
+                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(),"Facebook  hide dialog",Toast.LENGTH_LONG).show();
+                        //hideProgressDialog();
+                        // [END_EXCLUDE]
+
                         }
                         catch (Exception e){
                             e.printStackTrace();
