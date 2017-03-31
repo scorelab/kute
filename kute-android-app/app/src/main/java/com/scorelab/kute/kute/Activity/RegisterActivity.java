@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements
     RequestQueue rq;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+    Button signinfirebase,signupfirebase;
 
     private SignInButton mSignInButton;
 
@@ -73,6 +75,9 @@ public class RegisterActivity extends AppCompatActivity implements
         switch (v.getId()) {
             case R.id.login_with_google:
                 signIn();
+                break;
+            case R.id.custom_signup_button:
+                signUpFirebase();
                 break;
         }
     }
@@ -168,6 +173,9 @@ public class RegisterActivity extends AppCompatActivity implements
             // Initialize FirebaseAuth
             mFirebaseAuth = FirebaseAuth.getInstance();
 
+            signinfirebase=(Button)findViewById(R.id.custom_signin_button);
+            signupfirebase=(Button)findViewById(R.id.custom_signup_button);
+            signupfirebase.setOnClickListener(this);
 
             //Facebook
             mAuth = FirebaseAuth.getInstance();
@@ -221,11 +229,11 @@ public class RegisterActivity extends AppCompatActivity implements
                 @Override
                 public void onCancel() {
                     try{
-                    Log.d(TAG, "facebook:onCancel");
-                    // [START_EXCLUDE]
-                    Toast.makeText(getApplicationContext(), "Facebook  Cancel", Toast.LENGTH_LONG).show();
-                    //updateUI(null);
-                    // [END_EXCLUDE]
+                        Log.d(TAG, "facebook:onCancel");
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(), "Facebook  Cancel", Toast.LENGTH_LONG).show();
+                        //updateUI(null);
+                        // [END_EXCLUDE]
                     }
                     catch (Exception e){
                         e.printStackTrace();
@@ -237,11 +245,11 @@ public class RegisterActivity extends AppCompatActivity implements
                 public void onError(FacebookException error) {
                     try{
 
-                    Log.d(TAG, "facebook:onError", error);
-                    // [START_EXCLUDE]
-                    Toast.makeText(getApplicationContext(), "Facebook  Error "+error.getMessage(), Toast.LENGTH_LONG).show();
-                    //updateUI(null);
-                    // [END_EXCLUDE]
+                        Log.d(TAG, "facebook:onError", error);
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(), "Facebook  Error "+error.getMessage(), Toast.LENGTH_LONG).show();
+                        //updateUI(null);
+                        // [END_EXCLUDE]
                     }
                     catch (Exception e){
                         e.printStackTrace();
@@ -288,21 +296,21 @@ public class RegisterActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         try{
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                            Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "signInWithCredential", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                        // [START_EXCLUDE]
-                        Toast.makeText(getApplicationContext(),"Facebook  hide dialog",Toast.LENGTH_LONG).show();
-                        //hideProgressDialog();
-                        // [END_EXCLUDE]
+                            // [START_EXCLUDE]
+                            Toast.makeText(getApplicationContext(),"Facebook  hide dialog",Toast.LENGTH_LONG).show();
+                            //hideProgressDialog();
+                            // [END_EXCLUDE]
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -321,17 +329,22 @@ public class RegisterActivity extends AppCompatActivity implements
         Toast.makeText(getApplicationContext(),"You have been Signout from the Kute",Toast.LENGTH_LONG).show();
         //updateUI(null);
     }
-public void getImage(String url){
-    ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
-        @Override
-        public void onResponse(Bitmap response) {
-            ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
-            ImageView iv=(ImageView)findViewById(R.id.imageView);
-            iv.setImageBitmap(response);
-        }
-    }, 0, 0, null, null);
-    rq.add(ir);
+    public void getImage(String url){
+        ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
+                ImageView iv=(ImageView)findViewById(R.id.imageView);
+                iv.setImageBitmap(response);
+            }
+        }, 0, 0, null, null);
+        rq.add(ir);
 
-}
+    }
+    private void signUpFirebase()
+    {
+        Intent i =new Intent(this,SignUpSliderActivity.class);
+        startActivity(i);
+    }
 
 }

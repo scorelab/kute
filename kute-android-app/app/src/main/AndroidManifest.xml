@@ -32,6 +32,9 @@
             android:windowSoftInputMode="stateHidden">
 
         </activity>
+        <activity android:name=".Activity.SignUpSliderActivity"
+            android:windowSoftInputMode="stateHidden">
+            </activity>
 
         <activity
             android:name="com.facebook.FacebookActivity"
