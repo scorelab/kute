@@ -23,4 +23,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="sign_in_facebook">Sign in with Facebook</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">No account yet? Create one</string>
+    <string name="sign_up_button">Sign Up</string>
 </resources>
