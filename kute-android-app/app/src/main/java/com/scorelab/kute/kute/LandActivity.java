@@ -5,10 +5,14 @@ import android.app.Fragment;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +31,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,30 +48,53 @@ import com.scorelab.kute.kute.Util.ImageHandler;
 import com.scorelab.kute.kute.Util.MessageKey;
 
 public class LandActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, LocationListener {
+
     GoogleMap mGoogleMap;
     ImageView userProfileImage;
+
+    private LocationManager locationManager;
+    private static final long MIN_TIME = 400;
+    private static final float MIN_DISTANCE = 1000;
+
     static int SelectTaskActivityCode = 100;
+
     public static android.support.v4.app.FragmentManager fmn;
+
     ServiceDataReceiver serviceDataReceiver;
-    int applicationTaskStatus=MessageKey.InitShow;
-    String keyvehicle=null;
-    Marker trackerMarker=null;
+    int applicationTaskStatus = MessageKey.InitShow;
+
+    String keyvehicle = null;
+    Marker trackerMarker = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land);
+
         fmn = getSupportFragmentManager();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         serviceDataReceiver=new ServiceDataReceiver(null);
+
         Intent intent = new Intent(this, BacKService.class);
         intent.putExtra("receiver", serviceDataReceiver);
         startService(intent);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        if (ActivityCompat.checkSelfPermission(
+                this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                        this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling permission requests
+            return;
+        }
 
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,9 +113,10 @@ public class LandActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View navigation_header_View = navigationView.getHeaderView(0);
-        userProfileImage = (ImageView) navigation_header_View.findViewById(R.id.userProfile);
 
+        View navigation_header_View = navigationView.getHeaderView(0);
+
+        userProfileImage = (ImageView) navigation_header_View.findViewById(R.id.userProfile);
 
         try {
 
@@ -111,7 +141,9 @@ public class LandActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -157,8 +189,22 @@ public class LandActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Kute");
 
+            // TODO: Put the app link of the app here ...
+            intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?" +
+                    "id=com.scorelab.kute.kute");
+            startActivity(intent);
+
+        } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+            // TODO: Keep the link for playstore account here ...
+            intent.setData(Uri.parse("market://details?id=com.scorelab.kute.kute"));
+            // Eg:  market://details?id=com.example.android ...
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -168,49 +214,67 @@ public class LandActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == SelectTaskActivityCode) {
             if (resultCode == Activity.RESULT_OK) {
                 //Toast.makeText(getApplicationContext(),"+ "+data.getStringExtra("type")+" "+data.getStringExtra("vehname")+" "+data.getStringExtra("Activity"),Toast.LENGTH_LONG).show();
-                handleTask(data.getStringExtra("Activity"), data.getStringExtra("type"), data.getStringExtra("vehname"),data.getStringExtra("vehkey"));
+                handleTask(data.getStringExtra("Activity"), data.getStringExtra("type"), data.getStringExtra("vehname"), data.getStringExtra("vehkey"));
             } else if (resultCode == Activity.RESULT_CANCELED) {
 
             }
         }
     }
 
-    public void handleTask(String activity, String type, String vehname,String vehkey) {
+    public void handleTask(String activity, String type, String vehname, String vehkey) {
         Fragment fr;
         Intent intent = new Intent();
-        keyvehicle=vehkey;
-        Toast.makeText(getApplicationContext(),"-- "+vehkey,Toast.LENGTH_LONG).show();
+        keyvehicle = vehkey;
+        Toast.makeText(getApplicationContext(), "-- " + vehkey, Toast.LENGTH_LONG).show();
         if (activity.equals("PublishMe")) {
             //fr = new PublishFragment();
-            intent.putExtra(MessageKey.intenetKeyTrackStatus,"publish");
-            if(type.equals("train")){
-                applicationTaskStatus=MessageKey.PublishTrain;
-                intent.putExtra(MessageKey.intenetKeyTrackVehicle,"Trains");
-            }else if(type.equals("bus")){
-                applicationTaskStatus=MessageKey.PublishBus;
-                intent.putExtra(MessageKey.intenetKeyTrackVehicle,"Bus");
+            intent.putExtra(MessageKey.intenetKeyTrackStatus, "publish");
+
+            if (type.equals("train")) {
+
+                applicationTaskStatus = MessageKey.PublishTrain;
+                intent.putExtra(MessageKey.intenetKeyTrackVehicle, "Trains");
+
+            } else if (type.equals("bus")) {
+
+                applicationTaskStatus = MessageKey.PublishBus;
+                intent.putExtra(MessageKey.intenetKeyTrackVehicle, "Bus");
+
             }
+
         } else if (activity.equals("TrackMe")) {
             //fr = new TrackFragment();
-            intent.putExtra(MessageKey.intenetKeyTrackStatus,"track");
-            if(type.equals("train")){
-                applicationTaskStatus=MessageKey.TrackTrain;
-                intent.putExtra(MessageKey.intenetKeyTrackVehicle,"Trains");
-            }else if(type.equals("bus")){
-                applicationTaskStatus=MessageKey.TrackBus;
-                intent.putExtra(MessageKey.intenetKeyTrackVehicle,"Bus");
+            intent.putExtra(MessageKey.intenetKeyTrackStatus, "track");
+
+            if (type.equals("train")) {
+
+                applicationTaskStatus = MessageKey.TrackTrain;
+                intent.putExtra(MessageKey.intenetKeyTrackVehicle, "Trains");
+
+            } else if (type.equals("bus")) {
+
+                applicationTaskStatus = MessageKey.TrackBus;
+                intent.putExtra(MessageKey.intenetKeyTrackVehicle, "Bus");
+
             }
+
         } else {
+
             fr = new PublishFragment();
+
         }
-        intent.putExtra(MessageKey.vehiclekeyindex,keyvehicle);
+
+        intent.putExtra(MessageKey.vehiclekeyindex, keyvehicle);
         intent.setAction(MessageKey.activityserviceintentName);
+
         sendBroadcast(intent);
-        Toast.makeText(getApplicationContext(),"Done Getting task",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Done Getting task", Toast.LENGTH_LONG).show();
 
 //        fr=new PublishFragment();
 //        FragmentManager fm = getFragmentManager();
@@ -236,6 +300,34 @@ public class LandActivity extends AppCompatActivity
         }
         mGoogleMap.setMyLocationEnabled(true);
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        mGoogleMap.animateCamera(cameraUpdate);
+
+        if (ActivityCompat.checkSelfPermission(
+                this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                        this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling permission requests
+            return;
+        }
+
+        locationManager.removeUpdates(this);
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {/**/}
+
+    @Override
+    public void onProviderEnabled(String provider) {/**/}
+
+    @Override
+    public void onProviderDisabled(String provider) {/**/}
 
 
     class ServiceDataReceiver extends ResultReceiver{
@@ -264,22 +356,25 @@ public class LandActivity extends AppCompatActivity
         Bundle datatoupdate;
         int rescode;
         public UpDateMapFromData(Bundle data,int ResultCode){
-         datatoupdate=data;
+            datatoupdate=data;
             rescode=ResultCode;
         }
         @Override
         public void run() {
             if(rescode== MessageKey.MyLocationUpdate) {
-                //Toast.makeText(getApplicationContext(), "+++" + "Got data " + ((Location) datatoupdate.getParcelable("location")).getLongitude(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "+++" + "Got data " +
+                // ((Location) datatoupdate.getParcelable("location")).getLongitude(), Toast.LENGTH_LONG).show();
             }
             else if(rescode==MessageKey.FireBaseTrackUpdate){
-                //Toast.makeText(getApplicationContext(),"DataChnaged "+datatoupdate.getDouble("lat")+" "+datatoupdate.getDouble("lon"),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"DataChnaged "+datatoupdate.getDouble("lat")+" "+
+                // datatoupdate.getDouble("lon"),Toast.LENGTH_LONG).show();
 
                 if(applicationTaskStatus==MessageKey.TrackTrain){
 
                     LatLng newLoc=new LatLng(datatoupdate.getDouble("lat"),datatoupdate.getDouble("lon"));
                     if(trackerMarker==null) {
-                        trackerMarker=mGoogleMap.addMarker(new MarkerOptions().position(newLoc).title(datatoupdate.getString("TrainName")));
+                        trackerMarker=mGoogleMap.addMarker(new MarkerOptions().position(newLoc)
+                                .title(datatoupdate.getString("TrainName")));
                     }
                     else{
                         trackerMarker.setPosition(newLoc);
