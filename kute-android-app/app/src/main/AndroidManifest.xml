@@ -15,10 +15,12 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
+
             android:value="@string/facebook_app_id"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/googlemapApi"/>
+            android:value="googlemapApi"/>
 
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -32,6 +34,9 @@
             android:windowSoftInputMode="stateHidden">
 
         </activity>
+        <activity android:name=".Activity.SignUpSliderActivity"
+            android:windowSoftInputMode="stateHidden">
+            </activity>
 
         <activity
             android:name="com.facebook.FacebookActivity"
