@@ -25,8 +25,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,8 +36,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.scorelab.kute.kute.Activity.FragmentUI.PublishFragment;
 import com.scorelab.kute.kute.Activity.FragmentUI.TrackFragment;
+import com.scorelab.kute.kute.Activity.RegisterActivity;
 import com.scorelab.kute.kute.Activity.TaskSelection;
 import com.scorelab.kute.kute.Services.BacKService;
 import com.scorelab.kute.kute.Util.ImageHandler;
@@ -52,6 +57,8 @@ public class LandActivity extends AppCompatActivity
     String keyvehicle=null;
     Marker trackerMarker=null;
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +71,11 @@ public class LandActivity extends AppCompatActivity
         intent.putExtra("receiver", serviceDataReceiver);
         startService(intent);
 
+        //creating a firebase auth instance
+        mAuth = FirebaseAuth.getInstance();
 
-
+        //getting logged user
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +92,20 @@ public class LandActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        //Setting up navigation view
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View navigation_header_View = navigationView.getHeaderView(0);
+
+        //show username and email
+        TextView user_txt = (TextView) navigation_header_View.findViewById(R.id.nameUser);
+        TextView email_txt = (TextView) navigation_header_View.findViewById(R.id.emailUser);
+        user_txt.setText(mUser.getDisplayName());
+        email_txt.setText(mUser.getEmail());
+
+        //show display photo
         userProfileImage = (ImageView) navigation_header_View.findViewById(R.id.userProfile);
-
-
         try {
-
             Bitmap userimg = ImageHandler.getUserImage(getSharedPreferences(ImageHandler.MainKey, MODE_PRIVATE));
             if (userimg == null) {
                 userProfileImage.setImageResource(R.drawable.defuser);
@@ -103,6 +119,8 @@ public class LandActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
+
+        //Map area
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mainMapView);
         mapFragment.getMapAsync(this);
@@ -159,6 +177,14 @@ public class LandActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }else if(id == R.id.nav_logout){
+            //logout the user and direct to login page
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+            Intent tologin_intent =new Intent(this, RegisterActivity.class);
+            startActivity(tologin_intent);
+
+            Toast.makeText(getApplicationContext(),"You have been Signout from the Kute",Toast.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
