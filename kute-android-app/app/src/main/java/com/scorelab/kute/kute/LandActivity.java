@@ -235,6 +235,8 @@ public class LandActivity extends AppCompatActivity
             return;
         }
         mGoogleMap.setMyLocationEnabled(true);
+        mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+        mGoogleMap.getUiSettings().setZoomGesturesEnabled(true);
     }
 
 
