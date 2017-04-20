@@ -328,8 +328,7 @@ public void getImage(String url){
         @Override
         public void onResponse(Bitmap response) {
             ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
-            ImageView iv=(ImageView)findViewById(R.id.imageView);
-            iv.setImageBitmap(response);
+
         }
     }, 0, 0, null, null);
     rq.add(ir);
