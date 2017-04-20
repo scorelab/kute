@@ -8,7 +8,9 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +29,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.Profile;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -40,6 +43,8 @@ import com.scorelab.kute.kute.Activity.TaskSelection;
 import com.scorelab.kute.kute.Services.BacKService;
 import com.scorelab.kute.kute.Util.ImageHandler;
 import com.scorelab.kute.kute.Util.MessageKey;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public class LandActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
@@ -87,26 +92,49 @@ public class LandActivity extends AppCompatActivity
         View navigation_header_View = navigationView.getHeaderView(0);
         userProfileImage = (ImageView) navigation_header_View.findViewById(R.id.userProfile);
 
+        // Try to fetch the latest profile image from FaceBook
+        Uri UserImageURI = checkFBProfilePic(200);
+        // Fetch Image from the URI
+        Picasso.with(this).load(UserImageURI).into(
+                new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE), bitmap);
+                        userProfileImage.setImageBitmap(bitmap);
+                    }
 
-        try {
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        profilePicChanging();
+                    }
 
-            Bitmap userimg = ImageHandler.getUserImage(getSharedPreferences(ImageHandler.MainKey, MODE_PRIVATE));
-            if (userimg == null) {
-                userProfileImage.setImageResource(R.drawable.defuser);
-            } else {
-                userimg = Bitmap.createScaledBitmap(userimg, 200, 200, true);
-                userProfileImage.setImageBitmap(userimg);
-            }
-
-            //userProfileImage.
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        profilePicChanging();
+                    }
+                }
+        );
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mainMapView);
         mapFragment.getMapAsync(this);
 
+
+    }
+
+    private Uri checkFBProfilePic(int dimensions) {
+        Profile profile = Profile.getCurrentProfile();
+        return profile.getProfilePictureUri(dimensions, dimensions);
+    }
+
+    private void profilePicChanging() {
+        Bitmap img = ImageHandler.getUserImage(getSharedPreferences(ImageHandler.MainKey, MODE_PRIVATE));
+        if (img == null) {
+            userProfileImage.setImageResource(R.drawable.defuser);
+        } else {
+            img = Bitmap.createScaledBitmap(img, 200, 200, true);
+            userProfileImage.setImageBitmap(img);
+        }
     }
 
     @Override
