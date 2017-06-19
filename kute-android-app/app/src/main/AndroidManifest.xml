@@ -50,6 +50,7 @@
         <activity android:name=".Activity.VehicleSelection" ></activity>
         <service android:name=".Services.BacKService"
             android:process=":backservice"></service>
+        <activity android:name=".Activity.SwitchPrivatePublicActivity" />
     </application>
 
 </manifest>
