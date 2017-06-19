@@ -1,0 +1,45 @@
+{
+  "project_info": {
+    "project_number": "512059903778",
+    "firebase_url": "https://kutenew-c36c1.firebaseio.com",
+    "project_id": "kutenew-c36c1",
+    "storage_bucket": "kutenew-c36c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512059903778:android:e5312257f7c86a49",
+        "android_client_info": {
+          "package_name": "com.scorelab.kute.kute"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512059903778-uto3b2anj6phigvs60t99bbb1sl0oe7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrROeYR1glcHf4yPmneck3KbcS3fK4LAo"
+        },
+        {
+          "current_key": "AIzaSyCSZ7SOif62k5h3JSO4J9hhkFMsvzjJzO8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
