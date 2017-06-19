@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.scorelab.kute.kute.LandActivity;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Main;
 import com.scorelab.kute.kute.R;
 
 /**
@@ -40,8 +41,8 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
                 startActivity(i);
                 break;
             case R.id.privateVehicle:
-                Toast.makeText(this,"Request For privateVehicle",Toast.LENGTH_SHORT).show();
-                //TODO open the private vehicle activity
+                Intent pvi=new Intent(this, Main.class);
+                startActivity(pvi);
                 break;
             default:
                 Toast.makeText(this,"Not Clickable",Toast.LENGTH_SHORT).show();

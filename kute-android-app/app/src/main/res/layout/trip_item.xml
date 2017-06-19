@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    custom:cardCornerRadius="2dp"
+    android:background="@color/cardview_light_background"
+    custom:cardElevation="2dp"
+    custom:cardUseCompatPadding="true"
+    android:layout_span="2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textFrom"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="8dp"
+                android:text="HomeOffice"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@android:color/black"
+                android:maxEms="5"
+                android:maxWidth="140dp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lastTravelTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:text="Last Travelled :"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lastTravelValue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:text="7/06/17"
+                android:layout_toRightOf="@+id/lastTravelTitle"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@android:color/black"
+                />
+
+
+
+
+
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

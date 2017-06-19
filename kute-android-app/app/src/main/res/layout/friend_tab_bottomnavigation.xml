@@ -1,0 +1,115 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/apptheme"
+                android:layout_span="2">
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:textSize="30dp"
+                    android:text="Friends"
+                    android:textColor="@android:color/white"
+                    />
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/headIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chat" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="2dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Friend Requests"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"/>
+            <android.support.v7.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:text="View All"
+                android:id="@+id/viewallFriendrequests"
+                android:fontFamily="sans-serif-condensed"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"/>
+            </RelativeLayout>
+        </TableRow>
+        <TableRow android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:id="@+id/friendRequestsFrame"/>
+        </TableRow>
+        <TableRow android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="2dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Current Friends"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"/>
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:text="View All"
+                    android:id="@+id/viewallCurrentfriends"
+                    android:fontFamily="sans-serif-condensed"
+                    android:background="@null"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="2dp"/>
+            </RelativeLayout>
+        </TableRow>
+        <TableRow android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:id="@+id/currentFriendsFrame"/>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

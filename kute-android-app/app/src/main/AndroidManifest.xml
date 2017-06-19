@@ -51,6 +51,8 @@
         <service android:name=".Services.BacKService"
             android:process=":backservice"></service>
         <activity android:name=".Activity.SwitchPrivatePublicActivity" />
+        <activity android:name=".PrivateVehicles.App.Activities.Main"/>
+        <activity android:name=".PrivateVehicles.App.Activities.CurrentFriendList"/>
     </application>
 
 </manifest>
