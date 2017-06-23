@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/apptheme">
+    <TextView
+        android:text="Kute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView"
+        android:textSize="36sp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="48dp"
+        android:textColor="@android:color/background_light"
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif-smallcaps" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/publicvehicle"
+                android:background="@drawable/circle_background"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/publicVehicle"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="@dimen/textsize_head1"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Public Vehicles"
+                android:textColor="@android:color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/publicVehicle"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="16dp">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/privatevehicle"
+                android:background="@drawable/circle_background"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/privateVehicle"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="@dimen/textsize_head1"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Private Vehicles"
+                android:textColor="@android:color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/privateVehicle"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

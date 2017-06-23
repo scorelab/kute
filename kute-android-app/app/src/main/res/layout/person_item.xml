@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_span="2"
+    android:layout_height="wrap_content"
+    custom:cardCornerRadius="2dp"
+    android:background="@color/cardview_light_background"
+    custom:cardElevation="2dp"
+    custom:cardUseCompatPadding="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView
+            android:id="@+id/personimg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerInside"
+            />
+        <View
+            android:layout_width="60dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize_small"
+            android:textColor="#000000"
+            android:text="Nipun Arora"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="gravity"/>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

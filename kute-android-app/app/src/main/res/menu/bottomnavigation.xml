@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Home"
+        android:id="@+id/hometab"
+        android:icon="@drawable/ic_home_black_24dp"/>
+    <item android:title="Friends"
+        android:id="@+id/friendstab"
+        android:icon="@drawable/ic_people_black_24dp"/>
+    <item android:title="My Routes"
+        android:id="@+id/myroutestab"
+        android:icon="@drawable/ic_view_array_black_24dp"/>
+</menu>

@@ -23,4 +23,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">put in your facebook app id here</string>
+    <string name="googlemapApi">put in your google maps key here</string>
+
 </resources>

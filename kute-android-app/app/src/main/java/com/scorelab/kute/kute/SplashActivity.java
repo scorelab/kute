@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.scorelab.kute.kute.Activity.RegisterActivity;
+import com.scorelab.kute.kute.Activity.SwitchPrivatePublicActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class SplashActivity extends AppCompatActivity {
@@ -49,8 +50,8 @@ public class SplashActivity extends AppCompatActivity {
             }
             else{ //User registered in the system.
 
-                Intent regIntent =new Intent(SplashActivity.this, LandActivity.class);
-                startActivity(regIntent);
+                Intent switchIntent =new Intent(SplashActivity.this, SwitchPrivatePublicActivity.class);
+                startActivity(switchIntent);
             }
 
 
