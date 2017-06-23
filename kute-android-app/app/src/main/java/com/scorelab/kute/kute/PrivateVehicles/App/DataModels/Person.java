@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class Person {
     /***************** Defing Properties ***********/
     //Add provision for vehicle
-            
-    public String id,name,img_url,occupation;
-    public Boolean is_friend; // This will indicate whether the given person is users friend
+    //Make these variables private
+    public String id,name,img_url,occupation,other_details;
+    //Implement in some other way public Boolean is_friend; // This will indicate whether the given person is users friend
     public ArrayList<Route> route_list;
 
     /*********** Properties Defined *******/
@@ -19,18 +19,20 @@ public class Person {
     /****************** This constructor will configure for the list item
      ****************** rest detail will be filled later when person detail activity is called *******/
 
-    public Person(String name)   //Add id and img_url(Not being added right now because we dont have the backend for now)
+    public Person(String name,String id,String img_url)   //Add id and img_url(Not being added right now because we dont have the backend for now)
     {
         this.name=name;
+        this.img_url=img_url;
+        this.id=id;
     }
 
     /************** This method will be invoked when we load personDetail Activity **********/
 
-    public void completePersonDetail(String occupation,boolean is_friend,ArrayList<Route>list)
+    public void completePersonDetail(String occupation,ArrayList<Route>list,String other_details)
     {
         this.occupation=occupation;
-        this.is_friend=is_friend;
         this.route_list=list;
+        this.other_details=other_details;
     }
 
 }

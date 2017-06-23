@@ -39,7 +39,7 @@ public class CurrentFriendList extends AppCompatActivity {
         person_list=new ArrayList<Person>();
         for(int i=0;i<4;++i)
         {
-            Person temp=new Person("Nipun Arora");
+            Person temp=new Person("Nipun Arora","null","null");
             person_list.add(temp);
         }
         /************** Initialise the views *********/
