@@ -356,6 +356,8 @@ public class RegisterActivity extends AppCompatActivity implements
         editor.putString("Name", pf.getName());
         editor.putString("Id",pf.getId());
         editor.putString("Profile_Image",pf.getProfilePictureUri(100,100).toString());
+        editor.putBoolean("Register_db",true);
+        editor.putBoolean("Sync_Friends_db",true);
         editor.commit();
     }
 

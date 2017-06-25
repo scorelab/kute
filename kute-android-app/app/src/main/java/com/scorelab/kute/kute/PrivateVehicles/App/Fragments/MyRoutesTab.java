@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
  */
 
 public class MyRoutesTab extends Fragment {
+    private final String TAG="MyRoutesTab";
     ArrayList<Route> my_routes_list;
     RecyclerView my_routes_recycler;
     View v;
@@ -59,6 +61,12 @@ public class MyRoutesTab extends Fragment {
 
 
         my_routes_recycler.setAdapter(recycler_adapter);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG,"onDestroyView");
     }
 
     /********** End of Overrides ******/

@@ -3,6 +3,7 @@ package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.scorelab.kute.kute.R;
  */
 
 public class HomeTab extends Fragment {
+    private final String TAG="HomeTab";
     View v;
     public HomeTab()
     {}
@@ -37,5 +39,10 @@ public class HomeTab extends Fragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG,"onDestroyView");
 
+    }
 }

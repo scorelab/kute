@@ -1,18 +1,29 @@
 package com.scorelab.kute.kute.PrivateVehicles.App.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.android.volley.toolbox.ImageLoader;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.PersonDetail;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
+import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.RecyclerItemClick;
+import com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView;
+import com.scorelab.kute.kute.PrivateVehicles.App.Utils.VolleySingleton;
 import com.scorelab.kute.kute.PrivateVehicles.App.ViewHolders.HeaderRecyclerViewHolder;
 import com.scorelab.kute.kute.PrivateVehicles.App.ViewHolders.PersonItemViewHolder;
 import com.scorelab.kute.kute.R;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by nipunarora on 10/06/17.
@@ -23,16 +34,20 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private static final int header = 7;
     private static final int general_list_item=77;
     private ArrayList<Person> data_source;
-    Bitmap testdp;
+    private ImageLoader mImageLoader;
+    private final String TAG="FriendRecyclerAdapter";
+    Context mcontext;
+    RecyclerItemClick item_click_handler;
 
 
 
     /**************** Constructor ****/
-    public FriendRecyclerAdapter(ArrayList<Person> data_source,Bitmap test)//The bitmap arguement has been passed just to put in the test person image
-    //Later on we will have have an image url which would be used with volley image loader to get the image
+    public FriendRecyclerAdapter(ArrayList<Person> data_source,Context context,RecyclerItemClick item_click_handler)//
      {
-        this.data_source = data_source;
-        this.testdp=test;
+         this.data_source = data_source;
+         this.mcontext= context;
+         this.item_click_handler=item_click_handler;
+
     }
     /******** End of Constructor ******/
 
@@ -47,9 +62,9 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             case header:item_view=layout_inflater.inflate(R.layout.recycler_head,parent,false);
                 return new HeaderRecyclerViewHolder(item_view);
             case general_list_item:item_view=layout_inflater.inflate(R.layout.person_item,parent,false);
-                return new PersonItemViewHolder(item_view);
+                return new PersonItemViewHolder(item_view,item_click_handler);
             default:item_view=layout_inflater.inflate(R.layout.person_item,parent,false);
-                return new PersonItemViewHolder(item_view);
+                return new PersonItemViewHolder(item_view,item_click_handler);
         }
     }
 
@@ -84,6 +99,7 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             return general_list_item;
     }
 
+
     /***************** End of Overrides *************/
     /************ Configuring View Holders ****************/
     private void configureGeneralItem(PersonItemViewHolder vh, int position)
@@ -91,7 +107,12 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Person p=data_source.get(position-1);
         vh.name.setText(p.name);
         /********* Test ******/
-        vh.profile_pic.setImageBitmap(testdp);
+        RoundedImageView person_image=(RoundedImageView)vh.profile_pic;
+        mImageLoader = VolleySingleton.getInstance(mcontext).getImageLoader();
+        String img_url = String.format("https://graph.facebook.com/%s/picture?type=normal", p.id);
+        //Log.d(TAG,"Image Url for ImageLoader is"+img_url);
+        mImageLoader.get(img_url, ImageLoader.getImageListener(person_image,
+                R.drawable.ic_person_black_36dp, R.drawable.ic_person_black_36dp));
         /******** End of Test Data ********/
     }
 
