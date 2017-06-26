@@ -17,12 +17,14 @@ import com.scorelab.kute.kute.R;
 public class TripFrame extends Fragment {
     //TODO load data source from Fragment Args
     View v;
-    public TripFrame() {}
+
+    public TripFrame() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.trip_item,container,false);
+        v = inflater.inflate(R.layout.trip_item, container, false);
         return v;
     }
 }

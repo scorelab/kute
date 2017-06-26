@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by nipunarora on 18/06/17.
  */
 
-public class FriendTab extends Fragment implements View.OnClickListener,AsyncTaskListener {
+public class FriendTab extends Fragment implements View.OnClickListener {
     private final String TAG="FriendTab";
     View v;
     ArrayList<Person> friendslist;
@@ -38,7 +38,6 @@ public class FriendTab extends Fragment implements View.OnClickListener,AsyncTas
         super.onCreate(savedInstanceState);
         Log.d(TAG,"onCreate");
         setRetainInstance(true);
-
     }
 
     @Nullable
@@ -58,8 +57,6 @@ public class FriendTab extends Fragment implements View.OnClickListener,AsyncTas
         Log.d(TAG,"onACtivityCreated");
         getChildFragmentManager().beginTransaction().replace(R.id.friendRequestsFrame,new FriendFrame()).commit();
         getChildFragmentManager().beginTransaction().replace(R.id.currentFriendsFrame,new PlaceHolderFragment()).commit();
-
-
     }
 
     @Override
@@ -72,17 +69,6 @@ public class FriendTab extends Fragment implements View.OnClickListener,AsyncTas
              //TODO handle the viewall for friend requests as well
         }
     }
-
-    @Override
-    public void onTaskStarted() {
-
-    }
-
-    @Override
-    public void onTaskCompleted() {
-
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -106,9 +92,7 @@ public class FriendTab extends Fragment implements View.OnClickListener,AsyncTas
         super.onDetach();
         Log.d(TAG,"onDetach");
     }
-
     /********************* Custom Functions *************/
-
     //Receive Message  from Activity and other fragments
     public void receiveMessage(String Action,Object attachment)
     {
@@ -131,6 +115,5 @@ public class FriendTab extends Fragment implements View.OnClickListener,AsyncTas
         f.setArguments(args);
         viewall_currentfriends.setEnabled(true);
         getChildFragmentManager().beginTransaction().replace(R.id.currentFriendsFrame,f).commit();
-
     }
 }

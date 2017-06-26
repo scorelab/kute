@@ -5,5 +5,5 @@ package com.scorelab.kute.kute.PrivateVehicles.App.Interfaces;
  */
 
 public interface RecyclerItemClick {
-     void onRecyclerItemClick(int position);
+    void onRecyclerItemClick(int position);
 }

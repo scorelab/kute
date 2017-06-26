@@ -358,7 +358,7 @@ public class RegisterActivity extends AppCompatActivity implements
         editor.putString("Profile_Image",pf.getProfilePictureUri(100,100).toString());
         editor.putBoolean("Register_db",true);
         editor.putBoolean("Sync_Friends_db",true);
-        editor.commit();
+        editor.apply();
     }
 
     public void getImage(String url){

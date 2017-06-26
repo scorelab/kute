@@ -18,11 +18,12 @@ public class RouteFrame extends Fragment {
     //TODO load data source from Fragment Args
     // This Fragment has been created to load in a single route frame required at places such as the home tab for starred routes
     // or in the persondetail
-    public RouteFrame() {}
+    public RouteFrame() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.my_route_item,container,false);
+        return inflater.inflate(R.layout.my_route_item, container, false);
     }
 }

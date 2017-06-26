@@ -17,17 +17,18 @@ import com.scorelab.kute.kute.R;
 public class PersonItemViewHolder extends RecyclerView.ViewHolder {
     public TextView name;
     public RoundedImageView profile_pic;
+
     /****************** Default Constructor **************/
 
     public PersonItemViewHolder(View itemView, final RecyclerItemClick item_click_handler) {
         super(itemView);
-        name=(TextView)itemView.findViewById(R.id.name);
-        profile_pic=(RoundedImageView)itemView.findViewById(R.id.personimg);
+        name = (TextView) itemView.findViewById(R.id.name);
+        profile_pic = (RoundedImageView) itemView.findViewById(R.id.personimg);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos=getAdapterPosition();
-                Log.d("FriendsRecyclerAdapter","The position clicked is: "+pos);
+                int pos = getAdapterPosition();
+                Log.d("FriendsRecyclerAdapter", "The position clicked is: " + pos);
                 item_click_handler.onRecyclerItemClick(pos);
 
             }

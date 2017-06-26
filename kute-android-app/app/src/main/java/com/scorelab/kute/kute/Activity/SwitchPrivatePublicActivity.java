@@ -35,66 +35,62 @@ import org.json.JSONObject;
  */
 
 public class SwitchPrivatePublicActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageButton publicVeh,privateVeh;
-    private final String TAG="SwitchActivity";
+    ImageButton publicVeh, privateVeh;
+    private final String TAG = "SwitchActivity";
     BroadcastReceiver sync_friend_service_receiver;
     IntentFilter filter_sync_friend_receiver;
-    private final String Action=SyncFacebookFriendsToFirebase.class.getName()+"Complete";
+    private final String Action = SyncFacebookFriendsToFirebase.class.getName() + "Complete";
+
     /*****************  Overrides ***************/
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.switch_public_private_activity_layout);
         /************* Initialise Views *************************/
-
-        publicVeh=(ImageButton)findViewById(R.id.publicVehicle);
-        privateVeh=(ImageButton)findViewById(R.id.privateVehicle);
+        publicVeh = (ImageButton) findViewById(R.id.publicVehicle);
+        privateVeh = (ImageButton) findViewById(R.id.privateVehicle);
         publicVeh.setOnClickListener(this);
         privateVeh.setOnClickListener(this);
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("user_credentials", 0); // 0 - for private mode
+        /****************** Sync Data For First Timers to the app *********/
         /******************* Register to Firebase for new User ********/
         if (pref.getBoolean("Register_db", true)) {
             registerFirebaseDbSelf(pref);
-            pref.edit().putBoolean("Register_db", false).commit();
+            pref.edit().putBoolean("Register_db", false).apply();
         }
         if (pref.getBoolean("Sync_Friends_db", true)) {
             syncFacebookFriendsDb();
             //Boolean will be inverted at the end of service
         }
         //Initialising Broadcast receiver with its intent filter
-        sync_friend_service_receiver=new BroadcastReceiver() {
+        sync_friend_service_receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d(TAG,"Returned From SyncFacebookFriendsToFirebase Service");
+                Log.d(TAG, "Returned From SyncFacebookFriendsToFirebase Service");
                 //TODO alter the friend fragment to show up friends
-                Boolean x=pref.getBoolean("Sync_Friends_db", true);
-                Log.d(TAG,"onReceive Broadcast"+x.toString());
+                Boolean x = pref.getBoolean("Sync_Friends_db", true);
+                Log.d(TAG, "onReceive Broadcast" + x.toString());
             }
         };
-        filter_sync_friend_receiver=new IntentFilter(Action);
-
-
+        filter_sync_friend_receiver = new IntentFilter(Action);
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId())
-        {
+        switch (v.getId()) {
             case R.id.publicVehicle:
-                Intent i=new Intent(this, LandActivity.class);
+                Intent i = new Intent(this, LandActivity.class);
                 startActivity(i);
                 break;
             case R.id.privateVehicle:
-                Intent pvi=new Intent(this, Main.class);
+                Intent pvi = new Intent(this, Main.class);
                 startActivity(pvi);
                 break;
             default:
-                Toast.makeText(this,"Not Clickable",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Not Clickable", Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
-
     /*************** End Of overrides ***********/
     /**************** Custom Functions Invoked only once on app installation *******/
 
@@ -107,9 +103,8 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG, "Firebase Self Add Error:" + e.toString());
-
                 //reinvert the boolean if saving the user details face an error
-                pref.edit().putBoolean("Register_db", true).commit();
+                pref.edit().putBoolean("Register_db", true).apply();
             }
         });
     }
@@ -117,7 +112,7 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(sync_friend_service_receiver,filter_sync_friend_receiver);
+        registerReceiver(sync_friend_service_receiver, filter_sync_friend_receiver);
     }
 
     @Override
@@ -129,7 +124,6 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
     /***************** Other Custom Functions ***********/
     private void syncFacebookFriendsDb() {
         try {
-
             new GraphRequest(
                     AccessToken.getCurrentAccessToken(),
                     "/me/friends",
@@ -142,24 +136,18 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
                             Person temp;
                             try {
                                 JSONArray dta = x.getJSONArray("data");
-                                Log.d("friend json",dta.toString());
+                                Log.d("friend json", dta.toString());
                                 Intent start_friend_sync_service = new Intent(getApplicationContext(), SyncFacebookFriendsToFirebase.class);
                                 start_friend_sync_service.putExtra("FriendArray", dta.toString());
                                 startService(start_friend_sync_service);
                                 Log.d(TAG, "Friend Sync Service Intent Sent");
                             } catch (Exception e) {
-                                Log.d(TAG, "Graph Request Callback error"+e.toString());
+                                Log.d(TAG, "Graph Request Callback error" + e.toString());
                             }
-
                         }
                     }).executeAsync();
-
-        }catch (Exception e)
-        {
-            Log.d(TAG,"Graph Request error"+ e.toString());
+        } catch (Exception e) {
+            Log.d(TAG, "Graph Request error" + e.toString());
         }
-
-
     }
-
 }

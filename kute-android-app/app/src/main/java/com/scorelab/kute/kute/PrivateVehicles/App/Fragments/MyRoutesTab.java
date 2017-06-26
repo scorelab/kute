@@ -23,10 +23,11 @@ import java.util.ArrayList;
  */
 
 public class MyRoutesTab extends Fragment {
-    private final String TAG="MyRoutesTab";
+    private final String TAG = "MyRoutesTab";
     ArrayList<Route> my_routes_list;
     RecyclerView my_routes_recycler;
     View v;
+
     public MyRoutesTab() {
     }
 
@@ -34,40 +35,37 @@ public class MyRoutesTab extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        my_routes_list=new ArrayList<Route>();
+        my_routes_list = new ArrayList<Route>();
         /***************** Creating test data ***********/
-        for(int i=0;i<4;++i)
-        {
-            Route temp=new Route("IndianRoute","Delhi","Punjab",4,true);
+        for (int i = 0; i < 4; ++i) {
+            Route temp = new Route("IndianRoute", "Delhi", "Punjab", 4, true);
             my_routes_list.add(temp);
         }
         /**************** Test data creation over *********/
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.myroutes_tab_bottomnavigation,container,false);
+        v = inflater.inflate(R.layout.myroutes_tab_bottomnavigation, container, false);
         return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        my_routes_recycler=(RecyclerView)v.findViewById(R.id.routeRecycler);
-        MyRoutesRecyclerAdapter recycler_adapter=new MyRoutesRecyclerAdapter(my_routes_list);
+        my_routes_recycler = (RecyclerView) v.findViewById(R.id.routeRecycler);
+        MyRoutesRecyclerAdapter recycler_adapter = new MyRoutesRecyclerAdapter(my_routes_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         my_routes_recycler.setLayoutManager(mLayoutManager);
         my_routes_recycler.setItemAnimator(new DefaultItemAnimator());
-
-
         my_routes_recycler.setAdapter(recycler_adapter);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d(TAG,"onDestroyView");
+        Log.d(TAG, "onDestroyView");
     }
-
     /********** End of Overrides ******/
 }

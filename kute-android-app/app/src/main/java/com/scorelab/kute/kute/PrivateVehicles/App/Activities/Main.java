@@ -37,11 +37,9 @@ public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView route_request_number;
     private final String TAG = "MainPrivateVehicle";
-    BroadcastReceiver sync_friend_service_receiver;
-    IntentFilter filter_sync_friend_receiver;
-    private final String Action=SyncFacebookFriendsToFirebase.class.getName()+"Complete";
+    private final String Action = SyncFacebookFriendsToFirebase.class.getName() + "Complete";
 
-/*********************** Overrides ************************/
+    /*********************** Overrides ************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,29 +57,10 @@ public class Main extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         /******************************* End Of Drawer Setup **************************/
-
         /********************* Load Home Base Fragment**********/
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("user_credentials", 0); // 0 - for private mode
-
-        //Initialising Broadcast receiver with its intent filter
-        sync_friend_service_receiver=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d(TAG,"Returned From SyncFacebookFriendsToFirebase Service");
-                //TODO alter the friend fragment to show up friends
-                Boolean x=pref.getBoolean("Sync_Friends_db", true);
-                Log.d(TAG,"onReceive Broadcast"+x.toString());
-            }
-        };
-        filter_sync_friend_receiver=new IntentFilter(Action);
-
-        /****************** Sync Data For First Timers to the app *********/
-        //Register yourself to the firebase db if this is the first time the user enters the app
-
-
         Log.d("SharedPreference", pref.getString("Profile_Image", null));
-
 
 
     }
@@ -90,13 +69,12 @@ public class Main extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(sync_friend_service_receiver,filter_sync_friend_receiver);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(sync_friend_service_receiver);
     }
 
     /************* Functions handling the navigation drawer **************/
@@ -105,21 +83,14 @@ public class Main extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
         } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_send) {
-
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
