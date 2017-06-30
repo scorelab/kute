@@ -8,12 +8,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.scorelab.kute.kute.Activity.RegisterActivity;
 import com.scorelab.kute.kute.Activity.SwitchPrivatePublicActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class SplashActivity extends AppCompatActivity {
-
+    static  FirebaseDatabase fb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 
         new DelayTask().execute(); // This will delay the spalsh scrren and redierct to the login/register screen based
         //on the ststus of the user.
+
     }
 
     class DelayTask extends AsyncTask<Void,Void,Void>{

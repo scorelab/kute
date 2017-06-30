@@ -53,6 +53,8 @@
         <activity android:name=".Activity.SwitchPrivatePublicActivity" />
         <activity android:name=".PrivateVehicles.App.Activities.Main"/>
         <activity android:name=".PrivateVehicles.App.Activities.CurrentFriendList"/>
+        <service android:name=".PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase"/>
+        <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
     </application>
 
 </manifest>

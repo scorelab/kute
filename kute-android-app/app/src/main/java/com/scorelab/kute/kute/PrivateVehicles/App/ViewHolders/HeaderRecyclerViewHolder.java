@@ -18,7 +18,7 @@ public class HeaderRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public HeaderRecyclerViewHolder(View itemView) {
         super(itemView);
-        this.title=(TextView)itemView.findViewById(R.id.header);
-        this.head_image=(AppCompatImageView)itemView.findViewById(R.id.headIcon);
+        this.title = (TextView) itemView.findViewById(R.id.header);
+        this.head_image = (AppCompatImageView) itemView.findViewById(R.id.headIcon);
     }
 }

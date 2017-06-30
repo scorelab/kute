@@ -3,6 +3,7 @@ package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,15 @@ import com.scorelab.kute.kute.R;
  */
 
 public class HomeTab extends Fragment {
+    private final String TAG = "HomeTab";
     View v;
-    public HomeTab()
-    {}
+
+    public HomeTab() {}
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.home_tab_bottomnavigation,container,false);
+        v = inflater.inflate(R.layout.home_tab_bottomnavigation, container, false);
         return v;
     }
 
@@ -31,11 +34,14 @@ public class HomeTab extends Fragment {
         /*********** Get your top starred routes trips and suggested friends
          **** Set your  Trip,Suggested Friend and Starred route ******/
         //TODO set Args for respective fragments then place the frames
-        getFragmentManager().beginTransaction().replace(R.id.tripFrame,new TripFrame()).commit();
-        getFragmentManager().beginTransaction().replace(R.id.suggestedFriendsFrame,new FriendFrame()).commit();
-        getFragmentManager().beginTransaction().replace(R.id.strarredRouteFrame,new RouteFrame()).commit();
-
+        getFragmentManager().beginTransaction().replace(R.id.tripFrame, new TripFrame()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.suggestedFriendsFrame, new FriendFrame()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.strarredRouteFrame, new RouteFrame()).commit();
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView");
+    }
 }

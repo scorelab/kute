@@ -25,7 +25,7 @@ public class MyRoutesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int general_list_item=77;
     private ArrayList<Route> data_source;
 
-    
+
 
     /**************** Constructor ****/
     public MyRoutesRecyclerAdapter(ArrayList<Route> data_source) {
@@ -63,7 +63,6 @@ public class MyRoutesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             default:
                 configureGeneralItem((MyRoutesItemViewHolder)holder,position);
                 break;
-
         }
 
     }
@@ -118,5 +117,4 @@ public class MyRoutesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         //TODO handle the route share logic here
     }
     /**************** End of Custom Functions ******************/
-
 }

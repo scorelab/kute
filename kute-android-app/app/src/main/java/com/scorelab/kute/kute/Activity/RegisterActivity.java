@@ -2,6 +2,7 @@ package com.scorelab.kute.kute.Activity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -185,6 +188,7 @@ public class RegisterActivity extends AppCompatActivity implements
 
                         Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
                         startActivity(intentdone);
+                        finish();
 
 
                     } else {
@@ -202,15 +206,38 @@ public class RegisterActivity extends AppCompatActivity implements
 
             mCallbackManager = CallbackManager.Factory.create();
             LoginButton loginButton = (LoginButton) findViewById(R.id.connectWithFbButton);
-            loginButton.setReadPermissions("email", "public_profile");
+            loginButton.setReadPermissions("email", "public_profile","user_friends");
 
             loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                private ProfileTracker mProfileTracker;
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     try {
                         Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                        //Saving Facebook Credentials of the user
+                        if(Profile.getCurrentProfile() == null) {
+                            mProfileTracker = new ProfileTracker() {
+                                @Override
+                                protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
+                                    // profile2 is the new profile
+                                    Log.d("check",profile2.getCurrentProfile().toString());
+                                    saveFacebookProfile(profile2);
+                                    mProfileTracker.stopTracking();
+                                }
+                            };
+                            mProfileTracker.startTracking();
+                            // no need to call startTracking() on mProfileTracker
+                            // because it is called by its constructor, internally.
+                        }
+                        else {
+                            Log.d("check",Profile.getCurrentProfile().toString());
+                            saveFacebookProfile(Profile.getCurrentProfile());
+                        }
 
+                        Log.d(TAG,"Facebook Login:Saved Credentials to Shared Prefs");
+                        //Auth with Firebase
                         handleFacebookAccessToken(loginResult.getAccessToken());
+
                     }
                     catch (Exception e){
                         e.printStackTrace();
@@ -321,8 +348,21 @@ public class RegisterActivity extends AppCompatActivity implements
         Toast.makeText(getApplicationContext(),"You have been Signout from the Kute",Toast.LENGTH_LONG).show();
         //updateUI(null);
     }
-public void getImage(String url){
-    ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
+    public void saveFacebookProfile(Profile pf)
+    {
+        SharedPreferences pref=getApplicationContext().getSharedPreferences("user_credentials",0);
+        SharedPreferences.Editor editor=pref.edit();
+        editor.putString("Login_Method","Facebook");
+        editor.putString("Name", pf.getName());
+        editor.putString("Id",pf.getId());
+        editor.putString("Profile_Image",pf.getProfilePictureUri(100,100).toString());
+        editor.putBoolean("Register_db",true);
+        editor.putBoolean("Sync_Friends_db",true);
+        editor.apply();
+    }
+
+    public void getImage(String url){
+        ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
         @Override
         public void onResponse(Bitmap response) {
             ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);

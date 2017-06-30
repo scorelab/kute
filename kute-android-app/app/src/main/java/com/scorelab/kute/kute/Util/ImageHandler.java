@@ -41,7 +41,7 @@ public class ImageHandler {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(imagesaved_prefrence_key, encodeTobase64(img));
-        editor.commit();
+        editor.apply();
     }
 
     public static Bitmap getUserImage(SharedPreferences shared){

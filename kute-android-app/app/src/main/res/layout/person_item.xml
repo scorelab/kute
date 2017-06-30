@@ -7,7 +7,9 @@
     custom:cardCornerRadius="2dp"
     android:background="@color/cardview_light_background"
     custom:cardElevation="2dp"
-    custom:cardUseCompatPadding="true">
+    custom:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:id="@+id/friendFrameCard">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
