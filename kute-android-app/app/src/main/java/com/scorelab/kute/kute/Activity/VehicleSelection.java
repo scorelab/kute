@@ -136,7 +136,7 @@ public class VehicleSelection extends AppCompatActivity {
                 else if(vehtype.equals("bus")){
                     returnIntent.putExtra("vehkey",vehmapbus.get(ACTV.getText().toString()));
                 }
-
+                returnIntent.putExtra("Activity",getIntent().getStringExtra("Activity"));
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
