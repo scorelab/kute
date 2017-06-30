@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -52,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 9001;
 
     private SignInButton mSignInButton;
+    Button firebaseRegister;
+
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -73,6 +76,11 @@ public class RegisterActivity extends AppCompatActivity implements
         switch (v.getId()) {
             case R.id.login_with_google:
                 signIn();
+                break;
+            //Added to register users with Firebase
+            case R.id.custom_signup_button:
+                Intent intent = new Intent(getBaseContext(), NewUserActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -151,9 +159,11 @@ public class RegisterActivity extends AppCompatActivity implements
 
             // Assign fields
             mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
+            firebaseRegister = (Button) findViewById(R.id.custom_signup_button);
 
             // Set click listeners
             mSignInButton.setOnClickListener(this);
+            firebaseRegister.setOnClickListener(this);
 
             // Configure Google Sign In
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -180,7 +190,7 @@ public class RegisterActivity extends AppCompatActivity implements
                         // User is signed in
                         Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                         Toast.makeText(getApplicationContext(), "Facebook  User " + user.getPhotoUrl(), Toast.LENGTH_LONG).show();
-                        getImage(user.getPhotoUrl().toString());
+                        //getImage(user.getPhotoUrl().toString());
 
 
                         Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
