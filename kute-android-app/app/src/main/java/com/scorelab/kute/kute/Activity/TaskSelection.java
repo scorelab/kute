@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -25,8 +26,8 @@ import com.scorelab.kute.kute.R;
 
 public class TaskSelection extends AppCompatActivity {
 
-    ImageView trackMeImage;
-    ImageView PublishMeImage;
+    Button trackMeImage;
+    Button PublishMeImage;
     AlertDialog dialogSelectVehicle;
     static int TrackMeCode=1;
     static int PublishCode=2;
@@ -36,8 +37,8 @@ public class TaskSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taskselection);
 
-        trackMeImage=(ImageView)findViewById(R.id.trackVehicle);
-        PublishMeImage=(ImageView)findViewById(R.id.UpdateMe);
+        trackMeImage=(Button)findViewById(R.id.trackVehicle);
+        PublishMeImage=(Button)findViewById(R.id.UpdateMe);
 
         trackMeImage.setOnClickListener(new View.OnClickListener() {
             @Override
