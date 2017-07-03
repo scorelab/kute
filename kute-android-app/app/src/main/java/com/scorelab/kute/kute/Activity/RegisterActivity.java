@@ -355,7 +355,7 @@ public class RegisterActivity extends AppCompatActivity implements
         editor.putString("Login_Method","Facebook");
         editor.putString("Name", pf.getName());
         editor.putString("Id",pf.getId());
-        editor.putString("Profile_Image",pf.getProfilePictureUri(100,100).toString());
+        editor.putString("Profile_Image","null"); //It would contain some value when user sets a custom profile image
         editor.putBoolean("Register_db",true);
         editor.putBoolean("Sync_Friends_db",true);
         editor.apply();

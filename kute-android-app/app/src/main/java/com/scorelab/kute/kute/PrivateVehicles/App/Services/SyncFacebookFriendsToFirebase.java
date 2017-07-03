@@ -63,16 +63,14 @@ public class SyncFacebookFriendsToFirebase extends IntentService {
                 Log.d(TAG, "inside loop");
                 JSONObject p = (JSONObject) friends_array.get(i);
                 String person_id = p.getString("id");
-                String person_name = p.getString("name");
-                temp = new Person(person_id, person_name);
-                myfriends.child(temp.id).setValue(temp).addOnFailureListener(new OnFailureListener() {
+                myfriends.child(person_id).setValue("true").addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Firebase Self Add Error:" + e.toString());
 
                     }
                 });
-                Log.d(TAG, "Added Facebook Friend " + temp.name);
+                Log.d(TAG, "Added Facebook Friend " + person_id);
             }
 
         } catch (Exception e) {

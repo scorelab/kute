@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
 import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.AsyncTaskListener;
@@ -47,7 +48,7 @@ public class HomeBaseFragment extends Fragment {
     HomeTab ht;
     FriendTab ft;
     MyRoutesTab mrt;
-    ArrayList<Person> friend_list;
+    ArrayList<String> friend_list;
     SharedPreferences.OnSharedPreferenceChangeListener pref_change_listener;
     SharedPreferences prefs;
     Boolean is_receiver_register = false;
@@ -89,7 +90,7 @@ public class HomeBaseFragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "Returned From SyncFacebookFriendsToFirebase Service");
-                getFirebaseFriends();
+                getFirebaseFriend();
 
             }
         };
@@ -137,7 +138,7 @@ public class HomeBaseFragment extends Fragment {
             is_receiver_register = true;
             getActivity().registerReceiver(sync_friend_service_receiver, filter_sync_friend_receiver);
         } else {
-            getFirebaseFriends();
+            getFirebaseFriend();
         }
 
     }
@@ -153,8 +154,8 @@ public class HomeBaseFragment extends Fragment {
 
     /******************************** Custom Function ***************************/
     //Load friends from firebase
-    public ArrayList<Person> getFirebaseFriends() {
-        final ArrayList<Person> friends_list = new ArrayList<Person>();
+    public ArrayList<String> getFirebaseFriend() {
+        final ArrayList<String> friends_list = new ArrayList<String>();
         /******************** Getting Friends From Firebase *************/
         String ref = "Friends/" + getActivity().getSharedPreferences("user_credentials", 0).getString("Name", null);
         Log.d(TAG, "Firebase Reference :" + ref);
@@ -164,12 +165,13 @@ public class HomeBaseFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot k : dataSnapshot.getChildren()) {
-                    Person p = k.getValue(Person.class);
-                    friends_list.add(p);
+                    friends_list.add(k.getKey());
                     Log.d(TAG, "Debug Firebase data query" + k.getValue().toString());
                 }
+                
                 Log.d(TAG, String.format("The Friend List Size is %d",friends_list.size()));
-                sendMessageFriendTab("Friends_Ready",friends_list);
+                getFirstFriendProfile();
+
             }
 
             @Override
@@ -178,9 +180,33 @@ public class HomeBaseFragment extends Fragment {
         });
         return friends_list;
     }
+    //Get the entire profile of first Friend
+    private void getFirstFriendProfile()
+    {
+        DatabaseReference users=FirebaseDatabase.getInstance().getReference("Users");
+        final ArrayList<Person>person_detail_list=new ArrayList<Person>();
+        if(friend_list.size()>0) {
+            String first_friend_key = friend_list.get(0);
+            Query get_top_friend=users.orderByKey().equalTo(first_friend_key);
+            get_top_friend.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Person p=dataSnapshot.getChildren().iterator().next().getValue(Person.class);
+                    Log.d(TAG,"First Friend:"+p.name);
+                    person_detail_list.add(p);
+                    sendMessageFriendTab("Friends_Ready",friend_list,person_detail_list);
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
+
+
+    }
     //Send messages to friend tab
-    private void sendMessageFriendTab(String Message,ArrayList<Person>friend_list1) {
+    private void sendMessageFriendTab(String Message,ArrayList<String>friend_list1,ArrayList<Person>person_detail_list) {
         try {
             FriendTab fragment =
                     (FriendTab) getChildFragmentManager().findFragmentByTag("FriendTab");
@@ -188,7 +214,7 @@ public class HomeBaseFragment extends Fragment {
                 if (fragment.getView() != null) {
                     switch (Message) {
                         case "Friends_Ready":
-                            fragment.receiveMessage("Friends_Ready", friend_list1);
+                            fragment.receiveMessage("Friends_Ready", friend_list1,person_detail_list);
                     }
                     Log.d(TAG, "Message Sent to Friend Tab");
                 } else {

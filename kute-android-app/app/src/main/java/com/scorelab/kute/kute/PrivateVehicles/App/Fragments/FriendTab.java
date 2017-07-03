@@ -25,11 +25,13 @@ import java.util.ArrayList;
 public class FriendTab extends Fragment implements View.OnClickListener {
     private final String TAG="FriendTab";
     View v;
-    ArrayList<Person> friendslist;
+    ArrayList<Person> friend_detail_list;
+    ArrayList<String>friendslist;
     AppCompatButton viewall_currentfriends;
     public FriendTab() {
         Log.d(TAG,"New Fragment Created");
-        friendslist=new ArrayList<Person>();
+        friend_detail_list=new ArrayList<Person>();
+        friendslist=new ArrayList<String>();
     }
 
 
@@ -94,14 +96,17 @@ public class FriendTab extends Fragment implements View.OnClickListener {
     }
     /********************* Custom Functions *************/
     //Receive Message  from Activity and other fragments
-    public void receiveMessage(String Action,Object attachment)
+    public void receiveMessage(String Action,Object friend_list,Object person_detail_list )
     {
         Log.d(TAG,"Message Received : "+Action);
         switch (Action)
         {
             case "Friends_Ready":
-                friendslist=(ArrayList<Person>)attachment;
-                setupCurrentFriends();
+                friendslist=(ArrayList<String>)friend_list;
+                friend_detail_list=(ArrayList<Person>) person_detail_list;
+                if(friendslist.size()>0) {
+                    setupCurrentFriends();
+                }
         }
     }
 
@@ -111,7 +116,7 @@ public class FriendTab extends Fragment implements View.OnClickListener {
         Log.d(TAG,"Setting Up Current Friend");
         FriendFrame f=new FriendFrame();
         Bundle args=new Bundle();
-        args.putSerializable("Friend_1",friendslist.get(0));
+        args.putSerializable("Friend_1",friend_detail_list.get(0));
         f.setArguments(args);
         viewall_currentfriends.setEnabled(true);
         getChildFragmentManager().beginTransaction().replace(R.id.currentFriendsFrame,f).commit();
