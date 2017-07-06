@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
 import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeBaseFragment;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.UserSelfProfileFragment;
 import com.scorelab.kute.kute.PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase;
 import com.scorelab.kute.kute.R;
 
@@ -36,6 +39,7 @@ import org.json.JSONObject;
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView route_request_number;
+    ImageButton route_request,search;
     private final String TAG = "MainPrivateVehicle";
     private final String Action = SyncFacebookFriendsToFirebase.class.getName() + "Complete";
 
@@ -45,6 +49,8 @@ public class Main extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         route_request_number = (TextView) findViewById(R.id.numberRouteRequests);
+        route_request=(ImageButton)findViewById(R.id.routeRequests);
+        search=(ImageButton)findViewById(R.id.searchIcon);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -59,6 +65,7 @@ public class Main extends AppCompatActivity
         /******************************* End Of Drawer Setup **************************/
         /********************* Load Home Base Fragment**********/
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
+        navigationView.setCheckedItem(R.id.Home);
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("user_credentials", 0); // 0 - for private mode
         Log.d("SharedPreference", pref.getString("Profile_Image", null));
 
@@ -83,15 +90,10 @@ public class Main extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_camera) {
+        if (id == R.id.Home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Intent i=new Intent(this,ProfilePictureActivity.class);
-            startActivity(i);
-        } else if (id == R.id.nav_slideshow) {
-        } else if (id == R.id.nav_manage) {
-        } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.Profile) {
+            setupProfileFragment();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -108,5 +110,13 @@ public class Main extends AppCompatActivity
         }
     }
     /********************* End of nav drawer functions *********************/
+    /******************** Custom Functions ********************************/
+    private void setupProfileFragment()
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new UserSelfProfileFragment(), "UserSelfProfileFragment").commit();
+        search.setImageResource(R.drawable.ic_mode_edit_white_24dp);
+        route_request_number.setVisibility(View.GONE);
+        route_request.setVisibility(View.GONE);
+    }
 
 }

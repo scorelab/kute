@@ -29,13 +29,13 @@
                     android:layout_alignParentRight="true"
                     android:layout_margin="16dp"
                     android:layout_centerVertical="true"
-                    android:id="@+id/search"/>
+                    android:id="@+id/searchIcon"/>
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_add_location_white_24dp"
                     android:background="@drawable/button_selector"
-                    android:layout_toLeftOf="@+id/search"
+                    android:layout_toLeftOf="@+id/searchIcon"
                     android:layout_margin="16dp"
                     android:layout_centerVertical="true"
                     android:id="@+id/routeRequests"/>

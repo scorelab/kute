@@ -37,6 +37,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".Activity.RegisterActivity" >
@@ -67,6 +68,8 @@
         <service android:name=".PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase"/>
         <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
         <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
+        <activity android:name=".PrivateVehicles.App.Activities.Test">
+        </activity>>
     </application>
 
 </manifest>
