@@ -91,7 +91,7 @@ public class Main extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.Home) {
-            // Handle the camera action
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
         } else if (id == R.id.Profile) {
             setupProfileFragment();
         }

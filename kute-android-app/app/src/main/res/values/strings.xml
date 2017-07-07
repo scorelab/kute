@@ -26,4 +26,11 @@
     <string name="facebook_app_id">427052427666913</string>
     <string name="googlemapApi">put in your google maps key here</string>
 
+    <!--The strings below are for the intro details dialog -->
+    <string name="slide_1_title">Pool Your Drives!</string>
+    <string name="slide_1_desc">Reduce your daily car drives!</string>
+    <string name="slide_1_desc_2">We need your Contact and Vehicle Name(If Applicable) to setup your profile</string>
+    <string name="slide_2_title">Your Contact</string>
+    <string name="slide_2_desc">This will be the point of contact for the fellow app users!</string>
+
 </resources>

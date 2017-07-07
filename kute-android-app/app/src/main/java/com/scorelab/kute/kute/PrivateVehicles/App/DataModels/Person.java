@@ -11,7 +11,7 @@ public class Person implements Serializable {
     /***************** Defing Properties ***********/
     //Add provision for vehicle
     //Make these variables private
-    public String id,name,img_url,occupation,other_details,contact_phone,vehicle;
+    public String id,name,img_base64,occupation,other_details,contact_phone,vehicle;
     //Implement in some other way public Boolean is_friend; // This will indicate whether the given person is users friend
     public ArrayList<Route> route_list;
     /*********** Properties Defined *******/
@@ -21,10 +21,10 @@ public class Person implements Serializable {
      /****************** This constructor will configure for the list item
      ****************** rest detail will be filled later when person detail activity is called *******/
 
-    public Person(String name,String id,String img_url)   //Add id and img_url(Not being added right now because we dont have the backend for now)
+    public Person(String name,String id,String img_base64)   //Add id and img_url(Not being added right now because we dont have the backend for now)
     {
         this.name=name;
-        this.img_url=img_url;
+        this.img_base64=img_base64;
         this.id=id;
     }
 

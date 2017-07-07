@@ -33,6 +33,7 @@
                             android:layout_centerHorizontal="true"
                             android:id="@+id/personImage"
                             android:background="@drawable/ic_person_black_36dp"
+                            android:layout_marginTop="8dp"
                             />
 
                         <TextView
