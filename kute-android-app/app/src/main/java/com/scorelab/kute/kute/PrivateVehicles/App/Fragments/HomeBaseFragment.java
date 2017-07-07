@@ -44,9 +44,9 @@ public class HomeBaseFragment extends Fragment {
     View v;
     BottomNavigationView bottomNavigation;
     FragmentManager fm;
-    HomeTab ht;
-    FriendTab ft;
-    MyRoutesTab mrt;
+    HomeTab home_tab;
+    FriendTab friend_tab;
+    MyRoutesTab my_routes_tab;
     ArrayList<Person> friend_list;
     SharedPreferences.OnSharedPreferenceChangeListener pref_change_listener;
     SharedPreferences prefs;
@@ -58,9 +58,9 @@ public class HomeBaseFragment extends Fragment {
     /***************************** Default Constructor ****************/
     public HomeBaseFragment() {
         Log.d(TAG, "Constructor");
-        ht = new HomeTab();
-        ft = new FriendTab();
-        mrt = new MyRoutesTab();
+        home_tab = new HomeTab();
+        friend_tab = new FriendTab();
+        my_routes_tab = new MyRoutesTab();
     }
 
     /***************************** Overrides ****************************/
@@ -98,11 +98,11 @@ public class HomeBaseFragment extends Fragment {
         //set initial fragments We have loaded all the three fragments simultaneously
         // inorder to smooth out the transition between the three fragments
         FragmentTransaction frag_transaction = fm.beginTransaction();
-        frag_transaction.add(R.id.frameBottomBar, ht, "HomeTab");
-        frag_transaction.add(R.id.frameBottomBar, ft, "FriendTab");
-        frag_transaction.add(R.id.frameBottomBar, mrt, "MyRoutesTab");
-        frag_transaction.hide(ft);
-        frag_transaction.hide(mrt);
+        frag_transaction.add(R.id.frameBottomBar, home_tab, "HomeTab");
+        frag_transaction.add(R.id.frameBottomBar, friend_tab, "FriendTab");
+        frag_transaction.add(R.id.frameBottomBar, my_routes_tab, "MyRoutesTab");
+        frag_transaction.hide(friend_tab);
+        frag_transaction.hide(my_routes_tab);
         frag_transaction.commit();
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -204,52 +204,52 @@ public class HomeBaseFragment extends Fragment {
     /************************ FUnctions to toggle fragment visibility ***************/
     private void showHomeTab() {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        if (ht.isAdded()) {
-            fragmentTransaction.show(ht);
+        if (home_tab.isAdded()) {
+            fragmentTransaction.show(home_tab);
             Log.d(TAG, "Fragment transaction: HomeTab -> Found Previous One");
         } else {
-            fragmentTransaction.add(R.id.frameBottomBar, ht, "HomeTab");
+            fragmentTransaction.add(R.id.frameBottomBar, home_tab, "HomeTab");
         }
         //Hide The other two fragments
-        if (ft.isAdded()) {
-            fragmentTransaction.hide(ft);
+        if (friend_tab.isAdded()) {
+            fragmentTransaction.hide(friend_tab);
         }
-        if (mrt.isAdded()) {
-            fragmentTransaction.hide(mrt);
+        if (my_routes_tab.isAdded()) {
+            fragmentTransaction.hide(my_routes_tab);
         }
         fragmentTransaction.commit();
     }
 
     private void showFriendTab() {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        if (ft.isAdded()) {
-            fragmentTransaction.show(ft);
+        if (friend_tab.isAdded()) {
+            fragmentTransaction.show(friend_tab);
         } else {
-            fragmentTransaction.add(R.id.frameBottomBar, ft, "FriendTab");
+            fragmentTransaction.add(R.id.frameBottomBar, friend_tab, "FriendTab");
         }
         //Hide The other two fragments
-        if (ft.isAdded()) {
-            fragmentTransaction.hide(ht);
+        if (friend_tab.isAdded()) {
+            fragmentTransaction.hide(home_tab);
         }
-        if (mrt.isAdded()) {
-            fragmentTransaction.hide(mrt);
+        if (my_routes_tab.isAdded()) {
+            fragmentTransaction.hide(my_routes_tab);
         }
         fragmentTransaction.commit();
     }
 
     private void showMyRoutesTab() {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        if (mrt.isAdded()) {
-            fragmentTransaction.show(mrt);
+        if (my_routes_tab.isAdded()) {
+            fragmentTransaction.show(my_routes_tab);
         } else {
-            fragmentTransaction.add(R.id.frameBottomBar, mrt, "MyRoutesTab");
+            fragmentTransaction.add(R.id.frameBottomBar, my_routes_tab, "MyRoutesTab");
         }
         //Hide The other two fragments
-        if (ft.isAdded()) {
-            fragmentTransaction.hide(ft);
+        if (friend_tab.isAdded()) {
+            fragmentTransaction.hide(friend_tab);
         }
-        if (mrt.isAdded()) {
-            fragmentTransaction.hide(ht);
+        if (my_routes_tab.isAdded()) {
+            fragmentTransaction.hide(home_tab);
         }
         fragmentTransaction.commit();
     }
