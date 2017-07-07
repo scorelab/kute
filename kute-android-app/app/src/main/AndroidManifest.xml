@@ -67,9 +67,9 @@
         <activity android:name=".PrivateVehicles.App.Activities.CurrentFriendList"/>
         <service android:name=".PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase"/>
         <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
-        <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
-        <activity android:name=".PrivateVehicles.App.Activities.Test">
-        </activity>>
+        <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/><![CDATA[
+        >
+    ]]>
     </application>
 
 </manifest>
