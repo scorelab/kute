@@ -28,8 +28,6 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.current_friends_activity);
         person_list = (ArrayList<Person>) getIntent().getSerializableExtra("FriendList");
-        /************** Initialise the views *********/
-        //TODO get friends from facebook and google and get their images
         back = (ImageButton) findViewById(R.id.backNav);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
