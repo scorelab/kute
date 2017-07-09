@@ -91,7 +91,7 @@ public class Main extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.Home) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
+            setupHomeFragment();
         } else if (id == R.id.Profile) {
             setupProfileFragment();
         }
@@ -115,6 +115,13 @@ public class Main extends AppCompatActivity
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new UserSelfProfileFragment(), "UserSelfProfileFragment").commit();
         search.setImageResource(R.drawable.ic_mode_edit_white_24dp);
+        route_request_number.setVisibility(View.GONE);
+        route_request.setVisibility(View.GONE);
+    }
+
+    private void setupHomeFragment(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
+        search.setImageResource(R.drawable.ic_search_white_24dp);
         route_request_number.setVisibility(View.GONE);
         route_request.setVisibility(View.GONE);
     }

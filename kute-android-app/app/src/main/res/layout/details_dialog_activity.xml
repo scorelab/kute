@@ -2,18 +2,20 @@
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/detailsDialogCoordinator"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ScrollView android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:fillViewport="true"
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:background="@color/apptheme">
+                android:background="@color/apptheme"
+                android:isScrollContainer="false" >
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
             <FrameLayout
-                android:id="@+id/signupfragmentholder"
+                android:id="@+id/detailDialogFragmentHolder"
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
                 android:layout_marginTop="0dp"
@@ -38,7 +40,8 @@
                     android:text="Back"
                     android:layout_marginRight="3dp"
                     android:textColor="@android:color/white"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    />
 
                 <LinearLayout
                     android:id="@+id/layoutDots"
@@ -64,4 +67,5 @@
 
         </RelativeLayout>
     </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+

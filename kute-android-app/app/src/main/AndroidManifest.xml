@@ -32,11 +32,7 @@
             android:value="@string/googlemapApi"/>
 
         <activity android:name=".SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -69,7 +65,14 @@
         <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
         <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
         <activity android:name=".PrivateVehicles.App.Activities.Test">
-        </activity>>
+        </activity>
+        <activity android:name=".PrivateVehicles.App.Activities.InitialDetailDialogs">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
     </application>
 
 </manifest>
