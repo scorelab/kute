@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.scorelab.kute.kute.PrivateVehicles.App.AsyncTasks.LoadFirebaseFriends;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
 import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.AsyncTaskListener;
 import com.scorelab.kute.kute.PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase;
@@ -40,7 +41,7 @@ import java.util.Objects;
  * Created by nipunarora on 18/06/17.
  */
 //This Fragment serves as home fragment of the navigation drawer
-public class HomeBaseFragment extends Fragment {
+public class HomeBaseFragment extends Fragment implements AsyncTaskListener{
     private final String TAG = "HomeBaseFragment";
     View v;
     BottomNavigationView bottomNavigation;
@@ -55,6 +56,8 @@ public class HomeBaseFragment extends Fragment {
     BroadcastReceiver sync_friend_service_receiver;
     IntentFilter filter_sync_friend_receiver;
     private final String Action = SyncFacebookFriendsToFirebase.class.getName() + "Complete";
+    Boolean is_asynctask_running=false;
+    LoadFirebaseFriends load_friends_async;
 
     /***************************** Default Constructor ****************/
     public HomeBaseFragment() {
@@ -150,12 +153,21 @@ public class HomeBaseFragment extends Fragment {
             getActivity().unregisterReceiver(sync_friend_service_receiver);
         }
     }
+
+    @Override
+    public void onTaskStarted(Object... attachments) {
+    }
+
+    @Override
+    public void onTaskCompleted(Object attachment) {
+        sendMessageFriendTab("Friends_Ready",friend_list,(ArrayList<Person>) attachment);
+    }
+
     /******************** End of Overrides **********/
 
     /******************************** Custom Function ***************************/
     //Load friends from firebase
-    public ArrayList<String> getFirebaseFriend() {
-        final ArrayList<String> friends_list = new ArrayList<String>();
+    public void getFirebaseFriend() {
         /******************** Getting Friends From Firebase *************/
         String ref = "Friends/" + getActivity().getSharedPreferences("user_credentials", 0).getString("Name", null);
         Log.d(TAG, "Firebase Reference :" + ref);
@@ -165,11 +177,11 @@ public class HomeBaseFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot k : dataSnapshot.getChildren()) {
-                    friends_list.add(k.getKey());
+                    friend_list.add(k.getKey());
                     Log.d(TAG, "Debug Firebase data query" + k.getValue().toString());
                 }
                 
-                Log.d(TAG, String.format("The Friend List Size is %d",friends_list.size()));
+                Log.d(TAG, String.format("The Friend List Size is %d",friend_list.size()));
                 getFirstFriendProfile();
 
             }
@@ -178,7 +190,6 @@ public class HomeBaseFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        return friends_list;
     }
     //Get the entire profile of first Friend
     private void getFirstFriendProfile()
@@ -194,6 +205,9 @@ public class HomeBaseFragment extends Fragment {
                     Person p=dataSnapshot.getChildren().iterator().next().getValue(Person.class);
                     Log.d(TAG,"First Friend:"+p.name);
                     person_detail_list.add(p);
+                    Log.d(TAG,"Starting to load friends via firebase");
+                    load_friends_async=new LoadFirebaseFriends(friend_list,HomeBaseFragment.this);
+                    load_friends_async.execute(1,9);
                     sendMessageFriendTab("Friends_Ready",friend_list,person_detail_list);
                 }
 

@@ -96,14 +96,14 @@ public class FriendTab extends Fragment implements View.OnClickListener {
     }
     /********************* Custom Functions *************/
     //Receive Message  from Activity and other fragments
-    public void receiveMessage(String Action,Object friend_list,Object person_detail_list )
+    public void receiveMessage(String Action,Object...attachment )
     {
         Log.d(TAG,"Message Received : "+Action);
         switch (Action)
         {
             case "Friends_Ready":
-                friendslist=(ArrayList<String>)friend_list;
-                friend_detail_list=(ArrayList<Person>) person_detail_list;
+                friendslist=(ArrayList<String>)attachment[0];
+                friend_detail_list=(ArrayList<Person>)attachment[1];
                 if(friendslist.size()>0) {
                     setupCurrentFriends();
                 }
