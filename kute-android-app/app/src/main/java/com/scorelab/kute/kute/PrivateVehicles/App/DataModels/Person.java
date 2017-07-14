@@ -30,22 +30,21 @@ public class Person implements Serializable {
 
     /************** This method will be invoked when we load personDetail Activity **********/
 
-    public void completePersonDetail(String occupation,ArrayList<Route>list,String other_details,String phone,String vehicle)
+    public void completePersonDetail(String occupation,String other_details,String phone,String vehicle)
     {
         this.occupation=occupation;
-        this.route_list=list;
         this.other_details=other_details;
         this.contact_phone=phone;
         this.vehicle=vehicle;
     }
 
+    public void addRoutelist(ArrayList<Route>list)
+    {
+        this.route_list=list;
+    }
+
     public Person(String id, String name) {
         this.id = id;
         this.name = name;
-        /*this.occupation="--";
-        this.vehicle="--";
-        this.contact_phone="--";
-        this.other_details="--";
-        this.route_list=null;*/
     }
 }

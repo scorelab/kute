@@ -1,0 +1,321 @@
+<RelativeLayout android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:layout_alignParentTop="true"
+                android:id="@+id/personDetailScroll"
+                >
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*">
+                <TableRow
+                    android:id="@+id/row1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/headerTile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2"
+                        android:background="@color/apptheme">
+
+                        <com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/personImage"
+                            android:background="@drawable/ic_person_black_36dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/personImage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Nipun Arora"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            />
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/nameEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/personImage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Nipun Arora"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            android:hint="Occupation"
+                            app:backgroundTint="@android:color/white"
+                            android:textCursorDrawable="@drawable/edittext_cursor_white"
+                            android:visibility="gone"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/workRow"
+                            android:layout_below="@+id/name"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/workIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@+id/occupationName"
+                                android:src="@drawable/ic_work_white_18dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/occupationName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="1dp"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="Software Engineer"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/textsize_small"
+                                />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/workRowEdit"
+                            android:layout_below="@+id/nameEdit"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="8dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/workIconEdit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@+id/occupationNameEdit"
+                                android:src="@drawable/ic_work_white_18dp" />
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/occupationNameEdit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="1dp"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="Software Engineer"
+                                android:hint="Occupation"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/textsize_small"
+                                app:backgroundTint="@android:color/white"
+                                android:textCursorDrawable="@drawable/edittext_cursor_white"/>
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </TableRow>
+                <TableRow
+                    android:id="@+id/vehicleRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <ImageView
+                            android:id="@+id/vehicleIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="16dp"
+                            android:src="@drawable/ic_directions_car_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/vehicleName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/vehicleIcon"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Honda CR-V"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                           />
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/vehicleNameEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/vehicleIcon"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Honda CR-V"
+                            android:hint="Your Vehicle"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            android:textCursorDrawable="@drawable/edittext_cursor"
+                            android:visibility="gone"/>
+
+
+                    </RelativeLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/contact_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <ImageView
+                            android:id="@+id/contactIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="16dp"
+                            android:src="@drawable/ic_call_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/contactPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/contactIcon"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="999999999"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                            />
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/contactPhoneEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/contactIcon"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:hint="Your Contact"
+                            android:text="999999999"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            android:textCursorDrawable="@drawable/edittext_cursor"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_span="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="5"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Other Details"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4" />
+
+                        <ImageButton
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/otherDetailsDropdownIcon"
+                            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:background="@drawable/circle_white_back"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/rowOtherDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_span="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/otherDetailsText"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:ems="15"
+                            android:text="-"
+                            android:textSize="@dimen/textsize_small"
+                            android:lines="4"
+                            android:padding="2dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@android:color/black"/>
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/otherDetailsEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/contactIcon"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="16dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:hint="Other details you wish to share"
+                            android:text="An Avid reader,programmer and photographer"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            android:textCursorDrawable="@drawable/edittext_cursor"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+        </android.support.design.widget.CoordinatorLayout>
+    </ScrollView>
+</RelativeLayout>
