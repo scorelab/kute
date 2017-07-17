@@ -25,6 +25,7 @@
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">427052427666913</string>
     <string name="googlemapApi">put in your google maps key here</string>
+    <string name="title_activity_test">test</string>
 
     <!--The strings below are for the intro details dialog -->
     <string name="slide_1_title">Pool Your Drives!</string>

@@ -47,4 +47,5 @@ public class Person implements Serializable {
         this.id = id;
         this.name = name;
     }
+
 }

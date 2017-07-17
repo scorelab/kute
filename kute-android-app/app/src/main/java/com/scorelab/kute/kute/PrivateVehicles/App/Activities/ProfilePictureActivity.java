@@ -52,8 +52,11 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
     CoordinatorLayout cl;
     String yourBase64String;
     String TAG ="ProfilePictureActivity";
+<<<<<<< HEAD
     Boolean did_profile_image_change=false;
     final int PROFILE_PICTURE_ACTIVITY_CODE=01;
+=======
+>>>>>>> ProfilePictureUpdate
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +97,7 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.update:
                 String base_64=convertToBase64(current_image);
+<<<<<<< HEAD
                 did_profile_image_change=true;
                 saveNewImageToDb(base_64);
                 break;
@@ -104,6 +108,11 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
                     i.putExtra("ImageBase64String",yourBase64String);
                 }
                 setResult(PROFILE_PICTURE_ACTIVITY_CODE,i);
+=======
+                saveNewImageToDb(base_64);
+                break;
+            case R.id.backNav:
+>>>>>>> ProfilePictureUpdate
                 finish();
                 break;
         }
@@ -185,6 +194,7 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
     /******************** Custom Functions *************************/
     private void setupProfileImage()
     {
+<<<<<<< HEAD
         String Base64=pref.getString("Profile_Image",null);
         if(!(pref.getString("Profile_Image",null).equals("null"))){
             //Get the Image from base64 string stored in the prefs
@@ -192,6 +202,11 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
             Log.d(TAG,"User has custom profile image");
             base64ToBitmap(Base64);
 
+=======
+        if(pref.getString("Profile_Image",null)!="null"){
+            //Get the Image from base64 string stored in the prefs
+            //This is the case when the user has a custom profile image
+>>>>>>> ProfilePictureUpdate
 
         }
         else {
@@ -313,20 +328,32 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
     {
         byte []imageBytes = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+<<<<<<< HEAD
         profile_image.setImageBitmap(decodedImage);
+=======
+>>>>>>> ProfilePictureUpdate
         //imageView.setImageBitmap(decodedImage);
     }
     private void saveNewImageToDb(String base_64)
     {
+<<<<<<< HEAD
         DatabaseReference db_ref= FirebaseDatabase.getInstance().getReference("Users").child(pref.getString("Id","null")).child("img_base64");
         db_ref.setValue(base_64).addOnFailureListener(new OnFailureListener() {
+=======
+        DatabaseReference db_ref= FirebaseDatabase.getInstance().getReference("Users").child(pref.getString("Id","null"));
+        db_ref.setValue(new Person(pref.getString("Name","null"),pref.getString("Id","null"),base_64)).addOnFailureListener(new OnFailureListener() {
+>>>>>>> ProfilePictureUpdate
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG,"Update profile Image Firebase:"+e.toString());
             }
         });
         //Change the Shared Preference Value
+<<<<<<< HEAD
         pref.edit().putString("Profile_Image",base_64).apply();
+=======
+        pref.edit().putString("Profile_Image",base_64).commit();
+>>>>>>> ProfilePictureUpdate
         Log.d(TAG,"Update Profile Image:Done");
     }
 
