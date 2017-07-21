@@ -2,6 +2,7 @@ package com.scorelab.kute.kute.PrivateVehicles.App.AsyncTasks;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -50,11 +51,16 @@ public class LoadFirebaseFriends extends AsyncTask<Integer,Void,Void> {
                 get_friend.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Person p = dataSnapshot.getChildren().iterator().next().getValue(Person.class);
-                        if(async_task_listener!=null){
-                            //Check if the weak reference still exists
-                            Log.v(TAG,"Retrieved Friend "+p.name);
-                            taskListener.onTaskCompleted(p);
+                        try {
+                            //Added a a try except just to prevent finding those friends who does not exist now
+                            Person p = dataSnapshot.getChildren().iterator().next().getValue(Person.class);
+                            if (async_task_listener != null) {
+                                //Check if the weak reference still exists
+                                Log.v(TAG, "Retrieved Friend " + p.name);
+                                taskListener.onTaskCompleted(p);
+                            }
+                        }catch (Exception e){
+                            Log.i(TAG,"Error Receiving particular person details from firebase Person Might not Exist");
                         }
                     }
                     @Override

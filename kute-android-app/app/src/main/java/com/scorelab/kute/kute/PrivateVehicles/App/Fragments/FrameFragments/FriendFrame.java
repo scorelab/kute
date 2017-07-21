@@ -1,4 +1,4 @@
-package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
+package com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

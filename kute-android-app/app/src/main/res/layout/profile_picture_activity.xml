@@ -7,7 +7,6 @@
     android:background="@color/apptheme">
     <ScrollView
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="match_parent">
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -110,109 +109,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:visibility="gone"
                 />
-=======
-        android:layout_height="wrap_content">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:theme="@style/AppTheme.AppBarOverlay">
-            <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/apptheme"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_span="2"
-                    android:background="@color/apptheme"
-                    android:orientation="horizontal">
 
-                    <ImageButton
-                        android:layout_width="@dimen/back_button_width"
-                        android:layout_height="@dimen/back_button_height"
-                        android:layout_margin="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/backNav"
-                        android:src="@drawable/ic_arrow_back_white_24dp"
-                        android:background="@drawable/circle_background"/>
-                </LinearLayout>
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-        <TextView
-            android:id="@+id/header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="8dp"
-            android:layout_below="@+id/toolbar"
-            android:textSize="@dimen/textsize_head2"
-            android:text="Profile Picture"
-            android:textColor="@android:color/white"
-            />
-        <com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView
-            android:layout_margin="16dp"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_below="@+id/header"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/profileImage"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit"
-            android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
-            android:text="Edit"
-            android:textSize="@dimen/textsize_small"
-            android:textColor="@android:color/white"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_below="@+id/profileImage"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/button_selector"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_rotate_right_white_24dp"
-            android:text="Rotate"
-            android:id="@+id/rotate"
-            android:textSize="@dimen/textsize_small"
-            android:textColor="@android:color/white"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_below="@+id/edit"
-           android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_selector"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:visibility="gone"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_cloud_done_white_24dp"
-            android:text="Update"
-            android:id="@+id/update"
-            android:textSize="@dimen/textsize_small"
-            android:textColor="@android:color/white"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_below="@+id/edit"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_selector"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:visibility="gone"
-            />
->>>>>>> ProfilePictureUpdate
         </RelativeLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

@@ -39,16 +39,13 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.current_friends_activity);
-<<<<<<< HEAD
-        person_list = (ArrayList<Person>) getIntent().getSerializableExtra("FriendList");
-=======
+
         person_list = (ArrayList<String>)getIntent().getSerializableExtra("FriendList");
         person_detail_list=(ArrayList<Person>) getIntent().getSerializableExtra("FriendDetailList");
         /************** Initialise the views *********/
         //TODO get friends from facebook and google and get their images
         Log.d(TAG,"The length of the person list is:"+Integer.toString(person_list.size()));
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
->>>>>>> ProfilePictureUpdate
         back = (ImageButton) findViewById(R.id.backNav);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

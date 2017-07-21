@@ -118,6 +118,7 @@ public class InitialDetailDialogs extends AppCompatActivity implements View.OnCl
                     break;
                 case 3:
                     Intent pvi = new Intent(this, Main.class);
+                    pref.edit().putBoolean("update_profile_done",true).apply();
                     startActivity(pvi);
                     updateProfileOnDb();
                     finish();
@@ -194,12 +195,14 @@ public class InitialDetailDialogs extends AppCompatActivity implements View.OnCl
     //Handle updating user profile on firebase after filling the details dialog activity
     private void updateProfileOnDb(){
         DatabaseReference m= FirebaseDatabase.getInstance().getReference().child("Users/"+pref.getString("Id","null"));
+        pref.edit().putString("Contact",contact).apply();
         m.child("contact_phone").setValue(contact).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG, "Firebase conatct update error Error:" + e.toString());
             }
         });;
+        pref.edit().putString("Vehicle",vehicle_name).apply();
         m.child("vehicle").setValue(vehicle_name).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {

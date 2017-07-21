@@ -2,15 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.scorelab.kute.kute">
 
-<<<<<<< HEAD
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-=======
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
->>>>>>> ProfilePictureUpdate
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature
@@ -38,11 +33,11 @@
             android:value="@string/googlemapApi"/>
 
         <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ProfilePictureUpdate
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Activity.RegisterActivity">
         </activity>
@@ -72,32 +67,12 @@
         <service android:name=".PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase"/>
 
         <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
-<<<<<<< HEAD
         <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
-        <activity android:name=".PrivateVehicles.App.Activities.Test">
+        <activity android:name=".PrivateVehicles.App.Activities.test">
         </activity>
         <activity android:name=".PrivateVehicles.App.Activities.InitialDetailDialogs">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-=======
-        <activity
-            android:name=".PrivateVehicles.App.Activities.test"
-            android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
         </activity>
-        <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity">
-
->>>>>>> ProfilePictureUpdate
-            </activity>
     </application>
 
 </manifest>

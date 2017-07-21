@@ -1,5 +1,6 @@
 package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -88,6 +90,10 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
                 if(is_edit_layout_drawn) {
                     Log.d("Status","We are in edit layout drawn");
                     setupDetailsLayout();
+                    //Close the key Board if open
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    //toggle boolean for edit layout
                     is_edit_layout_drawn=false;
                 }
                 else {
@@ -215,7 +221,7 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
             other_details_string = pref.getString("OtherDetails", "Check");
             Log.d("Status","Other details string is"+other_details_string);
             Log.d("Status","occupations string is"+occupation_string);
-            if (other_details_string.equals("")) {
+            if (other_details_string.equals("Check")) {
                 Log.d("Status","We are in other details string null");
                 other_details.setText("Edit to add Other details you wish to share");
 
