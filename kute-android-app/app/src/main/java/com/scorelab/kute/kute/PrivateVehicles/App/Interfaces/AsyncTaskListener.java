@@ -7,8 +7,8 @@ package com.scorelab.kute.kute.PrivateVehicles.App.Interfaces;
 /******************************* Created an interface to create asynctasks which do not leak memory upon screen rotation **************/
 
 public interface AsyncTaskListener {
-    void onTaskStarted();
+    void onTaskStarted(Object...attachments);
 
-    void onTaskCompleted();
+    void onTaskCompleted(Object attachment);
 
 }

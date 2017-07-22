@@ -23,7 +23,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="facebook_app_id">Put in your facebook api key</string>
+
+    <string name="facebook_app_id">put in your facebook api</string>
     <string name="googlemapApi">put in your google maps key here</string>
+    <string name="title_activity_test">test</string>
+
+    <!--The strings below are for the intro details dialog -->
+    <string name="slide_1_title">Pool Your Drives!</string>
+    <string name="slide_1_desc">Reduce your daily car drives!</string>
+    <string name="slide_1_desc_2">We need your Contact and Vehicle Name(If Applicable) to setup your profile</string>
+    <string name="slide_2_title">Your Contact</string>
+    <string name="slide_2_desc">This will be the point of contact for the fellow app users!</string>
+    <string name="slide_3_title">Your Vehicle Name</string>
+    <string name="slide_3_desc">This will be displayed to fellow app users who wish to pool with you!"</string>
+    <string name="slide_3_desc_2">Leave Empty if not applicable</string>
 
 </resources>

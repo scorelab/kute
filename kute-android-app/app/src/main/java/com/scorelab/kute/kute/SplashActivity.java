@@ -51,7 +51,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(regIntent);
             }
             else{ //User registered in the system.
-
                 Intent switchIntent =new Intent(SplashActivity.this, SwitchPrivatePublicActivity.class);
                 startActivity(switchIntent);
             }

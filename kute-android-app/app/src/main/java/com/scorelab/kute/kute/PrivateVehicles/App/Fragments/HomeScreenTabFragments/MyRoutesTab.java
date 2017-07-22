@@ -1,4 +1,4 @@
-package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
+package com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeScreenTabFragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

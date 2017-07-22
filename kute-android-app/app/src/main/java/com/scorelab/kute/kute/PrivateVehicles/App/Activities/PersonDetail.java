@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
-import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.PlaceHolderFragment;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.PlaceHolderFragment;
 import com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView;
 import com.scorelab.kute.kute.PrivateVehicles.App.Utils.VolleySingleton;
 import com.scorelab.kute.kute.R;

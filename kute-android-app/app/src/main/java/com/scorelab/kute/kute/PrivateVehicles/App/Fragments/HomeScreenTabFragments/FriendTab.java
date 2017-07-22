@@ -1,4 +1,4 @@
-package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
+package com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeScreenTabFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.CurrentFriendList;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
-import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.AsyncTaskListener;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.FriendFrame;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.PlaceHolderFragment;
 import com.scorelab.kute.kute.R;
 
 import java.util.ArrayList;
@@ -25,11 +26,14 @@ import java.util.ArrayList;
 public class FriendTab extends Fragment implements View.OnClickListener {
     private final String TAG="FriendTab";
     View v;
-    ArrayList<Person> friendslist;
+    ArrayList<Person> friend_detail_list;
+    ArrayList<String>friendslist;
     AppCompatButton viewall_currentfriends;
+    final String Action_FRIENDS_ADDED="Added_Detail_Friends";
     public FriendTab() {
         Log.d(TAG,"New Fragment Created");
-        friendslist=new ArrayList<Person>();
+        friend_detail_list=new ArrayList<Person>();
+        friendslist=new ArrayList<String>();
     }
 
 
@@ -65,6 +69,7 @@ public class FriendTab extends Fragment implements View.OnClickListener {
         {
             case R.id.viewallCurrentfriends:Intent i =new Intent(getContext(), CurrentFriendList.class);
                 i.putExtra("FriendList",friendslist);
+                i.putExtra("FriendDetailList",friend_detail_list);
                 startActivity(i);
              //TODO handle the viewall for friend requests as well
         }
@@ -94,14 +99,20 @@ public class FriendTab extends Fragment implements View.OnClickListener {
     }
     /********************* Custom Functions *************/
     //Receive Message  from Activity and other fragments
-    public void receiveMessage(String Action,Object attachment)
+    public void receiveMessage(String Action,Object...attachment )
     {
         Log.d(TAG,"Message Received : "+Action);
         switch (Action)
         {
             case "Friends_Ready":
-                friendslist=(ArrayList<Person>)attachment;
-                setupCurrentFriends();
+                friendslist=(ArrayList<String>)attachment[0];
+                friend_detail_list=(ArrayList<Person>)attachment[1];
+                if(friendslist.size()>0) {
+                    setupCurrentFriends();
+                }
+                break;
+            case Action_FRIENDS_ADDED:
+                friend_detail_list=(ArrayList<Person>)attachment[1];
         }
     }
 
@@ -111,7 +122,7 @@ public class FriendTab extends Fragment implements View.OnClickListener {
         Log.d(TAG,"Setting Up Current Friend");
         FriendFrame f=new FriendFrame();
         Bundle args=new Bundle();
-        args.putSerializable("Friend_1",friendslist.get(0));
+        args.putSerializable("Friend_1",friend_detail_list.get(0));
         f.setArguments(args);
         viewall_currentfriends.setEnabled(true);
         getChildFragmentManager().beginTransaction().replace(R.id.currentFriendsFrame,f).commit();

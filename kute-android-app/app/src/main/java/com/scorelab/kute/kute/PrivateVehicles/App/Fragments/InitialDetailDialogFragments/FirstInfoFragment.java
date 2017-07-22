@@ -1,4 +1,4 @@
-package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
+package com.scorelab.kute.kute.PrivateVehicles.App.Fragments.InitialDetailDialogFragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,22 +9,20 @@ import android.view.ViewGroup;
 
 import com.scorelab.kute.kute.R;
 
-
 /**
- * Created by nipunarora on 18/06/17.
+ * Created by nipunarora on 07/07/17.
  */
 
-public class TripFrame extends Fragment {
-    //TODO load data source from Fragment Args
+public class FirstInfoFragment extends Fragment {
     View v;
 
-    public TripFrame() {
+    public FirstInfoFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.trip_item, container, false);
-        return v;
+        v=inflater.inflate(R.layout.starting_detail_dialog_fragment,container,false);
+        return  v;
     }
 }

@@ -8,4 +8,6 @@
     <color name="apptheme">#00BCD4</color>
     <color name="mainBackground">#F5F5F5</color>
     <color name="fab">#1de9b6</color>
+    <color name="dot_inactive">#2278d4</color>
+    <color name="dot_active">#93C6FD</color>
 </resources>

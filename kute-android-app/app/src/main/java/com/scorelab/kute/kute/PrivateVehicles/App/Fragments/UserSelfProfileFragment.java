@@ -1,23 +1,33 @@
 package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.ProfilePictureActivity;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
+import com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView;
+import com.scorelab.kute.kute.PrivateVehicles.App.Utils.VolleySingleton;
 import com.scorelab.kute.kute.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -29,13 +39,16 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
     AppCompatEditText name_edit,occupation_edit,vehicle_edit,contact_phone_edit,other_details_edit;
     ImageButton other_details_dropdown,edit_icon;
     Boolean is_edit_layout_drawn=false;
+    RoundedImageView profile_picture;
     String name_string,occupation_string,vehicle_string,contact_string,other_details_string;
     SharedPreferences pref;
     final String TAG="UserSelfProfileFragment";
+    final int PROFILE_PICTURE_ACTIVITY_CODE=01;
+    ImageLoader mImageLoader;
 
     public UserSelfProfileFragment() {
     }
-
+    /****************************** Overrides *************************/
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +57,7 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
         work_row_edit=(RelativeLayout)v.findViewById(R.id.workRowEdit);
         name=(TextView)v.findViewById(R.id.name);
         name_edit=(AppCompatEditText)v.findViewById(R.id.nameEdit);
+        profile_picture=(RoundedImageView)v.findViewById(R.id.personImage);
         occupation=(TextView)v.findViewById(R.id.occupationName);
         occupation_edit=(AppCompatEditText)v.findViewById(R.id.occupationNameEdit);
         vehicle=(TextView)v.findViewById(R.id.vehicleName);
@@ -62,7 +76,9 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
         edit_icon=(ImageButton)getActivity().findViewById(R.id.searchIcon);//The Id is search icon because this image button is used for search in the homebase fragment
         edit_icon.setOnClickListener(this);
         pref=getApplicationContext().getSharedPreferences("user_credentials",0);
+        profile_picture.setOnClickListener(this);
         loadInitialPersonDetails();
+        setupProfileImage();
     }
 
     @Override
@@ -74,6 +90,10 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
                 if(is_edit_layout_drawn) {
                     Log.d("Status","We are in edit layout drawn");
                     setupDetailsLayout();
+                    //Close the key Board if open
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    //toggle boolean for edit layout
                     is_edit_layout_drawn=false;
                 }
                 else {
@@ -81,6 +101,25 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
                     setupEditLayout();
                     is_edit_layout_drawn=true;
                 }
+                break;
+            case R.id.personImage:
+                Intent i=new Intent(getContext(), ProfilePictureActivity.class);
+                startActivityForResult(i,PROFILE_PICTURE_ACTIVITY_CODE);
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==PROFILE_PICTURE_ACTIVITY_CODE ){
+            //Handle the resukt from profile picture change activity
+            Log.d(TAG,"onActivityResultStatus:We are in ");
+            String base_64=data.getStringExtra("ImageBase64String");
+            if(data!=null && base_64!=null) {
+                base64ToBitmap(base_64);
+            }
+
         }
     }
 
@@ -147,7 +186,6 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
 
         SharedPreferences.Editor editor=pref.edit();
         editor.putString("Name",name_string );
-        editor.putString("Profile_Image","null");
         editor.putString("Occupation",occupation_string);
         editor.putString("Vehicle",vehicle_string);
         editor.putString("Contact",contact_string);
@@ -183,7 +221,7 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
             other_details_string = pref.getString("OtherDetails", "Check");
             Log.d("Status","Other details string is"+other_details_string);
             Log.d("Status","occupations string is"+occupation_string);
-            if (other_details_string.equals("null")) {
+            if (other_details_string.equals("Check")) {
                 Log.d("Status","We are in other details string null");
                 other_details.setText("Edit to add Other details you wish to share");
 
@@ -207,4 +245,30 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
             }
         }
     }
+    //Loads the current Profile image
+    private void setupProfileImage() {
+        String profile_image_base64 = pref.getString("Profile_Image", "null");
+        String id= pref.getString("Id","null");
+        Log.d(TAG,"User Id is"+id);
+        if (profile_image_base64.equals("null")){
+            mImageLoader = VolleySingleton.getInstance(getContext()).getImageLoader();
+            String img_url = String.format("https://graph.facebook.com/%s/picture?type=large",id);
+            //Log.d(TAG,"Image Url for ImageLoader is"+img_url);
+            mImageLoader.get(img_url, ImageLoader.getImageListener(profile_picture,
+                    R.drawable.ic_person_black_36dp, R.drawable.ic_person_black_36dp));
+        }
+        else {
+            base64ToBitmap(profile_image_base64);
+        }
+    }
+    //Function to convert base 64 to bitmap
+    private void base64ToBitmap(String base64)
+    {
+        byte []imageBytes = Base64.decode(base64, Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        profile_picture.setImageBitmap(decodedImage);
+        //imageView.setImageBitmap(decodedImage);
+    }
+
+
 }

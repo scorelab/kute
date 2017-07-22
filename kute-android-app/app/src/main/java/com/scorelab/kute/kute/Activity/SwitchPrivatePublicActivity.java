@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.scorelab.kute.kute.LandActivity;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.InitialDetailDialogs;
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Main;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
 import com.scorelab.kute.kute.PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase;
@@ -40,6 +41,7 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
     BroadcastReceiver sync_friend_service_receiver;
     IntentFilter filter_sync_friend_receiver;
     private final String Action = SyncFacebookFriendsToFirebase.class.getName() + "Complete";
+    SharedPreferences pref;
 
     /*****************  Overrides ***************/
     @Override
@@ -51,7 +53,7 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
         privateVeh = (ImageButton) findViewById(R.id.privateVehicle);
         publicVeh.setOnClickListener(this);
         privateVeh.setOnClickListener(this);
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences("user_credentials", 0); // 0 - for private mode
+        pref = getApplicationContext().getSharedPreferences("user_credentials", 0); // 0 - for private mode
         /****************** Sync Data For First Timers to the app *********/
         /******************* Register to Firebase for new User ********/
         if (pref.getBoolean("Register_db", true)) {
@@ -83,8 +85,7 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
                 startActivity(i);
                 break;
             case R.id.privateVehicle:
-                Intent pvi = new Intent(this, Main.class);
-                startActivity(pvi);
+                handlePrivateVehicleClick();
                 break;
             default:
                 Toast.makeText(this, "Not Clickable", Toast.LENGTH_SHORT).show();
@@ -148,6 +149,17 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
                     }).executeAsync();
         } catch (Exception e) {
             Log.d(TAG, "Graph Request error" + e.toString());
+        }
+    }
+    //Handles the click on the private vehicle part
+    private void handlePrivateVehicleClick(){
+        if(pref.getBoolean("update_profile_done",false)){
+            Intent pvi = new Intent(this, Main.class);
+            startActivity(pvi);
+        }
+        else {
+            Intent pvi = new Intent(this, InitialDetailDialogs.class);
+            startActivity(pvi);
         }
     }
 }

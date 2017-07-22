@@ -1,4 +1,4 @@
-package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
+package com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeScreenTabFragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.FriendFrame;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.RouteFrame;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.TripFrame;
 import com.scorelab.kute.kute.R;
 
 

@@ -33,6 +33,7 @@
                             android:layout_centerHorizontal="true"
                             android:id="@+id/personImage"
                             android:background="@drawable/ic_person_black_36dp"
+                            android:layout_marginTop="8dp"
                             />
 
                         <TextView
@@ -59,6 +60,8 @@
                             android:textColor="@android:color/white"
                             android:textSize="20dp"
                             android:hint="Occupation"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
                             app:backgroundTint="@android:color/white"
                             android:textCursorDrawable="@drawable/edittext_cursor_white"
                             android:visibility="gone"/>
@@ -120,8 +123,9 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginTop="1dp"
                                 android:fontFamily="sans-serif-condensed"
-                                android:text="Software Engineer"
                                 android:hint="Occupation"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/textsize_small"
                                 app:backgroundTint="@android:color/white"
@@ -176,7 +180,9 @@
                             android:textSize="@dimen/textsize_small"
                             app:backgroundTint="@color/apptheme"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:visibility="gone"/>
+                            android:visibility="gone"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"/>
 
 
                     </RelativeLayout>
@@ -229,7 +235,9 @@
                             android:textSize="@dimen/textsize_small"
                             app:backgroundTint="@color/apptheme"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:visibility="gone"/>
+                            android:visibility="gone"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"/>
                     </RelativeLayout>
 
                 </TableRow>
@@ -312,7 +320,9 @@
                             android:textSize="@dimen/textsize_small"
                             app:backgroundTint="@color/apptheme"
                             android:textCursorDrawable="@drawable/edittext_cursor"
-                            android:visibility="gone"/>
+                            android:visibility="gone"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"/>
                     </LinearLayout>
                 </TableRow>
             </TableLayout>

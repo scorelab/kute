@@ -1,7 +1,10 @@
 package com.scorelab.kute.kute.PrivateVehicles.App.Adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,10 +103,19 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         /********* Test ******/
         RoundedImageView person_image =  vh.profile_pic;
         mImageLoader = VolleySingleton.getInstance(mcontext).getImageLoader();
-        String img_url = String.format("https://graph.facebook.com/%s/picture?type=normal", p.id);
-        //Log.d(TAG,"Image Url for ImageLoader is"+img_url);
-        mImageLoader.get(img_url, ImageLoader.getImageListener(person_image,
-                R.drawable.ic_person_black_36dp, R.drawable.ic_person_black_36dp));
+        if(p.img_base64.equals("null")){
+            String img_url = String.format("https://graph.facebook.com/%s/picture?type=normal", p.id);
+            //Log.d(TAG,"Image Url for ImageLoader is"+img_url);
+            mImageLoader.get(img_url, ImageLoader.getImageListener(person_image,
+                    R.drawable.ic_person_black_36dp, R.drawable.ic_person_black_36dp));
+        }else {
+            //TODO This task of converting base64 to bitmap can be offloaded to a handler Thread
+            Bitmap bm=base64ToBitmap(p.img_base64);
+            person_image.setImageBitmap(bm);
+        }
+
+
+
         /******** End of Test Data ********/
     }
 
@@ -112,5 +124,13 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         vh.head_image.setBackgroundResource(R.drawable.community);
     }
     /******** End of Configuring of view holders ***************/
+    //Method to convert Base64 to bitmap
+    private Bitmap base64ToBitmap(String base64)
+    {
+        byte []imageBytes = Base64.decode(base64, Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        return decodedImage;
+        //imageView.setImageBitmap(decodedImage);
+    }
 }
 
