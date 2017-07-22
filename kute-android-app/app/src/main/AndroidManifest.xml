@@ -68,8 +68,6 @@
 
         <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
         <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
-        <activity android:name=".PrivateVehicles.App.Activities.test">
-        </activity>
         <activity android:name=".PrivateVehicles.App.Activities.InitialDetailDialogs">
 
         </activity>
