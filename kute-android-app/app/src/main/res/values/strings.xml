@@ -23,7 +23,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="facebook_app_id">put in your facebook api</string>
+=======
+    <string name="facebook_app_id">Put in your facebook api key</string>
+>>>>>>> UserSelfProfileFilling
     <string name="googlemapApi">put in your google maps key here</string>
     <string name="title_activity_test">test</string>
 

@@ -67,10 +67,12 @@
         <service android:name=".PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase"/>
 
         <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"/>
+
         <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
         <activity android:name=".PrivateVehicles.App.Activities.InitialDetailDialogs">
 
         </activity>
+
     </application>
 
 </manifest>

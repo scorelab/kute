@@ -221,7 +221,11 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
             other_details_string = pref.getString("OtherDetails", "Check");
             Log.d("Status","Other details string is"+other_details_string);
             Log.d("Status","occupations string is"+occupation_string);
+<<<<<<< HEAD
             if (other_details_string.equals("Check")) {
+=======
+            if (other_details_string.equals("null")) {
+>>>>>>> UserSelfProfileFilling
                 Log.d("Status","We are in other details string null");
                 other_details.setText("Edit to add Other details you wish to share");
 
