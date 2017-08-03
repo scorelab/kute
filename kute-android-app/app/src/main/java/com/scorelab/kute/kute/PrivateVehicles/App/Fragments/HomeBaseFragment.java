@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
  * Created by nipunarora on 18/06/17.
  */
 //This Fragment serves as home fragment of the navigation drawer
-public class HomeBaseFragment extends Fragment implements AsyncTaskListener{
+public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View.OnClickListener{
     private final String TAG = "HomeBaseFragment";
     View v;
     BottomNavigationView bottomNavigation;
@@ -106,6 +107,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener{
         friend_list=new ArrayList<String>();
 
 
+
         /*********** Bottom Navigation Setup *******/
         //set initial fragments We have loaded all the three fragments simultaneously
         // inorder to smooth out the transition between the three fragments
@@ -151,6 +153,8 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener{
         } else {
             getFirebaseFriend();
         }
+        ImageButton edit_icon=(ImageButton)getActivity().findViewById(R.id.searchIcon);//The Id is search icon because this image button is used for search in the homebase fragment
+        edit_icon.setOnClickListener(this);
 
     }
 
@@ -159,6 +163,14 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener{
         super.onDetach();
         if (is_receiver_register) {
             getActivity().unregisterReceiver(sync_friend_service_receiver);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.searchIcon:
+                break;
         }
     }
 

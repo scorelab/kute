@@ -15,14 +15,15 @@
             android:layout_span="2"
             android:background="@color/apptheme"
             android:orientation="horizontal">
+
             <ImageButton
                 android:layout_width="@dimen/back_button_width"
                 android:layout_height="@dimen/back_button_height"
-                android:layout_margin="8dp"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/backNav"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_background"
                 android:src="@drawable/ic_arrow_back_white_24dp"
-                android:background="@drawable/circle_background"/>
+                android:id="@id/backNav"
+                />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
     <ScrollView android:layout_width="match_parent"
@@ -227,6 +228,7 @@
                             android:background="@null"
                             android:fontFamily="sans-serif-condensed"
                             android:layout_gravity="center_vertical"
+                            android:id="@+id/viewAllRoutes"
                             android:textSize="@dimen/textsize_small"
                             android:textColor="@android:color/black"
 
