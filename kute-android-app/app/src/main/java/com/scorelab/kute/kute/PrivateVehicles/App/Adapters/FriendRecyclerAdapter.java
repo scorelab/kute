@@ -103,7 +103,7 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         /********* Test ******/
         RoundedImageView person_image =  vh.profile_pic;
         mImageLoader = VolleySingleton.getInstance(mcontext).getImageLoader();
-        if(p.img_base64.equals("null")){
+        if(p.img_base64.equals("null") || p.img_base64==null){
             String img_url = String.format("https://graph.facebook.com/%s/picture?type=normal", p.id);
             //Log.d(TAG,"Image Url for ImageLoader is"+img_url);
             mImageLoader.get(img_url, ImageLoader.getImageListener(person_image,

@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -15,18 +17,25 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Routes.RouteListPerson;
+import com.scorelab.kute.kute.PrivateVehicles.App.AsyncTasks.LoadPersonRoutesAsyncTask;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
+import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Route;
 import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.PlaceHolderFragment;
+import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.FrameFragments.RouteFrame;
+import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.AsyncTaskListener;
 import com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView;
 import com.scorelab.kute.kute.PrivateVehicles.App.Utils.VolleySingleton;
 import com.scorelab.kute.kute.R;
+
+import java.util.ArrayList;
 
 
 /**
  * Created by nipunarora on 15/06/17.
  */
 
-public class PersonDetail extends AppCompatActivity implements View.OnClickListener {
+public class PersonDetail extends AppCompatActivity implements View.OnClickListener,AsyncTaskListener {
     FloatingActionButton fab;
     RoundedImageView profile_image;
     TextView name, occupation, contact_phone, vehicle, other_details;
@@ -36,8 +45,13 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
     ScrollView scroll_view;
     ImageLoader mImageLoader;
     ImageButton back;
+    AppCompatButton view_all_routes;
     RelativeLayout occupation_row;
-    private final String TAG = "PersonDetail";
+    private final String TAG = "PersonDetailActivity";
+    Boolean is_loading_user_routes;
+    ArrayList<Route> route_list;
+    LoadPersonRoutesAsyncTask load_routes;
+    Person p;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +65,7 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
         noroutes.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.routeFramePersonDetail, noroutes).commit();
         //Initialise the views and variables required
+        route_list=new ArrayList<Route>();
         //View Initialization
         name = (TextView) findViewById(R.id.name);
         occupation = (TextView) findViewById(R.id.Occupation);
@@ -73,10 +88,12 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
                 finish();
             }
         });
+
         //Variable initialization
         is_otherdetails_dropdown = false;
         //Fill in the person details
         fillPersonDetails();
+        setupRoutesRow();
         //Onclick listeners
         contact_row.setOnClickListener(this);
         otherdetail_dropdown.setOnClickListener(this);
@@ -103,6 +120,12 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
             case R.id.otherDetailsDropdownIcon:
                 is_otherdetails_dropdown = handleOtherDetailsDropdown(is_otherdetails_dropdown, otherdetail_dropdown, other_details_row);
                 Log.d("Boolean check", is_otherdetails_dropdown.toString());
+                break;
+            case R.id.viewAllRoutes:
+                Intent i=new Intent(getApplicationContext(), RouteListPerson.class);
+                i.putExtra("RouteList",route_list);
+                i.putExtra("Name",p.name);
+                startActivity(i);
                 break;
         }
     }
@@ -135,9 +158,51 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onTaskStarted(Object... attachments) {
+        is_loading_user_routes=true;
+    }
+
+    @Override
+    public void onTaskCompleted(Object attachment) {
+        route_list=(ArrayList<Route>)attachment;
+        is_loading_user_routes=false;
+        //Checking to see if user has routes or  not
+        if(route_list.size()==0){
+            //User has no routes
+            Log.i(TAG,"OnTaskCompleted : "+ "No Routes Found");
+            PlaceHolderFragment no_routes = new PlaceHolderFragment();
+            Bundle args = new Bundle();
+            args.putString("Label", "No Routes Available");
+            no_routes.setArguments(args);
+            getSupportFragmentManager().beginTransaction().replace(R.id.routeFramePersonDetail, no_routes).commit();
+        }else{
+            //The case when user has routes
+            //Setup the first route fragment
+            Log.i(TAG,"OnTaskCompleted :"+"The size of the list is :"+Integer.toString(route_list.size()));
+            RouteFrame route_frame=new RouteFrame();
+            Bundle args=new Bundle();
+            args.putSerializable("Route",route_list.get(0));
+            Log.d(TAG,"The debug seats available is: " +route_list.get(0).getSeats_available());
+            view_all_routes.setEnabled(true);
+            route_frame.setArguments(args);
+            getSupportFragmentManager().beginTransaction().replace(R.id.routeFramePersonDetail, route_frame).commit();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Stop the asynctask if it is running
+        if(is_loading_user_routes){
+            load_routes.cancel(true);
+        }
+
+    }
+
     /*********** Filling user details from intent *******/
     private void fillPersonDetails() {
-        Person p = (Person) getIntent().getSerializableExtra("Person");
+        p = (Person) getIntent().getSerializableExtra("Person");
         Boolean is_friend = getIntent().getBooleanExtra("isAFriend", false);
         name.setText(p.name);
         if (is_friend) {
@@ -160,6 +225,20 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "Image Url for ImageLoader is" + img_url);
         mImageLoader.get(img_url, ImageLoader.getImageListener(profile_image,
                 R.drawable.ic_person_black_36dp, R.drawable.ic_person_black_36dp));
-
     }
+
+    //setting up the routes detail of a person
+    private void setupRoutesRow(){
+        load_routes=new LoadPersonRoutesAsyncTask(this);
+        load_routes.execute(p.name);
+        view_all_routes=(AppCompatButton)findViewById(R.id.viewAllRoutes);
+        view_all_routes.setOnClickListener(this);
+        view_all_routes.setEnabled(false);
+        PlaceHolderFragment loading = new PlaceHolderFragment();
+        Bundle args = new Bundle();
+        args.putString("Label", "Loading...");
+        loading.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.routeFramePersonDetail, loading).commit();
+    }
+
 }

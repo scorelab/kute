@@ -85,7 +85,7 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
     public void onRecyclerItemClick(int position) {
         Log.d(TAG, String.format("Item position clicked :%d", position));
         Intent i = new Intent(this, PersonDetail.class);
-        i.putExtra("Person", person_list.get(position - 1));
+        i.putExtra("Person", person_detail_list.get(position - 1));
         i.putExtra("isAFriend", true);
         startActivity(i);
     }
@@ -144,6 +144,8 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
     @Override
     protected void onStop() {
         super.onStop();
-        load_friends_async.cancel(true);
+        if(is_async_task_running) {
+            load_friends_async.cancel(true);
+        }
     }
 }

@@ -11,6 +11,16 @@
         android:paddingBottom="60dp"
         android:clipToPadding="false"
         />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_below="@id/personRecycler"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +30,7 @@
         android:src="@drawable/ic_add_white_24dp"
         android:elevation="8dp"
         android:clickable="true"
+        android:id="@+id/fab"
         app:rippleColor="@color/fabripple"/>
 
 </RelativeLayout>

@@ -1,0 +1,333 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/apptheme"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_span="2"
+            android:background="@color/apptheme"
+            >
+
+            <ImageButton
+                android:layout_width="@dimen/back_button_width"
+                android:layout_height="@dimen/back_button_height"
+                android:layout_margin="4dp"
+                android:id="@+id/backNav"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+            <ImageButton
+                android:layout_width="@dimen/back_button_width"
+                android:layout_height="@dimen/back_button_height"
+                android:layout_marginRight="8dp"
+                android:id="@+id/editButton"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/ic_mode_edit_white_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:layout_below="@+id/toolbar"
+        android:fadeScrollbars="false">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*">
+                <TableRow
+                    android:id="@+id/row1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/headerTile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2"
+                        android:background="@color/apptheme"
+                        android:paddingBottom="10dp">
+                        <TextView
+                            android:id="@+id/routeName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Home Office"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textsize_head2" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/routeName"
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/routeLogo"
+                            android:background="@drawable/route5"
+                            />
+
+
+                    </RelativeLayout>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/rowFromHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="From"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/rowSource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <ImageView
+                            android:id="@+id/start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/flight_takeoff_black_24x24" />
+
+                        <TextView
+                            android:id="@+id/startPlace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/start"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Anuradhapura"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small" />
+                    </RelativeLayout>
+
+                </TableRow>
+                <TableRow android:id="@+id/rowTOHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="To"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textsize_head1" />
+                </LinearLayout>
+            </TableRow>
+                <TableRow
+                    android:id="@+id/rowDestination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <ImageView
+                            android:id="@+id/destinationIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/flight_land_black_24x24" />
+
+                        <TextView
+                            android:id="@+id/destination"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/destinationIcon"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Dambula"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small" />
+                    </RelativeLayout>
+
+                </TableRow>
+                <TableRow android:id="@+id/rowtimeHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Time"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1" />
+                    </LinearLayout>
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <ImageView
+                            android:id="@+id/TimeIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_timer_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/startTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/TimeIcon"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="6:00"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"/>
+                    </RelativeLayout>
+
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowDaysHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Days"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"/>
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_white_back"
+                            android:src="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="8dp"
+                            />
+                    </RelativeLayout>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startTripButton">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Start Trip"
+                            android:textAlignment="center"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:id="@+id/startTrip"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/button_selector"
+                            android:layout_centerHorizontal="true"
+                            android:elevation="4dp"
+                            android:textColor="@android:color/white"
+                            />
+                    </RelativeLayout>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deleteRoute">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Delete"
+                            android:textAlignment="center"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:id="@+id/routeDelete"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@drawable/button_selector"
+                            android:layout_centerHorizontal="true"
+                            android:elevation="4dp"
+                            android:textColor="@android:color/white"
+                            />
+                    </RelativeLayout>
+                </TableRow>
+
+            </TableLayout>
+        </ScrollView>
+    </RelativeLayout>

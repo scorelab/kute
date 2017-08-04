@@ -122,8 +122,8 @@ public class Main extends AppCompatActivity
     private void setupHomeFragment(){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
         search.setImageResource(R.drawable.ic_search_white_24dp);
-        route_request_number.setVisibility(View.GONE);
-        route_request.setVisibility(View.GONE);
+        route_request_number.setVisibility(View.VISIBLE);
+        route_request.setVisibility(View.VISIBLE);
     }
 
 }
