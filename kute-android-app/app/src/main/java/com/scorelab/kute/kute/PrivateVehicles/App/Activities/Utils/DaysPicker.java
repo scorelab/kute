@@ -27,7 +27,7 @@ public class DaysPicker extends AppCompatActivity implements DaysPickerRecyclerA
     ArrayList<Boolean>days=new ArrayList<Boolean>(); //A serialized format of passing the information of days to firebase by creating a sort of enum for the days of the week
     DaysPickerAdapter recycler_adapter;
     ImageButton backnav;
-    private final int result_code=0x2;
+    private final int result_code=0007;
     RecyclerView days_recycler;
     private final String  TAG="DaysPicker";
     @Override

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/apptheme"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_span="2"
+            android:background="@color/apptheme"
+            >
+
+            <ImageButton
+                android:layout_width="@dimen/back_button_width"
+                android:layout_height="@dimen/back_button_height"
+                android:layout_margin="4dp"
+                android:id="@+id/backNav"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/apptheme"
+                      android:paddingBottom="16dp"
+                      android:paddingTop="16dp"
+                      android:layout_below="@+id/toolbar"
+            android:id="@+id/headBanner">
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:textSize="@dimen/textsize_head1"
+                android:text="Number Of Seats you wish to share"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                />
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/headIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp"
+                android:background="@drawable/seatbelt" />
+        </LinearLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_below="@+id/headBanner"
+            android:layout_marginTop="16dp"
+            android:id="@+id/seatsTable">
+            <TableRow android:id="@+id/rowSeatHead"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Seats Available"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textsize_head1" />
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                android:id="@+id/rowSeatsAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="2">
+
+                    <ImageView
+                        android:id="@+id/seatIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_event_seat_black_24dp" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/seatsAvailable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/seatIcon"
+                        android:layout_marginLeft="64dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:hint="Seats Available"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textsize_small"
+                        app:backgroundTint="@color/apptheme"
+                        android:textAlignment="center"
+                        android:textCursorDrawable="@drawable/edittext_cursor"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"/>
+                </RelativeLayout>
+
+            </TableRow>
+        </TableLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go"
+            android:textAlignment="center"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/goButton"
+            android:layout_margin="16dp"
+            android:background="@drawable/material_button_selector"
+            android:layout_alignParentBottom="true"
+            android:elevation="4dp"
+            android:textColor="@android:color/white"
+            />
+
+    </RelativeLayout>
+
