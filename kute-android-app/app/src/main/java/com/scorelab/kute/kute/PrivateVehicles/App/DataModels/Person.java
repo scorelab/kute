@@ -14,6 +14,7 @@ public class Person implements Serializable {
     public String id,name,img_base64,occupation,other_details,contact_phone,vehicle;
     //Implement in some other way public Boolean is_friend; // This will indicate whether the given person is users friend
     public ArrayList<Route> route_list;
+    public String token;
     /*********** Properties Defined *******/
      public Person() {
      }
@@ -21,11 +22,12 @@ public class Person implements Serializable {
      /****************** This constructor will configure for the list item
      ****************** rest detail will be filled later when person detail activity is called *******/
 
-    public Person(String name,String id,String img_base64)   //Add id and img_url(Not being added right now because we dont have the backend for now)
+    public Person(String name,String id,String img_base64,String token1)   //Add id and img_url(Not being added right now because we dont have the backend for now)
     {
         this.name=name;
         this.img_base64=img_base64;
         this.id=id;
+        this.token=token1;
     }
 
     /************** This method will be invoked when we load personDetail Activity **********/

@@ -52,7 +52,6 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
     String permission = Manifest.permission.ACCESS_FINE_LOCATION;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE_SOURCE=01;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE_DESTINATION=02;
-    private GoogleApiClient mGoogleApiClient;
     ImageButton schedule_trip,back_nav;
     String destination_string,source_string;
     LatLng destination_latlng,source_latlng;

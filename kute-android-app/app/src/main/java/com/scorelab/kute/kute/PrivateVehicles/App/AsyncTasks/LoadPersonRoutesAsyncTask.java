@@ -37,8 +37,8 @@ public class LoadPersonRoutesAsyncTask extends AsyncTask<String,Void,ArrayList<R
     @Override
     protected ArrayList<Route> doInBackground(String... params) {
         //Return the retrieved list of person's  routes from firebase
-        String name=params[0];
-        String route_ref="Routes/"+name;
+        String id=params[0];
+        String route_ref="Routes/"+id;
         DatabaseReference routes_ref= FirebaseDatabase.getInstance().getReference(route_ref);
         routes_ref.keepSynced(true);
         routes_ref.addListenerForSingleValueEvent(new ValueEventListener() {

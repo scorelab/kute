@@ -164,7 +164,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View
         } else {
             getFirebaseFriend();
         }
-        ImageButton edit_icon=(ImageButton)getActivity().findViewById(R.id.searchIcon);//The Id is search icon because this image button is used for search in the homebase fragment
+        ImageButton edit_icon=(ImageButton)getActivity().findViewById(R.id.routeRequests);//The Id is search icon because this image button is used for search in the homebase fragment
         edit_icon.setOnClickListener(this);
 
     }
@@ -180,7 +180,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.searchIcon:
+            case R.id.routeRequests:
                 break;
         }
     }

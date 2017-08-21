@@ -51,6 +51,8 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.osmdroid:osmdroid-android:5.6.4'
+    compile 'com.google.firebase:firebase-messaging:11.0.1'
+    compile 'com.google.firebase:firebase-core:11.0.1'
     testCompile 'junit:junit:4.12'
 }
 

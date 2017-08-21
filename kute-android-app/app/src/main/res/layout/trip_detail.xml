@@ -26,16 +26,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 />
-            <ImageButton
-                android:layout_width="@dimen/back_button_width"
-                android:layout_height="@dimen/back_button_height"
-                android:layout_marginRight="8dp"
-                android:id="@+id/addButton"
-                android:background="@drawable/circle_background"
-                android:src="@drawable/ic_done_white_24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
@@ -60,20 +50,37 @@
                     android:layout_span="2"
                     android:background="@color/apptheme"
                     android:paddingBottom="10dp">
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/routeName"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/textsize_head2"
-                        android:hint="Name for Route"
-                        android:textColorHint="@android:color/white"
-                        android:backgroundTint="@android:color/white"
-                        android:textCursorDrawable="@drawable/edittext_cursor_white"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"
-                        android:layout_centerHorizontal="true"/>
+                        android:id="@+id/routeName">
+                        <TextView
+                            android:id="@+id/routeNameText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Trip"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textsize_head2"
+                            />
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/routeNameEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Home Office"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textsize_head2"
+                            android:hint="Route Name"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            app:backgroundTint="@android:color/white"
+                            android:textCursorDrawable="@drawable/edittext_cursor_white"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
 
                     <android.support.v7.widget.AppCompatImageView
                         android:layout_width="wrap_content"
@@ -82,10 +89,8 @@
                         android:layout_below="@+id/routeName"
                         android:layout_marginTop="8dp"
                         android:id="@+id/routeLogo"
-                        android:background="@drawable/route5"
+                        android:background="@drawable/tripicon"
                         />
-
-
                 </RelativeLayout>
             </TableRow>
 
@@ -120,7 +125,6 @@
                         android:id="@+id/startPlace"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/start"
                         android:layout_marginLeft="64dp"
                         android:fontFamily="sans-serif-condensed"
                         android:hint="Start Point"
@@ -137,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -162,7 +166,6 @@
                         android:id="@+id/destination"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/destinationIcon"
                         android:layout_marginLeft="64dp"
                         android:layout_marginRight="4dp"
                         android:fontFamily="sans-serif-condensed"
@@ -174,121 +177,129 @@
                 </RelativeLayout>
 
             </TableRow>
-            <TableRow android:id="@+id/rowSeatHead"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Seats Available"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/textsize_head1" />
-                </LinearLayout>
-            </TableRow>
             <TableRow
-                android:id="@+id/rowSeatsAvailable"
+                android:id="@+id/rowStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
                     android:layout_span="2">
 
-                    <ImageView
-                        android:id="@+id/seatIcon"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_event_seat_black_24dp" />
-
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/seatsAvailable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/seatIcon"
-                        android:layout_marginLeft="64dp"
+                        android:text="Start Time"
+                        android:textSize="@dimen/textsize_small"
+                        android:textStyle="bold"
                         android:fontFamily="sans-serif-condensed"
-                        android:hint="Seats Available"
+                        android:id="@+id/timeHead"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        />
+
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/startTimeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="4dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@+id/timeHead"
+                        android:text="00:00"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/textsize_small"
                         app:backgroundTint="@color/apptheme"
-                        android:textCursorDrawable="@drawable/edittext_cursor"
-                        android:imeOptions="actionDone"
-                        android:inputType="number"/>
+                        />
                 </RelativeLayout>
 
             </TableRow>
-            <TableRow android:id="@+id/rowtimeHead"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="Time"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/textsize_head1" />
-                </LinearLayout>
-            </TableRow>
             <TableRow
-                android:id="@+id/rowTime"
+                android:id="@+id/rowHostName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:id="@+id/timeLayout">
-
-                    <ImageView
-                        android:id="@+id/TimeIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_timer_black_24dp" />
+                    android:layout_marginRight="16dp"
+                    android:layout_span="2">
 
                     <TextView
-                        android:id="@+id/startTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/TimeIcon"
-                        android:layout_marginLeft="64dp"
+                        android:text="Host"
+                        android:textSize="@dimen/textsize_small"
+                        android:textStyle="bold"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="Tap to set starting time"
+                        android:id="@+id/hostNameHead"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        />
+
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/hostNameText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="4dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@+id/hostNameHead"
+                        android:text="Lorem Imposum"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/textsize_small"/>
+                        android:textSize="@dimen/textsize_small"
+                        app:backgroundTint="@color/apptheme"
+                        />
                 </RelativeLayout>
 
             </TableRow>
+            <TableRow android:id="@+id/rowaddressHead"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_span="2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Host Location"
+                        android:textSize="@dimen/textsize_small"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:id="@+id/hostAddressHead"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/addressMapView"
+                        android:background="@drawable/circle_white_back"
+                        android:src="@drawable/ic_arrow_forward_black_24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="24dp"
+                        />
+                </RelativeLayout>
+            </TableRow>
             <TableRow
-                android:id="@+id/rowDaysHead"
+                android:id="@+id/rowHostAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp">
 
                 <RelativeLayout
@@ -296,13 +307,45 @@
                     android:layout_height="wrap_content"
                     android:layout_span="2">
 
+                    <ImageView
+                        android:id="@+id/locationIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_location_on_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/hostAddressText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/TimeIcon"
+                        android:layout_marginLeft="64dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="123 Sri Lanka"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textsize_small"/>
+                </RelativeLayout>
+
+            </TableRow>
+            <TableRow
+                android:id="@+id/rowTravellingWith"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="2">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="Days"
+                        android:text="Travelling With"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/textsize_head1"
                         android:layout_alignParentLeft="true"
@@ -310,12 +353,35 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:id="@+id/travellingPersonView"
                         android:background="@drawable/circle_white_back"
                         android:src="@drawable/ic_arrow_forward_black_24dp"
-                        android:id="@+id/setDaysButton"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="8dp"
+                        />
+                </RelativeLayout>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/endTripButton">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="2">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="End Trip"
+                        android:textAlignment="center"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:id="@+id/endTrip"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/button_selector"
+                        android:layout_centerHorizontal="true"
+                        android:elevation="4dp"
+                        android:textColor="@android:color/white"
                         />
                 </RelativeLayout>
             </TableRow>

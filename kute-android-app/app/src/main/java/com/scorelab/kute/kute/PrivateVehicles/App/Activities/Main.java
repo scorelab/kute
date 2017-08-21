@@ -50,7 +50,6 @@ public class Main extends AppCompatActivity
         setContentView(R.layout.activity_main);
         route_request_number = (TextView) findViewById(R.id.numberRouteRequests);
         route_request=(ImageButton)findViewById(R.id.routeRequests);
-        search=(ImageButton)findViewById(R.id.searchIcon);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -114,16 +113,16 @@ public class Main extends AppCompatActivity
     private void setupProfileFragment()
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new UserSelfProfileFragment(), "UserSelfProfileFragment").commit();
-        search.setImageResource(R.drawable.ic_mode_edit_white_24dp);
+        route_request.setImageResource(R.drawable.ic_mode_edit_white_24dp);
         route_request_number.setVisibility(View.GONE);
-        route_request.setVisibility(View.GONE);
+
     }
 
     private void setupHomeFragment(){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
-        search.setImageResource(R.drawable.ic_search_white_24dp);
+        route_request.setImageResource(R.drawable.ic_search_white_24dp);
         route_request_number.setVisibility(View.VISIBLE);
-        route_request.setVisibility(View.VISIBLE);
+
     }
 
 }

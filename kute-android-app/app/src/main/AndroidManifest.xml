@@ -89,6 +89,17 @@
     <activity android:name=".PrivateVehicles.App.Activities.Travel.AddTrip"/>
     <activity android:name=".PrivateVehicles.App.Activities.Travel.GetSeatsInfo"/>
 
+    <service android:name=".PrivateVehicles.App.Services.MyFirebaseInstanceIDService">
+        <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+        </intent-filter>
+    </service>
+    <service android:name=".PrivateVehicles.App.Services.MyFirebaseMessagingService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        </intent-filter>
+    </service>
+
 </application>
 
 </manifest>

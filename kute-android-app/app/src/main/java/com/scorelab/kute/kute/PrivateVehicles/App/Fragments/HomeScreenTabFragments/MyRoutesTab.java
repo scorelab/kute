@@ -16,10 +16,12 @@ import android.widget.ProgressBar;
 
 
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Routes.AddRouteActivity;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Routes.SelfRouteDetailActivity;
 import com.scorelab.kute.kute.PrivateVehicles.App.Adapters.MyRoutesRecyclerAdapter;
 import com.scorelab.kute.kute.PrivateVehicles.App.AsyncTasks.LoadPersonRoutesAsyncTask;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Route;
 import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.AsyncTaskListener;
+import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.FragmentMail;
 import com.scorelab.kute.kute.R;
 
 import java.util.ArrayList;
@@ -28,10 +30,15 @@ import java.util.ArrayList;
  * Created by nipunarora on 06/06/17.
  */
 
-public class MyRoutesTab extends Fragment implements View.OnClickListener,AsyncTaskListener {
+public class MyRoutesTab extends Fragment implements View.OnClickListener,AsyncTaskListener,FragmentMail {
     private final String TAG = "MyRoutesTab";
+    private final int ROUTE_DELETE_CODE=10;
+    private final int ROUTE_DETAIL_CODE=100;
+    private final String ITEM_CLICK="ClickedRoute";
     ArrayList<Route> my_routes_list;
     RecyclerView my_routes_recycler;
+    int current_clicked_object;
+    Route current_clicked_route;
     View v;
     private final int add_route_activity_code=0x1;
     MyRoutesRecyclerAdapter recycler_adapter;
@@ -64,13 +71,13 @@ public class MyRoutesTab extends Fragment implements View.OnClickListener,AsyncT
         fab_add.setOnClickListener(this);
         pg=(ProgressBar)v.findViewById(R.id.progressBar);
         my_routes_recycler = (RecyclerView) v.findViewById(R.id.routeRecycler);
-        recycler_adapter = new MyRoutesRecyclerAdapter(my_routes_list,"My");
+        recycler_adapter = new MyRoutesRecyclerAdapter(my_routes_list,"My",this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         my_routes_recycler.setLayoutManager(mLayoutManager);
         my_routes_recycler.setItemAnimator(new DefaultItemAnimator());
         my_routes_recycler.setAdapter(recycler_adapter);
         routes_async_load=new LoadPersonRoutesAsyncTask(this);
-        routes_async_load.execute(getActivity().getSharedPreferences("user_credentials", 0).getString("Name", null));
+        routes_async_load.execute(getActivity().getSharedPreferences("user_credentials", 0).getString("Id", null));
     }
 
     @Override
@@ -101,6 +108,11 @@ public class MyRoutesTab extends Fragment implements View.OnClickListener,AsyncT
                 recycler_adapter.notifyItemInserted(recycler_adapter.getItemCount()+1);
             }
 
+        }else if(requestCode==ROUTE_DETAIL_CODE){
+            if (resultCode==ROUTE_DELETE_CODE){
+                my_routes_list.remove(current_clicked_object-1);
+                recycler_adapter.notifyItemRemoved(current_clicked_object);
+            }
         }
     }
     @Override
@@ -122,6 +134,20 @@ public class MyRoutesTab extends Fragment implements View.OnClickListener,AsyncT
         recycler_adapter.notifyItemRangeInserted(recycler_adapter.getItemCount(),my_routes_list.size());
         pg.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public void onReceive(String Source, String action, Object attachment) {
+        switch (action){
+            case ITEM_CLICK:
+                ArrayList<Object> list=(ArrayList<Object>) attachment;
+                current_clicked_object=(int)list.get(0);
+                current_clicked_route=(Route)list.get(1);
+                Intent i=new Intent(getContext(), SelfRouteDetailActivity.class);
+                i.putExtra("Route",current_clicked_route);
+                startActivityForResult(i,ROUTE_DETAIL_CODE);
+
+        }
     }
     /********** End of Overrides ******/
 }

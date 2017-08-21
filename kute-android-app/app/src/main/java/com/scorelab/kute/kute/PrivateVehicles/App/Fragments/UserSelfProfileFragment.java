@@ -24,6 +24,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.ProfilePictureActivity;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Person;
 import com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView;
@@ -73,7 +75,7 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        edit_icon=(ImageButton)getActivity().findViewById(R.id.searchIcon);//The Id is search icon because this image button is used for search in the homebase fragment
+        edit_icon=(ImageButton)getActivity().findViewById(R.id.routeRequests);//The Id is search icon because this image button is used for search in the homebase fragment
         edit_icon.setOnClickListener(this);
         pref=getApplicationContext().getSharedPreferences("user_credentials",0);
         profile_picture.setOnClickListener(this);
@@ -85,14 +87,14 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.searchIcon:
+            case R.id.routeRequests:
                 //Handle the logic for edit
                 if(is_edit_layout_drawn) {
                     Log.d("Status","We are in edit layout drawn");
                     setupDetailsLayout();
                     //Close the key Board if open
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    /*InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);*/
                     //toggle boolean for edit layout
                     is_edit_layout_drawn=false;
                 }
@@ -177,7 +179,7 @@ public class UserSelfProfileFragment extends Fragment implements View.OnClickLis
         other_details_string=other_details_edit.getText().toString();
         //save details to shared preferences
         saveToPrefs();
-        Person p=new Person(name_string,pref.getString("Id","null"),pref.getString("Profile_Image","null"));
+        Person p=new Person(name_string,pref.getString("Id","null"),pref.getString("Profile_Image","null"), FirebaseInstanceId.getInstance().getToken());
         p.completePersonDetail(occupation_string,other_details_string,contact_string,vehicle_string);
         return p;
     }

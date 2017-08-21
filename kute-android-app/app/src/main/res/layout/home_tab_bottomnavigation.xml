@@ -24,6 +24,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
                     android:text="Trips"
+                    android:layout_gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="20sp" />
                 <android.support.v7.widget.AppCompatButton
@@ -36,7 +37,8 @@
                     android:id="@+id/viewallTrips"
                     android:fontFamily="sans-serif-condensed"
                     android:background="@null"
-                    android:paddingRight="4dp"/>
+                    android:paddingRight="4dp"
+                    android:visibility="gone"/>
             </TableRow>
              <TableRow android:layout_height="wrap_content"
                  android:layout_width="match_parent">
@@ -52,6 +54,7 @@
                      android:layout_height="wrap_content"
                      android:layout_width="match_parent"
                      android:text="Starred Routes"
+                     android:layout_gravity="center_vertical"
                      android:textColor="#000000"
                      android:fontFamily="sans-serif-condensed"
                      android:textSize="20sp"/>
@@ -68,41 +71,13 @@
                      android:paddingRight="4dp"/>
              </TableRow>
              <TableRow android:layout_height="wrap_content"
-                 android:layout_width="match_parent">
+                 android:layout_width="match_parent"
+                 android:paddingBottom="48dp">
                  <FrameLayout
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:layout_span="2"
                      android:id="@+id/strarredRouteFrame"/>
-             </TableRow>
-             <TableRow android:layout_height="wrap_content"
-                 android:layout_width="match_parent">
-                 <TextView
-                     android:layout_height="wrap_content"
-                     android:layout_width="match_parent"
-                     android:text="Suggested Friends"
-                     android:fontFamily="sans-serif-condensed"
-                     android:textColor="#000000"
-                     android:textSize="20sp"/>
-               <android.support.v7.widget.AppCompatButton
-                   android:layout_height="wrap_content"
-                   android:layout_width="wrap_content"
-                   android:textSize="15sp"
-                   android:textAlignment="viewEnd"
-                   android:layout_gravity="end"
-                   android:id="@+id/viewallSuggestedfriends"
-                   android:text="View All"
-                   android:fontFamily="sans-serif-condensed"
-                   android:background="@null"
-                   android:paddingRight="4dp"/>
-             </TableRow>
-             <TableRow android:layout_height="wrap_content"
-                 android:layout_width="match_parent">
-                 <FrameLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_span="2"
-                     android:id="@+id/suggestedFriendsFrame"/>
              </TableRow>
         </TableLayout>
     </ScrollView>

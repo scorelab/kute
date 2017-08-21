@@ -34,14 +34,16 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final String TAG = "FriendRecyclerAdapter";
     Context mcontext;
     RecyclerItemClick item_click_handler;
+    String source;
 
 
     /**************** Constructor ****/
-    public FriendRecyclerAdapter(ArrayList<Person> data_source, Context context, RecyclerItemClick item_click_handler)//
+    public FriendRecyclerAdapter(String source1,ArrayList<Person> data_source, Context context, RecyclerItemClick item_click_handler)//
     {
         this.data_source = data_source;
         this.mcontext = context;
         this.item_click_handler = item_click_handler;
+        this.source=source1;
 
     }
     /******** End of Constructor ******/
@@ -120,7 +122,7 @@ public class FriendRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     private void configureRecyclerHead(HeaderRecyclerViewHolder vh) {
-        vh.title.setText("Current Friends");
+        vh.title.setText(source);
         vh.head_image.setBackgroundResource(R.drawable.community);
     }
     /******** End of Configuring of view holders ***************/
