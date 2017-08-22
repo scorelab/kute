@@ -43,18 +43,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             {
                 JSONObject data=new JSONObject(remoteMessage.getData());
                 messagebody=data.getString("Message");
-                imageurl=data.getString("image");
+                //imageurl=data.getString("image");
             }
             catch (Exception e)
             {
                 Log.d("Json Exception",e.toString());
                 messagebody=null;
-                imageurl=null;
+                //imageurl=null;
             }
             sendBigNotification(messagebody);
-
-
-
         }
 
         //***************** CHECK TO SEE IF THERE IS A NOTIFICATION *********************//
@@ -66,6 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             sendBigNotification(remoteMessage.getNotification().getBody());
         }
     }
+
     @TargetApi(16)
     private void sendBigNotification(String messageBody) {
         Intent intent = new Intent(this, Main.class);
@@ -73,7 +71,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-
+        Log.d(TAG,"The message body is :"+messageBody);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_directions_car_white_24dp);
         Bitmap image= BitmapFactory.decodeResource(getResources(), R.drawable.auto);
@@ -84,7 +82,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                  .setSmallIcon(R.drawable.ic_people_black_24dp)
                 .setLargeIcon(Icon)
                  .setContentTitle("KUTE")
-                 .setContentText("Trip Matched..!")
+                 .setContentText(messageBody)
                 .setPriority(Notification.PRIORITY_MAX)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)
