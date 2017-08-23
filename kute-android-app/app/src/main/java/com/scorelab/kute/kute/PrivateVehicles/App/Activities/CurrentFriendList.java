@@ -35,6 +35,7 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
     ProgressBar progressBar;
     boolean is_async_task_running=false;// A boolean created to prevent a new asynctask being created everytime we scroll down
     LoadFirebaseFriends load_friends_async;
+    String source;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,11 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
 
         person_list = (ArrayList<String>)getIntent().getSerializableExtra("FriendList");
         person_detail_list=(ArrayList<Person>) getIntent().getSerializableExtra("FriendDetailList");
+        source=(String) getIntent().getSerializableExtra("Source");
+        if(source.equals("Trip"))
+            recycler_adapter = new FriendRecyclerAdapter("Travelling With",person_detail_list, this, this);
+        else
+            recycler_adapter = new FriendRecyclerAdapter("Current Friends",person_detail_list, this, this);
         /************** Initialise the views *********/
         //TODO get friends from facebook and google and get their images
         Log.d(TAG,"The length of the person list is:"+Integer.toString(person_list.size()));
@@ -54,7 +60,7 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
             }
         });
         friend_recycler = (RecyclerView) findViewById(R.id.personRecycler);
-        recycler_adapter = new FriendRecyclerAdapter(person_detail_list, this, this);
+
         final android.support.v7.widget.LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         friend_recycler.setLayoutManager(mLayoutManager);
         friend_recycler.setItemAnimator(new DefaultItemAnimator());
@@ -64,17 +70,21 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
             public void onScrolled(RecyclerView recyclerView,
                                    int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                visibleItemCount[0] = mLayoutManager.getChildCount();//Gives the number of children currently on the screen
-                totalItemCount[0] = mLayoutManager.getItemCount();//gives total items of recycler view
-                pastVisiblesItems[0] = mLayoutManager.findFirstVisibleItemPosition();//gives the index of item at the top of the screen
-                Log.d("Recycler",String.format("visible %d past visible %d total %d",visibleItemCount[0],pastVisiblesItems[0],totalItemCount[0]));
-                if ((visibleItemCount[0] + pastVisiblesItems[0]) >= totalItemCount[0]&& visibleItemCount[0]!=totalItemCount[0] ) {
-                    if(mLayoutManager.findLastCompletelyVisibleItemPosition()==recycler_adapter.getItemCount()-1 /*&& recycleradapter.getItemCount()>5 You have your ofset values here*/){
-                        //************************* Reached the End of recycler View ***********/
-                        Log.d(TAG,"reached the Bottom");
-                        //******************** Call The function to load more data *********//
-                        loadRecyclerItems(recycler_adapter.getItemCount()-1);
+                try {
+                    visibleItemCount[0] = mLayoutManager.getChildCount();//Gives the number of children currently on the screen
+                    totalItemCount[0] = mLayoutManager.getItemCount();//gives total items of recycler view
+                    pastVisiblesItems[0] = mLayoutManager.findFirstVisibleItemPosition();//gives the index of item at the top of the screen
+                    Log.d("Recycler", String.format("visible %d past visible %d total %d", visibleItemCount[0], pastVisiblesItems[0], totalItemCount[0]));
+                    if ((visibleItemCount[0] + pastVisiblesItems[0]) >= totalItemCount[0] && visibleItemCount[0] != totalItemCount[0]) {
+                        if (mLayoutManager.findLastCompletelyVisibleItemPosition() == recycler_adapter.getItemCount() - 1 /*&& recycleradapter.getItemCount()>5 You have your ofset values here*/) {
+                            //************************* Reached the End of recycler View ***********/
+                            Log.d(TAG, "reached the Bottom");
+                            //******************** Call The function to load more data *********//
+                            loadRecyclerItems(recycler_adapter.getItemCount() - 1);
+                        }
                     }
+                }catch (Exception e){
+                    Log.d(TAG,"Exception in OnScroll "+e.toString());
                 }
             }
         });

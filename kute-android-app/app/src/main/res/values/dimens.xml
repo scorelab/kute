@@ -15,4 +15,6 @@
     <dimen name="dots_height">50dp</dimen>
     <dimen name="dots_margin_bottom">20dp</dimen>
     <dimen name="margin_top_signup_btn">20dp</dimen>
+    <dimen name="button_height">80dp</dimen>
+    <dimen name="button_width">80dp</dimen>
 </resources>

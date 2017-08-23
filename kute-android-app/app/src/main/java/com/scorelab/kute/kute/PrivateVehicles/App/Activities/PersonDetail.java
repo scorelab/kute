@@ -230,7 +230,7 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
     //setting up the routes detail of a person
     private void setupRoutesRow(){
         load_routes=new LoadPersonRoutesAsyncTask(this);
-        load_routes.execute(p.name);
+        load_routes.execute(p.id);
         view_all_routes=(AppCompatButton)findViewById(R.id.viewAllRoutes);
         view_all_routes.setOnClickListener(this);
         view_all_routes.setEnabled(false);

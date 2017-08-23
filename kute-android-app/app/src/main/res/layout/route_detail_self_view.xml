@@ -60,15 +60,37 @@
                         android:layout_span="2"
                         android:background="@color/apptheme"
                         android:paddingBottom="10dp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/routeName">
                         <TextView
-                            android:id="@+id/routeName"
+                            android:id="@+id/routeNameText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:fontFamily="sans-serif-condensed"
                             android:text="Home Office"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/textsize_head2" />
+                            android:textSize="@dimen/textsize_head2"
+                            />
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/routeNameEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Home Office"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textsize_head2"
+                            android:hint="Route Name"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            app:backgroundTint="@android:color/white"
+                            android:textCursorDrawable="@drawable/edittext_cursor_white"
+                            android:visibility="gone"/>
+                        </RelativeLayout>
 
                         <android.support.v7.widget.AppCompatImageView
                             android:layout_width="wrap_content"
@@ -79,32 +101,65 @@
                             android:id="@+id/routeLogo"
                             android:background="@drawable/route5"
                             />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/routeLogo"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/utilityButtos">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_event_seat_white_24dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="16dp"
+                                android:id="@+id/seatIcon"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/noSeats"
+                                android:textSize="@dimen/textsize_small"
+                                android:layout_toRightOf="@+id/seatIcon"
+                                android:textColor="@android:color/white"
+                                android:layout_marginLeft="16dp"
+                                android:text="4"
+                                android:layout_centerVertical="true"
+
+                                />
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/noSeatEdit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed"
+                                android:layout_toRightOf="@+id/seatIcon"
+                                android:text="4"
+                                android:layout_marginLeft="16dp"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/textsize_small"
+                                android:hint="No of Seats"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                app:backgroundTint="@android:color/white"
+                                android:textCursorDrawable="@drawable/edittext_cursor_white"
+                                android:visibility="gone"/>
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/deleteRoute"
+                                android:textSize="@dimen/textsize_xsmall"
+                                android:drawableLeft="@drawable/ic_delete_white_24dp"
+                                android:text="Delete"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="16dp"
+                                android:background="@drawable/button_selector"
+                                android:textColor="@android:color/white"
+                                style="?android:attr/borderlessButtonStyle"/>
+                        </RelativeLayout>
 
 
                     </RelativeLayout>
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/rowFromHead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif-condensed"
-                            android:text="From"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/textsize_head1" />
-                    </LinearLayout>
                 </TableRow>
 
                 <TableRow
@@ -112,86 +167,86 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="16dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_span="2">
-
-                        <ImageView
-                            android:id="@+id/start"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/flight_takeoff_black_24x24" />
+                        android:layout_marginRight="16dp"
+                        android:layout_span="2"
+                        >
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="From"
+                            android:textSize="@dimen/textsize_small"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-condensed"
+                            android:id="@+id/fromHead"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                        <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/startPlace"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/start"
                             android:layout_marginLeft="64dp"
                             android:fontFamily="sans-serif-condensed"
-                            android:text="Anuradhapura"
+                            android:hint="Start Point"
+                            android:layout_marginRight="4dp"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/textsize_small" />
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            />
                     </RelativeLayout>
 
                 </TableRow>
-                <TableRow android:id="@+id/rowTOHead"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="To"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/textsize_head1" />
-                </LinearLayout>
-            </TableRow>
                 <TableRow
                     android:id="@+id/rowDestination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="32dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
                         android:layout_span="2">
 
-                        <ImageView
-                            android:id="@+id/destinationIcon"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="To"
+                            android:textSize="@dimen/textsize_small"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-condensed"
+                            android:id="@+id/toHead"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/flight_land_black_24x24" />
+                            android:layout_marginLeft="5dp"
+                            />
 
-                        <TextView
+
+                        <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/destination"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/destinationIcon"
                             android:layout_marginLeft="64dp"
+                            android:layout_marginRight="4dp"
                             android:fontFamily="sans-serif-condensed"
-                            android:text="Dambula"
+                            android:hint="To"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/textsize_small" />
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            />
                     </RelativeLayout>
 
                 </TableRow>
+
+
                 <TableRow android:id="@+id/rowtimeHead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -270,6 +325,7 @@
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:id="@+id/daysSelect"
                             android:background="@drawable/circle_white_back"
                             android:src="@drawable/ic_arrow_forward_black_24dp"
                             android:layout_alignParentRight="true"
@@ -294,32 +350,6 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/startTrip"
                             android:layout_margin="16dp"
-                            android:background="@drawable/button_selector"
-                            android:layout_centerHorizontal="true"
-                            android:elevation="4dp"
-                            android:textColor="@android:color/white"
-                            />
-                    </RelativeLayout>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/deleteRoute">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_span="2">
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Delete"
-                            android:textAlignment="center"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:id="@+id/routeDelete"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="16dp"
                             android:background="@drawable/button_selector"
                             android:layout_centerHorizontal="true"
                             android:elevation="4dp"

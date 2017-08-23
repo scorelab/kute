@@ -1,0 +1,34 @@
+Metadata-Version: 2.0
+Name: geopy
+Version: 1.11.0
+Summary: Python Geocoding Toolbox
+Home-page: https://github.com/geopy/geopy
+Author: GeoPy Contributors
+Author-email: uijllji@gmail
+License: MIT
+Download-URL: https://github.com/geopy/geopy/archive/1.11.0.tar.gz
+Keywords: geocode geocoding gis geographical maps earth distance
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering :: GIS
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Provides-Extra: placefinder
+Requires-Dist: requests-oauthlib (>=0.4.0); extra == 'placefinder'
+Provides-Extra: timezone
+Requires-Dist: pytz; extra == 'timezone'
+
+UNKNOWN
+
+

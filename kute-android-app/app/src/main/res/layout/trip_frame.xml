@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    custom:cardCornerRadius="2dp"
+    android:background="@color/cardview_light_background"
+    custom:cardElevation="2dp"
+    custom:cardUseCompatPadding="true"
+    android:layout_span="2"
+    android:id="@+id/mainCard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical" android:layout_width="match_parent"
+                      android:layout_height="0dp"
+                      android:layout_weight="0.2"
+                      android:background="@color/apptheme"
+            android:visibility="gone"
+            android:id="@+id/headerNetLayout">
+            <TextView
+                android:id="@+id/headerNet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:textSize="@dimen/textsize_head1"
+                android:text="Trip"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                />
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/tripHeadNet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp"
+                android:background="@drawable/tripicon" />
+
+
+
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/apptheme"
+            android:id="@+id/headerLayout">
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:textSize="@dimen/textsize_head1"
+                android:text="Trip"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                />
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/tripHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp"
+                android:background="@drawable/tripicon" />
+
+
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:id="@+id/addressLayout"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textFrom"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="4dp"
+                android:text="Uttam Nagar West Metro"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                android:maxEms="5"
+                android:maxWidth="140dp"
+
+                />
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/offset"/>
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:id="@+id/arrow"
+                android:layout_toRightOf="@+id/offset"
+                android:background="@drawable/arrow"
+                android:layout_margin="4dp"
+                />
+            <TextView
+                android:id="@+id/textTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="4dp"
+                android:text="Rohini West Metro Station"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:textSize="@dimen/textsize_small"
+                android:maxEms="5"
+                android:maxWidth="140dp"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/hostNameLayout"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lastTravelTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Host :"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/hostName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Nipun Arora"
+                android:layout_toRightOf="@+id/lastTravelTitle"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@android:color/black"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:id="@+id/hostAddressLayout"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/hostAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="8dp"
+                android:text="Host Location:"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/hostAddressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_toRightOf="@+id/hostAddress"
+                android:text="D-14/148 Rohini Sector 7 New Delhi 110059"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/startTimeLayout"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Start Time:"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/startTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="14:30"
+                android:layout_toRightOf="@+id/startTime"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@android:color/black"
+                />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/excuseTextLayout"
+            android:visibility="visible"
+            android:layout_margin="16dp">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/excuseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Loading ......."
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@android:color/black"
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

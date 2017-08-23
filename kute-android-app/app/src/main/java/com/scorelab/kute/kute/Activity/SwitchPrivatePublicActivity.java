@@ -21,6 +21,8 @@ import com.facebook.HttpMethod;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.scorelab.kute.kute.LandActivity;
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.InitialDetailDialogs;
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Main;
@@ -96,7 +98,7 @@ public class SwitchPrivatePublicActivity extends AppCompatActivity implements Vi
     /**************** Custom Functions Invoked only once on app installation *******/
 
     public void registerFirebaseDbSelf(final SharedPreferences pref) {
-        Person temp = new Person(pref.getString("Name", null), pref.getString("Id", null), pref.getString("Profile_Image", null));
+        Person temp = new Person(pref.getString("Name", null), pref.getString("Id", null), pref.getString("Profile_Image", null), FirebaseInstanceId.getInstance().getToken());
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
         DatabaseReference users = root.child("Users");
         Log.d(TAG, "Saving Self To db");

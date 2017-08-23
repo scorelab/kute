@@ -43,45 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2">
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Friend Requests"
-                android:textColor="#000000"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="20sp"
-                android:layout_centerVertical="true"/>
-            <android.support.v7.widget.AppCompatButton
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:layout_centerVertical="true"
-                android:text="View All"
-                android:id="@+id/viewallFriendrequests"
-                android:fontFamily="sans-serif-condensed"
-                android:background="@null"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="2dp"/>
-            </RelativeLayout>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="2"
-                android:id="@+id/friendRequestsFrame"/>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="2dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="2">
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"

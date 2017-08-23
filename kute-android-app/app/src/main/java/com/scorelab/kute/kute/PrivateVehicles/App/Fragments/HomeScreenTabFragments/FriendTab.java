@@ -59,7 +59,6 @@ public class FriendTab extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG,"onACtivityCreated");
-        getChildFragmentManager().beginTransaction().replace(R.id.friendRequestsFrame,new FriendFrame()).commit();
         getChildFragmentManager().beginTransaction().replace(R.id.currentFriendsFrame,new PlaceHolderFragment()).commit();
     }
 
@@ -70,6 +69,7 @@ public class FriendTab extends Fragment implements View.OnClickListener {
             case R.id.viewallCurrentfriends:Intent i =new Intent(getContext(), CurrentFriendList.class);
                 i.putExtra("FriendList",friendslist);
                 i.putExtra("FriendDetailList",friend_detail_list);
+                i.putExtra("Source","Friends");
                 startActivity(i);
              //TODO handle the viewall for friend requests as well
         }

@@ -11,13 +11,16 @@ import android.widget.CompoundButton;
 
 
 import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Routes.RouteDetail;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Routes.SelfRouteDetailActivity;
 import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Route;
+import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.FragmentMail;
 import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.RecyclerItemClick;
 import com.scorelab.kute.kute.PrivateVehicles.App.ViewHolders.HeaderRecyclerViewHolder;
 import com.scorelab.kute.kute.PrivateVehicles.App.ViewHolders.MyRoutesItemViewHolder;
 import com.scorelab.kute.kute.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by nipunarora on 10/06/17.
@@ -26,9 +29,11 @@ import java.util.ArrayList;
 public class MyRoutesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyRoutesItemViewHolder.RecyclerClick {
     private static final int header = 7;
     private final String TAG="MyRoutesRecycler";
+    private final String ITEM_CLICK="ClickedRoute";
     private static final int general_list_item=77;
     private String header_banner;
     private ArrayList<Route> data_source;
+    FragmentMail mailer;
 
 
     /**************** Constructor ****/
@@ -36,6 +41,14 @@ public class MyRoutesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         this.data_source = data_source;
         this.header_banner=banner_header;
     }
+    public MyRoutesRecyclerAdapter(ArrayList<Route> data_source, String banner_header, FragmentMail mailer1) {
+        this.data_source = data_source;
+        this.header_banner=banner_header;
+        this.mailer=mailer1;
+
+    }
+
+
     /******** End of Constructor ******/
 
     /******************* Overrides ******/
@@ -89,17 +102,29 @@ public class MyRoutesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onRecyclerClick(int position, Context c) {
-        Intent i = new Intent(c, RouteDetail.class);
-        i.putExtra("Route", data_source.get(position-1));
-        c.startActivity(i);
+        Intent i;
+        if(header_banner.equals("My")) {
+            if(mailer!=null) {
+                ArrayList<Object> d=new ArrayList<Object>();
+                d.add(position);
+                d.add(data_source.get(position - 1));
+                mailer.onReceive("",ITEM_CLICK,d);
+            }
+
+        }
+        else {
+            i = new Intent(c, RouteDetail.class);
+            i.putExtra("Route", data_source.get(position - 1));
+            c.startActivity(i);
+        }
     }
     /***************** End of Overrides *************/
     /************ Configuring View Holders ****************/
     private void configureGeneralItem(final MyRoutesItemViewHolder vh, final int position)
     {
         Route m=data_source.get(position-1);
-        vh.from.setText(m.getSource());
-        vh.to.setText(m.getDestination());
+        vh.from.setText(m.source_name);
+        vh.to.setText(m.destination_name);
         vh.no_of_seats.setText(m.getSeats_available().toString());
         if(m.getIs_starred()!=null) {
             vh.is_starred.setChecked(m.getIs_starred());

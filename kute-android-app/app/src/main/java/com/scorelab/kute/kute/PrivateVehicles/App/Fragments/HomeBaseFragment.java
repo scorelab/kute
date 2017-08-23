@@ -1,23 +1,31 @@
 package com.scorelab.kute.kute.PrivateVehicles.App.Fragments;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,9 +39,11 @@ import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeScreenTabFragmen
 import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeScreenTabFragments.HomeTab;
 import com.scorelab.kute.kute.PrivateVehicles.App.Fragments.HomeScreenTabFragments.MyRoutesTab;
 import com.scorelab.kute.kute.PrivateVehicles.App.Interfaces.AsyncTaskListener;
+import com.scorelab.kute.kute.PrivateVehicles.App.Miscelleneous.FabMenu;
 import com.scorelab.kute.kute.PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase;
 import com.scorelab.kute.kute.R;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 
@@ -62,6 +72,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View
     int start_index_async,last_index_async;
     boolean is_async_task_running=false;// A boolean created to prevent a new asynctask being created everytime we scroll down
     LoadFirebaseFriends load_friends_async;
+
 
 
     /***************************** Default Constructor ****************/
@@ -153,7 +164,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View
         } else {
             getFirebaseFriend();
         }
-        ImageButton edit_icon=(ImageButton)getActivity().findViewById(R.id.searchIcon);//The Id is search icon because this image button is used for search in the homebase fragment
+        ImageButton edit_icon=(ImageButton)getActivity().findViewById(R.id.routeRequests);//The Id is search icon because this image button is used for search in the homebase fragment
         edit_icon.setOnClickListener(this);
 
     }
@@ -169,7 +180,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.searchIcon:
+            case R.id.routeRequests:
                 break;
         }
     }
@@ -338,5 +349,7 @@ public class HomeBaseFragment extends Fragment implements AsyncTaskListener,View
         }
         fragmentTransaction.commit();
     }
+
 }
+
 
