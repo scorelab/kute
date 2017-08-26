@@ -38,6 +38,7 @@ public class TripFrame extends Fragment implements View.OnClickListener {
     private final String ACTION_ADDRESS_UPDATED="ADDRESSUPDATED";
 
     private final int TRIP_DETAIL_ACTIVITY=711;
+    private final int END_TRIP=111;
     ArrayList<Person> travelling_with=null;
     boolean trip_found=false;
     CardView main_card;
@@ -77,6 +78,14 @@ public class TripFrame extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==TRIP_DETAIL_ACTIVITY && resultCode==END_TRIP){
+            toggleGenericTripViews(false);
+        }
+    }
+
     /************************** Custom functions **********************/
     public void onReceive(String Action,Object attachments){
         switch(Action){
@@ -106,15 +115,26 @@ public class TripFrame extends Fragment implements View.OnClickListener {
         time_text=(TextView)v.findViewById(R.id.startTimeText);
     }
 
-    private void toggleGenericTripViews(){
-        //remove the current views
-        header_layout.setVisibility(View.GONE);
-        excuse_text_layout.setVisibility(View.GONE);
+    private void toggleGenericTripViews(boolean check){
+        if(check) {
+            //remove the current views
+            header_layout.setVisibility(View.GONE);
+            excuse_text_layout.setVisibility(View.GONE);
+            //enable other views
+            header_net_layout.setVisibility(View.VISIBLE);
+            address_layout.setVisibility(View.VISIBLE);
+            time_layout.setVisibility(View.VISIBLE);
+        }else {
+            header_net_layout.setVisibility(View.GONE);
+            address_layout.setVisibility(View.GONE);
+            time_layout.setVisibility(View.GONE);
 
-        //enable other views
-        header_net_layout.setVisibility(View.VISIBLE);
-        address_layout.setVisibility(View.VISIBLE);
-        time_layout.setVisibility(View.VISIBLE);
+            header_layout.setVisibility(View.VISIBLE);
+            excuse_text_layout.setVisibility(View.VISIBLE);
+            excuse_text.setText("You do not have an active trip right now \n Start A New Trip from \n My Routes Tab or from the button below");
+            //enable other views
+
+        }
 
     }
 
@@ -132,6 +152,8 @@ public class TripFrame extends Fragment implements View.OnClickListener {
             excuse_text.setText("You do not have an active trip right now \n Start A New Trip from \n My Routes Tab or from the button below");
         }
         else{
+            connectAuxillaryViews();
+            toggleGenericTripViews(true);
             trip_found=true;
             HashMap<String,Object> data= (HashMap<String,Object>)trip_map;
             Trip trip_object=(Trip)data.get("Trip");
@@ -149,11 +171,15 @@ public class TripFrame extends Fragment implements View.OnClickListener {
 
 
             //Setup time
-            time_text.setText(trip_object.getTime());
+            if(!trip_object.getTime().equals("7"))
+                time_text.setText(trip_object.getTime());
+            else {
+                time_layout.setVisibility(View.GONE);
+
+            }
 
             //Connect the auxillary views
-            connectAuxillaryViews();
-            toggleGenericTripViews();
+
             //Setup host name if not a host
             if(!trip_object.getIsOwner()){
                 host_name.setText(trip_object.getOwner_string());

@@ -221,13 +221,14 @@ public class HomeTab extends Fragment implements View.OnClickListener,AsyncTaskL
     //Send Messages to Trip Frame
     private void sendMessageToTripFrame(String Action,Object attachments) {
 
-        try {
+
             TripFrame fragment =
                     (TripFrame) getChildFragmentManager().findFragmentByTag("TripFrame");
             fragment.onReceive(Action,attachments);
-        } catch (Exception e) {
-            Log.d(TAG,"Exception in Send Message to trip frame :"+e.toString());
-        }
+            Log.d(TAG,"Message to trip frame fragment sent");
+
+            //Log.d(TAG,"Exception in Send Message to trip frame :"+e.toString());
+
 
 
     }

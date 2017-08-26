@@ -63,8 +63,8 @@ public class RouteFrame extends Fragment {
             });
             //Set Content to views
             route_name.setText(route.getName());
-            from.setText(route.getSource());
-            to.setText(route.getDestination());
+            from.setText(route.source_name);
+            to.setText(route.destination_name);
             number_seats.setText(Integer.toString(route.getSeats_available()));
         }catch (Exception e){
             Log.i(TAG,e.toString());

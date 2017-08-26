@@ -88,6 +88,10 @@
     </activity>
     <activity android:name=".PrivateVehicles.App.Activities.Travel.AddTrip"/>
     <activity android:name=".PrivateVehicles.App.Activities.Travel.GetSeatsInfo"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Utils.NotificationActivity"
+              android:exported="true">
+        </activity>
+    <activity android:name=".PrivateVehicles.App.Activities.Travel.TripDetail"/>
 
     <service android:name=".PrivateVehicles.App.Services.MyFirebaseInstanceIDService">
         <intent-filter>

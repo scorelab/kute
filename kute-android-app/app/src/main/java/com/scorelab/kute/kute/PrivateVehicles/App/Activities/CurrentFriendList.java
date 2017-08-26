@@ -50,7 +50,7 @@ public class CurrentFriendList extends AppCompatActivity implements RecyclerItem
             recycler_adapter = new FriendRecyclerAdapter("Current Friends",person_detail_list, this, this);
         /************** Initialise the views *********/
         //TODO get friends from facebook and google and get their images
-        Log.d(TAG,"The length of the person list is:"+Integer.toString(person_list.size()));
+        //Log.d(TAG,"The length of the person list is:"+Integer.toString(person_list.size()));
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
         back = (ImageButton) findViewById(R.id.backNav);
         back.setOnClickListener(new View.OnClickListener() {

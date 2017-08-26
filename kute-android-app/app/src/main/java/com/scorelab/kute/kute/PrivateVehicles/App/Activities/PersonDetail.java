@@ -210,15 +210,20 @@ public class PersonDetail extends AppCompatActivity implements View.OnClickListe
         }
         if (p.occupation != null) {
             occupation.setText(p.occupation);
+
+        } else {
+            occupation_row.setVisibility(View.INVISIBLE);
+
+
+        }
+        if(p.contact_phone!=null){
             contact_phone.setText(p.contact_phone);
             vehicle.setText(p.vehicle);
             other_details.setText(p.other_details);
-        } else {
-            occupation_row.setVisibility(View.INVISIBLE);
+        }else {
             vehicle_row.setVisibility(View.GONE);
             contact_row.setVisibility(View.GONE);
             no_info_row.setVisibility(View.VISIBLE);
-
         }
         mImageLoader = VolleySingleton.getInstance(this).getImageLoader();
         String img_url = String.format("https://graph.facebook.com/%s/picture?type=normal", p.id);

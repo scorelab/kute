@@ -15,6 +15,7 @@ def isRouteCompatible(source_owner,destination_owner,source_rider,destination_ri
 	url2="https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=AIzaSyAacNLiHHRaHxA___8h9cvTgtrqLfHEOUQ"%(source_rider,destination_rider)
 	re_2=requests.get(url2)
 	route_2_polyline=json.loads(re_2.text)["routes"][0]["overview_polyline"]["points"]
+	route_2_polyline=json.loads(re_2.text)["routes"][0]["overview_polyline"]["points"]
 	re_2_list=polyline.decode(route_2_polyline)
 
 
@@ -37,7 +38,10 @@ def isRouteCompatible(source_owner,destination_owner,source_rider,destination_ri
 	####### Calculating the offset from the first and last point #############
 	########### initial offset ###############
 	initial_offset=vincenty(re_2_list[0],matched_points[0]).miles * 1.6
-
+	print re_2_list[0]
+	print matched_points[0]
+	print re_2_list[len(re_2_list)-1]
+	print matched_points[len(matched_points)-1]
 	final_offset=vincenty(re_2_list[len(re_2_list)-1],matched_points[len(matched_points)-1]).miles * 1.6
 
 	print "The initial distance is ",initial_offset
