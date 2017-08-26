@@ -345,7 +345,7 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
                 source_address=place.getAddress().toString();
             }
             else if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_DESTINATION) {
-                destination_string=place.getAddress().toString();
+                destination_string=place.getName().toString();
                 destination_text.setText(destination_string);
                 destination_cords=Double.toString(place.getLatLng().latitude)+","+Double.toString(place.getLatLng().longitude);
                 destination_address=place.getAddress().toString();

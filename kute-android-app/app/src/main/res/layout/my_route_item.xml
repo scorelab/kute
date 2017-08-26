@@ -8,6 +8,7 @@
     custom:cardUseCompatPadding="true"
     android:layout_margin="4dp"
     android:id="@+id/routeCard"
+    android:paddingBottom="16dp"
     >
 
     <LinearLayout
@@ -110,6 +111,9 @@
                 android:layout_margin="8dp"
                 android:text="0"
                 android:layout_toRightOf="@+id/seatIcon"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
                 android:textSize="20sp"
                 />
 
