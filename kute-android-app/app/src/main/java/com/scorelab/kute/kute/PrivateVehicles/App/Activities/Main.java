@@ -63,7 +63,7 @@ public class Main extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         /******************************* End Of Drawer Setup **************************/
         /********************* Load Home Base Fragment**********/
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
+       setupHomeFragment();
         navigationView.setCheckedItem(R.id.Home);
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("user_credentials", 0); // 0 - for private mode
         Log.d("SharedPreference", pref.getString("Profile_Image", null));
@@ -114,14 +114,17 @@ public class Main extends AppCompatActivity
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new UserSelfProfileFragment(), "UserSelfProfileFragment").commit();
         route_request.setImageResource(R.drawable.ic_mode_edit_white_24dp);
+        route_request.setVisibility(View.VISIBLE);
         route_request_number.setVisibility(View.GONE);
 
     }
 
     private void setupHomeFragment(){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameDrawer, new HomeBaseFragment(), "HomeBaseFragment").commit();
-        route_request.setImageResource(R.drawable.ic_search_white_24dp);
-        route_request_number.setVisibility(View.VISIBLE);
+        /*route_request.setImageResource(R.drawable.ic_search_white_24dp);
+        route_request_number.setVisibility(View.VISIBLE);*/
+        route_request.setVisibility(View.GONE);
+        route_request_number.setVisibility(View.GONE);
 
     }
 

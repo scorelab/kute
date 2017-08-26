@@ -18,8 +18,13 @@ public class Trip implements Serializable{
     String owner_string; // This string would contain the name of the owner in case the user is not the owner that is the above boolean is 0
     ArrayList<String> travelling_with;
     String owner_address;
+    int no_of_seats;
+
+    public Trip() {
+    }
 
     /************************** Constructor ****************/
+
     public Trip(String route_id, Boolean owner, String owner_string,String time1) {
         this.route_id = route_id;
         this.is_owner = owner;
@@ -37,6 +42,27 @@ public class Trip implements Serializable{
         this.time = time;
         this.is_owner = owner;
         this.owner_string = owner_string;
+    }
+    public Trip(String source_address, String destination_address, String source_name, String destination_name, String source_cords, String destination_cords, String time, Boolean owner) {
+        this.source_address = source_address;
+        this.destination_address = destination_address;
+        this.source_name = source_name;
+        this.destination_name = destination_name;
+        this.source_cords = source_cords;
+        this.destination_cords = destination_cords;
+        this.time = time;
+        this.is_owner = owner;
+    }
+    public Trip(String source_address, String destination_address, String source_name, String destination_name, String source_cords, String destination_cords, String time, Boolean owner,int no_seats) {
+        this.source_address = source_address;
+        this.destination_address = destination_address;
+        this.source_name = source_name;
+        this.destination_name = destination_name;
+        this.source_cords = source_cords;
+        this.destination_cords = destination_cords;
+        this.time = time;
+        this.is_owner = owner;
+        this.no_of_seats=no_seats;
     }
 
     /************************* Getters and Setters **************************/

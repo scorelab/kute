@@ -49,43 +49,47 @@ public class LoadTripAsyncTask extends AsyncTask<String,Void,Void> {
                     listener.onTaskCompleted(null);
                     Log.d(TAG,"NO trips found");
                 }else {
-                    Log.d(TAG,"Active Trip Found");
+                    Log.d(TAG, "Active Trip Found");
                     attachments.put("Trip", person_trip);
                     if (person_trip.getRoute_id() != null) {
+                        //The case when the given person is not the owner of the trip he is currently into.
+                        DatabaseReference route_ref = FirebaseDatabase.getInstance().getReference("Routes/" + person_trip.getOwner_string());
+                        route_ref.child(person_trip.getRoute_id()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Route route = dataSnapshot.getValue(Route.class);
+                                attachments.put("Route", route);
+                            }
 
-                            //The case when the given person is not the owner of the trip he is currently into.
-                            DatabaseReference route_ref = FirebaseDatabase.getInstance().getReference("Routes/" + person_trip.getOwner_string());
-                            route_ref.child(person_trip.getRoute_id()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                    //Retrieving all people travelling on that trip
+                    final ArrayList<Person> people_travelling_with = new ArrayList<Person>();
+                    final ArrayList<String> people_id = person_trip.getTravelling_with();
+                    DatabaseReference user_ref = FirebaseDatabase.getInstance().getReference("Users");
+                    if (people_id != null) {
+                        for (int i = 0; i < people_id.size(); ++i) {
+                            final int j = i;
+                            user_ref.child(people_id.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Route route = dataSnapshot.getValue(Route.class);
-                                    attachments.put("Route", route);
+                                    people_travelling_with.add(dataSnapshot.getValue(Person.class));
+                                    if (j == people_id.size() - 1) {
+                                        attachments.put("People", people_travelling_with);
+                                        listener.onTaskCompleted(attachments);
+                                    }
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                 }
                             });
-                    }
-                    //Retrieving all people travelling on that trip
-                    final ArrayList<Person> people_travelling_with=new ArrayList<Person>();
-                    final ArrayList<String> people_id=person_trip.getTravelling_with();
-                    DatabaseReference user_ref=FirebaseDatabase.getInstance().getReference("Users");
-                    for(int i=0;i<people_id.size();++i){
-                        final int j=i;
-                        user_ref.child(people_id.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                people_travelling_with.add(dataSnapshot.getValue(Person.class));
-                                if(j==people_id.size()-1){
-                                    attachments.put("People",people_travelling_with);
-                                    listener.onTaskCompleted(attachments);
-                                }
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
+                        }
+                    }else {
+                        listener.onTaskCompleted(attachments);
                     }
                 }
             }

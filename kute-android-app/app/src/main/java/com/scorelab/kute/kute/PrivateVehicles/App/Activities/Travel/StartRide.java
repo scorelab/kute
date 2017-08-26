@@ -2,11 +2,16 @@ package com.scorelab.kute.kute.PrivateVehicles.App.Activities.Travel;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -22,6 +27,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
@@ -38,8 +48,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Main;
+import com.scorelab.kute.kute.PrivateVehicles.App.Activities.Utils.NotificationActivity;
+import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Notification;
+import com.scorelab.kute.kute.PrivateVehicles.App.DataModels.Trip;
+import com.scorelab.kute.kute.PrivateVehicles.App.Utils.VolleySingleton;
 import com.scorelab.kute.kute.R;
+
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Locale;
 
 
 public class StartRide extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.OnConnectionFailedListener {
@@ -54,9 +76,15 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
     int PLACE_AUTOCOMPLETE_REQUEST_CODE_DESTINATION=02;
     ImageButton schedule_trip,back_nav;
     String destination_string,source_string;
-    LatLng destination_latlng,source_latlng;
+    String source_address,destination_address;
+    String destination_cords,source_cords;
+    HandlerThread reverse_geocode_thread;
+    Handler reverse_geocode_handler;
     Button action_button;
     String action;
+    ProgressDialog progress_dialog;
+    RequestQueue request_queue;
+    boolean is_progress_dialog_visible=false;
 
 
     //Overrides
@@ -68,12 +96,16 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        destination_string=null;
-        source_string=null;
-        destination_latlng=null;
-        source_latlng=null;
+        destination_string="null";
+        source_string="null";
+        source_cords="null";
+        destination_cords="null";
         CoordinatorLayout root=(CoordinatorLayout)findViewById(R.id.rootView);
         action=getIntent().getStringExtra("Action");
+
+        reverse_geocode_thread=new HandlerThread("ReverseGeocode");
+        reverse_geocode_thread.start();
+        reverse_geocode_handler=new Handler(reverse_geocode_thread.getLooper());
 
         destination=(CardView)findViewById(R.id.destination);
         source=(CardView)findViewById(R.id.source);
@@ -84,12 +116,16 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
         schedule_trip=(ImageButton)findViewById(R.id.scheduleTrip);
         action_button=(Button)findViewById(R.id.actionButton);
         back_nav=(ImageButton)findViewById(R.id.backNav);
+        progress_dialog = new ProgressDialog(this);
+        progress_dialog.setMessage("Registering Trip Request..");
+        progress_dialog.setCanceledOnTouchOutside(false);
         back_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        request_queue= VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
         if(action.equals("Owner")){
             //Show a snackbar indiacting that you can start a trip from your routes as well
             Snackbar snackbar = Snackbar
@@ -106,9 +142,30 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
             public void onClick(View v) {
                 if(action.equals("Owner")){
                     Intent i=new Intent(StartRide.this,GetSeatsInfo.class);
-                    i.putExtra("destination-LatLng",destination_latlng);
-                    i.putExtra("source-LatLng",source_latlng);
+                    i.putExtra("source",source_string);
+                    i.putExtra("destination",destination_string);
+                    i.putExtra("destinationCords",destination_cords);
+                    i.putExtra("sourceCords",source_cords);
+                    i.putExtra("sourceAdd",source_address);
+                    i.putExtra("destinationAdd",destination_address);
                     startActivity(i);
+
+                }else {
+                    if(destination_string.equals("null") || source_string.equals("null")){
+                        Toast.makeText(StartRide.this,"Please Enter Start and End Points",Toast.LENGTH_LONG).show();
+                    }else {
+                        is_progress_dialog_visible=true;
+                        progress_dialog.show();
+                        Trip t = new Trip(source_address, destination_address, source_string, destination_string, source_cords, destination_cords, "7", false);
+                        String self_id=getSharedPreferences("user_credentials", 0).getString("Id", null);
+                        FirebaseDatabase.getInstance().getReference("Temporarytrips").child(self_id).setValue(t).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG,"Error Adding temporary trip "+e.toString());
+                            }
+                        });
+                        requestServer(getResources().getString(R.string.server_url)+"matchTrip?personId="+self_id+"&Initiator="+"rider");
+                    }
                 }
             }
         });
@@ -140,12 +197,15 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
                 Intent i=new Intent(StartRide.this,AddTrip.class);
                 i.putExtra("source",source_string);
                 i.putExtra("destination",destination_string);
-                i.putExtra("destination-LatLng",destination_latlng);
-                i.putExtra("source-LatLng",source_latlng);
+                i.putExtra("destinationCords",destination_cords);
+                i.putExtra("sourceCords",source_cords);
+                i.putExtra("sourceAdd",source_address);
+                i.putExtra("destinationAdd",destination_address);
                 startActivity(i);
 
             }
         });
+
     }
 
     @Override
@@ -240,8 +300,10 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
                                 gmap.moveCamera(CameraUpdateFactory.newLatLng(home));
                                 gmap.moveCamera(CameraUpdateFactory.zoomTo(17.0f));
                                 updateStartPointAddress(location);
-                                source_latlng=new LatLng(location.getLatitude(),location.getLongitude());
+                                source_cords=Double.toString(location.getLatitude())+","+Double.toString(location.getLongitude());
                                 source_string="Current Location";
+                                reverseGeocodeSource(location,5);
+
 
                             }
                         }
@@ -279,12 +341,14 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
             if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
                 source_string=place.getName().toString();
                 source_text.setText(source_string);
-                source_latlng=place.getLatLng();
+                source_cords=Double.toString(place.getLatLng().latitude)+","+Double.toString(place.getLatLng().longitude);
+                source_address=place.getAddress().toString();
             }
             else if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_DESTINATION) {
                 destination_string=place.getAddress().toString();
                 destination_text.setText(destination_string);
-                destination_latlng=place.getLatLng();
+                destination_cords=Double.toString(place.getLatLng().latitude)+","+Double.toString(place.getLatLng().longitude);
+                destination_address=place.getAddress().toString();
             }
             Log.i(TAG, "Place: " + place.getAddress());
         } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
@@ -297,5 +361,100 @@ public class StartRide extends AppCompatActivity implements OnMapReadyCallback,G
         }
 
     }
+
+    //Reverse Geocode and Send Data to Firebase
+    public void reverseGeocodeSource(final Location location,final Integer index){
+        Runnable r=new Runnable() {
+            @Override
+            public void run() {
+                Log.i("ReverseGeocodeFirebase","Started runnable");
+                String address="null";
+                Geocoder geocoder= new Geocoder(getBaseContext(), Locale.ENGLISH);
+                Double latitude=location.getLatitude();
+                Double longitude=location.getLongitude();
+
+                try {
+
+                    //Place your latitude and longitude
+                    List<Address> addresses = geocoder.getFromLocation(latitude,longitude,1);
+
+                    if(addresses != null) {
+
+                        Address fetchedAddress = addresses.get(0);
+                        StringBuilder strAddress = new StringBuilder();
+
+
+                        for(int i=0; i<fetchedAddress.getMaxAddressLineIndex(); i++) {
+                            strAddress.append(fetchedAddress.getAddressLine(i)).append("\n");
+                        }
+                        address=strAddress.toString();
+                        source_address=address;
+                        source_string=fetchedAddress.getAddressLine(1);
+                        Log.d("ReverseGeocodeFirebase","The current Address is"+ address);
+                        Log.d("ReverseGeocodeFirebase","The current source string  is"+ source_string);
+                    }
+
+                }
+                catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Could not get address..!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        };
+        reverse_geocode_handler.post(r);
+    }
+    //Request Server
+    private void requestServer(final String url){
+        final StringRequest mrequest=new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Parse the response from server
+                        if(is_progress_dialog_visible){
+                            progress_dialog.dismiss();
+                        }
+                        Log.d(TAG,"Response from server :" +response);
+                        Intent i=new Intent(getBaseContext(), Main.class);
+                        startActivity(i);
+                        finish();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //give an option to retry
+                        showMessageTryCancel("Confirmation to server failed..Try Again!",new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestServer(url);
+                            }
+                        });
+
+                    }
+                });
+        request_queue.add(mrequest);
+        if(!is_progress_dialog_visible) {
+            is_progress_dialog_visible = true;
+            progress_dialog.show();
+        }
+
+    }
+    //Show try again dialog
+    private void showMessageTryCancel(String message, DialogInterface.OnClickListener tryListener) {
+        new AlertDialog.Builder(StartRide.this)
+                .setMessage(message)
+                .setPositiveButton("Try Again", tryListener)
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
+    }
+
 
 }

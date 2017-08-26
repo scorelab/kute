@@ -33,7 +33,7 @@ public class TripDetail extends AppCompatActivity implements View.OnClickListene
     TextView host_address_text;
     ImageButton back_nav,travelling_with,host_location_map;
     Button end_trip;
-    TableRow host_name_row,host_address_row,travelling_with_row;
+    TableRow host_name_row,host_address_row,travelling_with_row,host_location_row,time_row;
     Trip data;
     ArrayList<Person> travelling_with_people;
     private final int END_TRIP=111;
@@ -43,6 +43,7 @@ public class TripDetail extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.trip_detail);
         //Reference the views
         source_text=(AppCompatTextView)findViewById(R.id.startPlace);
         destination_text=(AppCompatTextView)findViewById(R.id.destination);
@@ -60,6 +61,8 @@ public class TripDetail extends AppCompatActivity implements View.OnClickListene
 
         host_name_row=(TableRow)findViewById(R.id.rowHostName);
         host_address_row=(TableRow)findViewById(R.id.rowHostAddress);
+        host_location_row=(TableRow)findViewById(R.id.rowaddressHead);
+        time_row=(TableRow)findViewById(R.id.rowStartTime);
         travelling_with_row=(TableRow)findViewById(R.id.rowTravellingWith);
 
         end_trip=(Button)findViewById(R.id.endTrip);
@@ -68,8 +71,11 @@ public class TripDetail extends AppCompatActivity implements View.OnClickListene
         //Get data from Intent
         data=(Trip)getIntent().getSerializableExtra("Trip");
         ArrayList<Person> t=(ArrayList<Person>)getIntent().getSerializableExtra("People");
-        if(t!=null)
-            travelling_with_people=t;
+        if(t!=null) {
+            travelling_with_people = t;
+            Log.d(TAG, t.get(0).name);
+        }
+        setupTripDetail();
 
     }
 
@@ -100,17 +106,27 @@ public class TripDetail extends AppCompatActivity implements View.OnClickListene
     private void setupTripDetail(){
         source_text.setText(data.getSource_address());
         destination_text.setText(data.getDestination_address());
-        time_text.setText(data.getTime());
+        if(!data.getTime().equals("7"))
+            time_text.setText(data.getTime());
+        else
+            time_row.setVisibility(View.GONE);
+
         if(!data.getIsOwner()){
             host_name.setText(data.getOwner_string());
             if(data.getOwner_address()!=null){
                 host_address_text.setText(data.getOwner_address());
+            }else {
+                host_address_row.setVisibility(View.GONE);
+                host_location_row.setVisibility(View.GONE);
             }
+
         }else{
             host_name_row.setVisibility(View.GONE);
             host_address_row.setVisibility(View.GONE);
+            host_location_row.setVisibility(View.GONE);
             if(travelling_with_people!=null)
                 travelling_with_row.setVisibility(View.VISIBLE);
+
 
         }
     }

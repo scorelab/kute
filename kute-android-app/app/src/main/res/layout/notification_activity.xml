@@ -1,0 +1,304 @@
+<RelativeLayout android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/apptheme"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_span="2"
+            android:background="@color/apptheme"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="@dimen/back_button_width"
+                android:layout_height="@dimen/back_button_height"
+                android:layout_margin="4dp"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:id="@id/backNav"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:id="@+id/personDetailScroll"
+                android:layout_below="@+id/toolbar"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*">
+                <TableRow
+                    android:id="@+id/row1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/headerTile"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_span="2"
+                        android:background="@color/apptheme">
+
+                    </RelativeLayout>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_span="2"
+                        android:layout_height="130dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/transparent">
+
+                    </View>
+                </TableRow>
+            </TableLayout>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:id="@+id/personDetailFAB"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:clickable="true"
+                android:elevation="8dp"
+                app:layout_anchor="@id/row1"
+                app:layout_anchorGravity="bottom|right|end"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/headText"
+                        android:text="We found a match for your Trip"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textColor="@android:color/black"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="@dimen/textsize_head1"
+                        android:textAlignment="center"/>
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/headOtherName"
+                        android:layout_below="@+id/headText"
+                        android:text="Your friend"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textColor="@android:color/black"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="@dimen/textsize_head1"
+                        android:textAlignment="center"/>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/headOtherName"
+                        android:id="@+id/personItem">
+                        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                            xmlns:custom="http://schemas.android.com/apk/res-auto"
+                                                            android:orientation="vertical" android:layout_width="match_parent"
+                                                            android:layout_span="2"
+                                                            android:layout_height="wrap_content"
+                                                            custom:cardCornerRadius="2dp"
+                                                            android:background="@color/cardview_light_background"
+                                                            custom:cardElevation="2dp"
+                                                            custom:cardUseCompatPadding="true"
+                                                            android:clickable="true"
+                                                            android:id="@+id/friendFrameCard">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:orientation="horizontal">
+
+                                <com.scorelab.kute.kute.PrivateVehicles.App.RoundedImageView
+                                    android:id="@+id/personimg"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:scaleType="centerInside"
+                                    />
+                                <View
+                                    android:layout_width="60dp"
+                                    android:layout_height="match_parent"/>
+                                <TextView
+                                    android:id="@+id/name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/textsize_small"
+                                    android:textColor="#000000"
+                                    android:text="Nipun Arora"
+                                    android:layout_gravity="center_vertical"
+                                    android:textAlignment="gravity"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+
+                    </FrameLayout>
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/headDetailRest"
+                        android:layout_below="@+id/personItem"
+                        android:text="Wants to pool with you \n "
+                        android:fontFamily="sans-serif-condensed"
+                        android:textColor="@android:color/black"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="@dimen/textsize_head1"
+                        android:textAlignment="center"/>
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="*"
+                        android:layout_below="@+id/headDetailRest">
+                        <TableRow android:id="@+id/rowStart"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:text="Nipun's Start Point"
+                                    android:id="@+id/startHead"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/textsize_head1" />
+                            </LinearLayout>
+                        </TableRow>
+                        <TableRow
+                            android:id="@+id/rowStartPlace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_span="2">
+                                <TextView
+                                    android:id="@+id/startPlace"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:text="Uttam Nagar,New Delhi"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/textsize_small"/>
+                            </RelativeLayout>
+
+                        </TableRow>
+                        <TableRow android:id="@+id/rowDrop"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginTop="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="sans-serif-condensed"
+                                    android:text="Nipun's Drop off Point"
+                                    android:id="@+id/dropHead"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/textsize_head1" />
+                            </LinearLayout>
+                        </TableRow>
+                        <TableRow
+                            android:id="@+id/rowDropText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_span="2">
+                            <TextView
+                                android:id="@+id/dropText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="Rohini Sector 7"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/textsize_small"/>
+                        </RelativeLayout>
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startTripButton">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_span="2">
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Confirm Trip"
+                                    android:textAlignment="center"
+                                    style="@style/Widget.AppCompat.Button.Borderless"
+                                    android:id="@+id/confirmTrip"
+                                    android:layout_margin="16dp"
+                                    android:background="@drawable/button_selector"
+                                    android:layout_centerHorizontal="true"
+                                    android:elevation="4dp"
+                                    android:textColor="@android:color/white"
+                                    />
+                            </RelativeLayout>
+                        </TableRow>
+                    </TableLayout>
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+           <!-- <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:id="@+id/personDetailFAB"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:clickable="true"
+                android:elevation="8dp"
+                android:src="@drawable/ic_group_add_white_24dp"
+                app:backgroundTint="@color/fab"
+                app:rippleColor="@color/apptheme"
+                app:fabSize="normal"
+                app:layout_anchor="@id/row1"
+                app:layout_anchorGravity="bottom|right|end"
+                />-->
+        </android.support.design.widget.CoordinatorLayout>
+    </ScrollView>
+</RelativeLayout>

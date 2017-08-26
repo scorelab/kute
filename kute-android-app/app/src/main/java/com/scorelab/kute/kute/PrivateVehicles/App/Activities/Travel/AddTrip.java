@@ -39,7 +39,10 @@ public class AddTrip extends AppCompatActivity implements View.OnClickListener{
     private final String TAG="AddTripActivity";
     private final int result_code_days_picker=0007;
     ArrayList<Boolean>days;
-    LatLng source_latlng,dest_latlng;
+    String source_cords,dest_cords;
+    String source_string,destination_string;
+    String source_address,destination_address;
+    String time_string;
 
 
     //Override
@@ -53,18 +56,20 @@ public class AddTrip extends AppCompatActivity implements View.OnClickListener{
         destination=(TextView)findViewById(R.id.destination);
         source=(TextView)findViewById(R.id.startPlace);
         Bundle b=getIntent().getExtras();
-        String source_string=(String) b.get("source");
-        String dest=(String)b.get("destination");
+        source_string=(String) b.get("source");
+        destination_string=(String)b.get("destination");
+        source_address=(String)b.get("sourceAdd");
+        destination_address=(String)b.get("destinationAdd");
 
-        if(source_string!=null){
+        if(!source_string.equals("null")){
             source.setText(source_string);
         }
-        if (dest!=null){
-            destination.setText(dest);
+        if (!destination_string.equals("null")){
+            destination.setText(destination_string);
         }
 
-        dest_latlng=(LatLng)b.get("destination-LatLng");
-        source_latlng=(LatLng)b.get("source-LatLng");
+        dest_cords=(String)b.get("destinationCords");
+        source_cords=(String)b.get("sourceCords");
 
 
         back_nav=(ImageButton)findViewById(R.id.backNav);
@@ -139,10 +144,18 @@ public class AddTrip extends AppCompatActivity implements View.OnClickListener{
     private void configurePlace(int requestCode,int resultCode,Intent data){
         if (resultCode == RESULT_OK) {
             Place place = PlaceAutocomplete.getPlace(this, data);
-            if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_SOURCE)
+            if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
+                source_string=place.getName().toString();
                 source.setText(place.getAddress());
-            else if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_DESTINATION)
+                source_cords=Double.toString(place.getLatLng().latitude)+","+Double.toString(place.getLatLng().longitude);
+                source_address=place.getAddress().toString();
+            }
+            else if(requestCode==PLACE_AUTOCOMPLETE_REQUEST_CODE_DESTINATION) {
+                destination_string=place.getAddress().toString();
                 destination.setText(place.getAddress());
+                dest_cords=Double.toString(place.getLatLng().latitude)+","+Double.toString(place.getLatLng().longitude);
+                destination_address=place.getAddress().toString();
+            }
             Log.i(TAG, "Place: " + place.getAddress());
         } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
             Status status = PlaceAutocomplete.getStatus(this, data);
@@ -169,8 +182,9 @@ public class AddTrip extends AppCompatActivity implements View.OnClickListener{
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
                         Toast.makeText(AddTrip.this,Integer.toString(hourOfDay),Toast.LENGTH_SHORT).show();
-                        String time_string=Integer.toString(hourOfDay)+":"+Integer.toString(minute);
-                        time.setText(time_string);
+                        String time_string1=Integer.toString(hourOfDay)+":"+Integer.toString(minute);
+                        time.setText(time_string1);
+                        time_string=time_string1;
 
                     }
                 }, mHour, mMinute, false);
@@ -191,7 +205,7 @@ public class AddTrip extends AppCompatActivity implements View.OnClickListener{
 
         //Return to the homescreen
         Intent i=new Intent(getApplicationContext(), Main.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
         finish();
     }
