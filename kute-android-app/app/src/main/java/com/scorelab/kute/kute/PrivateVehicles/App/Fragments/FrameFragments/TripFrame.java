@@ -128,7 +128,7 @@ public class TripFrame extends Fragment implements View.OnClickListener {
             header_net_layout.setVisibility(View.GONE);
             address_layout.setVisibility(View.GONE);
             time_layout.setVisibility(View.GONE);
-
+            hostname_layout.setVisibility(View.GONE);
             header_layout.setVisibility(View.VISIBLE);
             excuse_text_layout.setVisibility(View.VISIBLE);
             excuse_text.setText("You do not have an active trip right now \n Start A New Trip from \n My Routes Tab or from the button below");

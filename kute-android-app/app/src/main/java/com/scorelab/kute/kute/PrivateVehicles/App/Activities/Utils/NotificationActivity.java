@@ -201,6 +201,9 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                                 progress_dialog.dismiss();
                             }
                             Log.d(TAG,"Response from server :" +response);
+                            Intent i=new Intent(getBaseContext(), Main.class);
+                            startActivity(i);
+                            finish();
                         }
                     },
                 new Response.ErrorListener() {
