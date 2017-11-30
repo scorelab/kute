@@ -150,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         try {
-            setContentView(R.layout.testreg);
+            setContentView(R.layout.signin);
 
             // Assign fields
             mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
@@ -321,6 +321,8 @@ public class RegisterActivity extends AppCompatActivity implements
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+                            //make user partial login to logout
+                            signOut();
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

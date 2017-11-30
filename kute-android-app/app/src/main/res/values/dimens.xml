@@ -6,6 +6,7 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
     <dimen name="back_button_width">25dp</dimen>
     <dimen name="back_button_height">25dp</dimen>
     <dimen name="textsize_xsmall">10sp</dimen>
@@ -15,6 +16,7 @@
     <dimen name="dots_height">50dp</dimen>
     <dimen name="dots_margin_bottom">20dp</dimen>
     <dimen name="margin_top_signup_btn">20dp</dimen>
+
     <dimen name="button_height">80dp</dimen>
     <dimen name="button_width">80dp</dimen>
 </resources>

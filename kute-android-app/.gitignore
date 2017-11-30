@@ -7,3 +7,7 @@
 /build
 /captures
 /app/src/main/res/values/keyfile.xml
+.directory
+.idea/misc.xml
+.idea/
+app/.directory
