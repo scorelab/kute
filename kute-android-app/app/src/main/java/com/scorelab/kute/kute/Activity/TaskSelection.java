@@ -1,21 +1,13 @@
 package com.scorelab.kute.kute.Activity;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.scorelab.kute.kute.R;
 

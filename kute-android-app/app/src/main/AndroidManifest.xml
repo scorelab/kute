@@ -1,56 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.scorelab.kute.kute">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.scorelab.kute.kute">
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
-    <application
-        android:name=".KuteApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-feature
+    android:name="android.hardware.camera"
+    android:required="false"/>
+<uses-feature
+    android:name="android.hardware.camera.autofocus"
+    android:required="false"/>
+<uses-feature
+    android:name="android.hardware.camera.flash"
+    android:required="false"/>
+
+<application
+    android:name=".KuteApplication"
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_app_id"/>
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/googlemapApi"/>
+
+    <activity android:name=".SplashActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".Activity.RegisterActivity">
+    </activity>
+    <activity
+        android:name="com.facebook.FacebookActivity"
+        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+    />
+    <activity android:name=".Activity.MainActivity">
+    </activity>
+    <activity
+        android:name=".LandActivity"
+        android:label="@string/title_activity_land"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/googlemapApi"/>
 
-        <activity android:name=".SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    </activity>
+    <activity android:name=".Activity.TaskSelection"/>
+    <activity android:name=".Activity.VehicleSelection"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+    <service
+        android:name=".Services.BacKService"
+        android:process=":backservice"/>
+
+
+    <activity android:name=".Activity.SwitchPrivatePublicActivity"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Main"/>
+    <activity android:name=".PrivateVehicles.App.Activities.CurrentFriendList"/>
+
+    <service android:name=".PrivateVehicles.App.Services.SyncFacebookFriendsToFirebase"/>
+
+    <activity android:name=".PrivateVehicles.App.Activities.PersonDetail"
+              android:screenOrientation="portrait"/>  <!-- to avoid memory leaks via screen orientation change  -->
+
+    <activity android:name=".PrivateVehicles.App.Activities.ProfilePictureActivity"/>
+    <activity android:name=".PrivateVehicles.App.Activities.InitialDetailDialogs">
+
+    </activity>
+    <activity android:name=".PrivateVehicles.App.Activities.Routes.SelfRouteDetailActivity">
+
+    </activity>
+    <activity android:name=".PrivateVehicles.App.Activities.Routes.AddRouteActivity">
+
+    </activity>
+    <activity android:name=".PrivateVehicles.App.Activities.Routes.RouteDetail"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Utils.DaysPicker"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Routes.RouteListPerson"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Travel.StartRide">
+
+    </activity>
+    <activity android:name=".PrivateVehicles.App.Activities.Travel.AddTrip"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Travel.GetSeatsInfo"/>
+    <activity android:name=".PrivateVehicles.App.Activities.Utils.NotificationActivity"
+              android:exported="true">
         </activity>
+    <activity android:name=".PrivateVehicles.App.Activities.Travel.TripDetail"/>
 
-        <activity android:name=".Activity.RegisterActivity"
-            android:windowSoftInputMode="stateHidden">
+    <service android:name=".PrivateVehicles.App.Services.MyFirebaseInstanceIDService">
+        <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+        </intent-filter>
+    </service>
+    <service android:name=".PrivateVehicles.App.Services.MyFirebaseMessagingService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        </intent-filter>
+    </service>
 
-        </activity>
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".Activity.MainActivity">
-
-        </activity>
-        <activity
-            android:name=".LandActivity"
-            android:label="@string/title_activity_land"
-            android:theme="@style/AppTheme">
-
-        </activity>
-        <activity android:name=".Activity.TaskSelection"></activity>
-        <activity android:name=".Activity.VehicleSelection" ></activity>
-        <service android:name=".Services.BacKService"
-            android:process=":backservice"></service>
-    </application>
+</application>
 
 </manifest>
+

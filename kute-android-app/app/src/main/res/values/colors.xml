@@ -3,9 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="white">#ffffff</color>
-    <color name="splashBackground">#4885ed</color>
-    <color name="iron">#CCCCCC</color>
-    <color name="black">#000000</color>
-    <color name="whitetrans">#80ffffff</color>
+    <color name="splashBackground">#00BCD4</color>
+    <color name="fabripple">#FF80AB</color>
+    <color name="apptheme">#00BCD4</color>
+    <color name="mainBackground">#F5F5F5</color>
+    <color name="fab">#1de9b6</color>
+    <color name="dot_inactive">#2278d4</color>
+    <color name="dot_active">#93C6FD</color>
 </resources>
+

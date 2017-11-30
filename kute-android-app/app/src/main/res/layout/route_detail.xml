@@ -1,0 +1,450 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/apptheme"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_span="2"
+            android:background="@color/apptheme"
+            >
+
+            <ImageButton
+                android:layout_width="@dimen/back_button_width"
+                android:layout_height="@dimen/back_button_height"
+                android:layout_margin="4dp"
+                android:id="@+id/backNav"
+                android:background="@drawable/circle_background"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:layout_below="@+id/toolbar"
+        android:fadeScrollbars="false">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*">
+                <TableRow
+                    android:id="@+id/row1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/headerTile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2"
+                        android:background="@color/apptheme">
+                        <TextView
+                            android:id="@+id/routeName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Route Name"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textsize_head2" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/routeName"
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/routeLogo"
+                            android:background="@drawable/route5"
+                            />
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/routeLogo"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/utilityButtos">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_event_seat_white_24dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="16dp"
+                                android:id="@+id/seatIcon"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/noSeats"
+                                android:textSize="@dimen/textsize_small"
+                                android:layout_toRightOf="@+id/seatIcon"
+                                android:textColor="@android:color/white"
+                                android:layout_marginLeft="16dp"
+                                android:text="4"
+                                android:layout_centerVertical="true"
+                                />
+
+                            <CheckBox
+                                android:id="@+id/star"
+                                style="?android:attr/starStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:checked="false" />
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/requestSeat"
+                                android:textSize="@dimen/textsize_xsmall"
+                                android:text="Request Seat"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="16dp"
+                                android:background="@drawable/button_selector"
+                                android:textColor="@android:color/white"
+                                style="?android:attr/borderlessButtonStyle"/>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/rowSource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_span="2"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="From"
+                            android:textSize="@dimen/textsize_small"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-condensed"
+                            android:id="@+id/fromHead"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/startPlace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:hint="Start Point"
+                            android:layout_marginRight="4dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            />
+                    </RelativeLayout>
+
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowDestination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_span="2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="To"
+                            android:textSize="@dimen/textsize_small"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-condensed"
+                            android:id="@+id/toHead"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            />
+
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/destination"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="64dp"
+                            android:layout_marginRight="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:hint="To"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"
+                            app:backgroundTint="@color/apptheme"
+                            />
+                    </RelativeLayout>
+
+                </TableRow>
+                <TableRow android:id="@+id/rowtimeHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Time"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1" />
+                    </LinearLayout>
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <ImageView
+                            android:id="@+id/TimeIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_timer_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/startTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/TimeIcon"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="00:00"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small"/>
+                    </RelativeLayout>
+
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowHostHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Host"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1" />
+                    </LinearLayout>
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowHost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="2">
+
+                        <TextView
+                            android:id="@+id/hostIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:textSize="10sp"
+                            android:text="Host"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            />
+
+                        <TextView
+                            android:id="@+id/hostname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/hostIcon"
+                            android:layout_marginLeft="64dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Nipun Arora"
+                            android:layout_centerVertical="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_small" />
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_white_back"
+                            android:src="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="32dp"
+                            />
+
+                    </RelativeLayout>
+
+
+                </TableRow>
+                <TableRow
+                    android:id="@+id/rowDaysHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Days"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/textsize_head1" />
+                    </LinearLayout>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/daysRow">
+                    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:id="@+id/basic"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_marginLeft="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:background="@drawable/circle_days_selector"
+                            android:fontFamily="sans-serif-condensed"
+                            android:padding="8dp"
+                            android:id="@+id/dayMonday"
+                            android:text="Mon"
+                            android:textColor="@android:color/white"
+                            android:textSize="10dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle_days_selector"
+                            android:textColor="@android:color/white"
+                            android:text="Tue"
+                            android:textSize="10dp"
+                            android:id="@+id/dayTuesday"
+                            android:padding="8dp"
+                            android:layout_margin="6dp"
+                            android:fontFamily="sans-serif-condensed"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle_days_selector"
+                            android:textColor="@android:color/white"
+                            android:text="Wed"
+                            android:id="@+id/dayWednesday"
+                            android:textSize="10dp"
+                            android:padding="8dp"
+                            android:layout_margin="6dp"
+                            android:fontFamily="sans-serif-condensed"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle_days_selector"
+                            android:textColor="@android:color/white"
+                            android:text="Thu"
+                            android:textSize="10dp"
+                            android:id="@+id/dayThursday"
+                            android:padding="8dp"
+                            android:layout_margin="6dp"
+                            android:fontFamily="sans-serif-condensed"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle_days_selector"
+                            android:textColor="@android:color/white"
+                            android:text="Fri"
+                            android:textSize="10dp"
+                            android:id="@+id/dayFriday"
+                            android:padding="8dp"
+                            android:layout_margin="6dp"
+                            android:fontFamily="sans-serif-condensed"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle_days_selector"
+                            android:textColor="@android:color/white"
+                            android:id="@+id/daySaturday"
+                            android:text="Sat"
+                            android:textSize="10dp"
+                            android:padding="8dp"
+                            android:layout_margin="6dp"
+                            android:fontFamily="sans-serif-condensed"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle_days_selector"
+                            android:textColor="@android:color/white"
+                            android:text="Sun"
+                            android:id="@+id/daySunday"
+                            android:textSize="10dp"
+                            android:padding="8dp"
+                            android:layout_margin="6dp"
+                            android:fontFamily="sans-serif-condensed"/>
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </RelativeLayout>

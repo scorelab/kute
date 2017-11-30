@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/apptheme"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_span="2"
+                android:background="@color/apptheme">
+                <ImageButton
+                    android:layout_width="@dimen/back_button_width"
+                    android:layout_height="@dimen/back_button_height"
+                    android:layout_margin="8dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/backNav"
+                    android:src="@drawable/ic_arrow_back_white_24dp"
+                    android:background="@drawable/circle_background"/>
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="2dp"
+                android:id="@+id/source"
+                android:layout_marginTop="2dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="From"
+                        android:textSize="@dimen/textsize_small"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:id="@+id/fromHead"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Start point"
+                        android:padding="16dp"
+                        android:id="@+id/startText"
+                        android:textSize="@dimen/textsize_small"
+                        android:layout_toRightOf="@+id/fromHead"
+                        android:layout_toLeftOf="@+id/scheduleTrip"
+                        android:layout_centerVertical="true"
+                        />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_watch_later_black_24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/scheduleTrip"
+                        android:background="@drawable/button_selector_rect_whiteback"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="2dp"
+                android:id="@+id/destination"
+                android:layout_marginTop="48dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To"
+                    android:textSize="@dimen/textsize_small"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-condensed"
+                    android:id="@+id/toHead"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Your Destination"
+                    android:id="@+id/destinationText"
+                    android:padding="16dp"
+                    android:layout_toRightOf="@+id/toHead"
+                    android:textSize="@dimen/textsize_small"
+                    />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                          xmlns:map="http://schemas.android.com/apk/res-auto"
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:id="@+id/mapView"
+                          android:name="com.google.android.gms.maps.SupportMapFragment"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          tools:context="com.example.nipunarora.exploringgooglemaps.MapsActivity">
+                </fragment>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find A Ride"
+                android:textAlignment="center"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/actionButton"
+                android:layout_margin="16dp"
+                android:background="@drawable/material_button_selector"
+                android:layout_gravity="bottom"
+                android:elevation="4dp"
+                android:textColor="@android:color/white"
+                />
+            </FrameLayout>
+
+
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

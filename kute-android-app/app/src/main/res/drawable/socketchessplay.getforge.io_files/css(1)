@@ -1,0 +1,8 @@
+/* latin */
+@font-face {
+  font-family: 'Arapey';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arapey Regular'), local('Arapey-Regular'), url(https://fonts.gstatic.com/s/arapey/v5/4t1S0d9lD7X4L2Hpcr5y_evvDin1pK8aKteLpeZ5c0A.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}

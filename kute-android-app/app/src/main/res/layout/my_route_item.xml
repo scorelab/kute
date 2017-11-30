@@ -1,0 +1,135 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    custom:cardCornerRadius="2dp"
+    custom:cardElevation="2dp"
+    android:layout_span="2"
+    custom:cardUseCompatPadding="true"
+    android:layout_margin="4dp"
+    android:id="@+id/routeCard"
+    android:paddingBottom="16dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/RouteHead"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="4dp"
+                android:text="Route Name"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:textSize="@dimen/textsize_small"
+                android:maxEms="5"
+                android:maxWidth="140dp"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textFrom"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="4dp"
+                android:text="From"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize_small"
+                android:maxEms="5"
+                android:maxWidth="140dp"
+
+                />
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/offset"/>
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:id="@+id/arrow"
+                android:layout_toRightOf="@+id/offset"
+                android:background="@drawable/arrow"
+                android:layout_margin="4dp"
+                />
+            <TextView
+                android:id="@+id/textTo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="4dp"
+                android:text="To"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:textSize="@dimen/textsize_small"
+                android:maxEms="5"
+                android:maxWidth="140dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/seatIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:background="@drawable/ic_event_seat_black_24dp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/noOfSeats"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:text="0"
+                android:layout_toRightOf="@+id/seatIcon"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:textAlignment="gravity"
+                android:textSize="20sp"
+                />
+
+
+            <CheckBox
+                android:id="@+id/star"
+                style="?android:attr/starStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:checked="false"
+
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

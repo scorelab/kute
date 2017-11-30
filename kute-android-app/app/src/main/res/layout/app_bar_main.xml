@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/apptheme"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_location_white_24dp"
+                    android:background="@drawable/button_selector"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="16dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/routeRequests"/>
+                <TextView
+                    android:id="@+id/numberRouteRequests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/routeRequests"
+                    android:background="@android:drawable/ic_notification_overlay"
+                    android:text="5"
+                    android:textColor="#FFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+
+            </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_main" />
+
+</android.widget.LinearLayout>

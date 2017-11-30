@@ -1,0 +1,27 @@
+Metadata-Version: 2.0
+Name: firebase-admin
+Version: 2.2.0
+Summary: Firebase Admin Python SDK
+Home-page: https://firebase.google.com/docs/admin/setup/
+Author: Firebase
+Author-email: UNKNOWN
+License: Apache License 2.0
+Keywords: firebase cloud development
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Dist: google-auth (>=1.0.0)
+Requires-Dist: google-cloud-storage (>=1.2.0)
+Requires-Dist: requests (>=2.13.0)
+Requires-Dist: six (>=1.6.1)
+
+The Firebase Admin Python SDK enables server-side (backend) Python developers to integrate Firebase into their services and applications.
+
+
