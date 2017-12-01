@@ -26,6 +26,17 @@ download the zip file.
 7. Wait for a few seconds and the app should start on your device(android phone or emulator)
 8. Make sure you are connected to internet.
 
+## Test users.
+
+user 01
+email:- kute_rukdjlk_one@tfbnw.net
+pwd:- kute123
+
+user 02
+email:- kute_jmzumqg_two@tfbnw.net
+pwd:- kute123
+
+
 ## License
 
 This project is licensed under the terms of the Apache License 2.0.
