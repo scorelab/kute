@@ -39,6 +39,15 @@ People travel to the same destination on a regular basis for various reasons usi
 
 9. Make sure you are connected to internet
 
+## Google Code-in 2017
+
+Google Code-in users should checkout the **c_in_refine** branch for all tasks.
+
+   ```git checkout c_in_refine```
+   
+You'll have all the necessary information to procede in there.
+
+
 ## License
 
 This project is licensed under the terms of the Apache License 2.0.
