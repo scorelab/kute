@@ -53,6 +53,7 @@
         android:name=".LandActivity"
         android:label="@string/title_activity_land"
         android:theme="@style/AppTheme">
+
     </activity>
     <activity android:name=".Activity.TaskSelection"/>
     <activity android:name=".Activity.VehicleSelection"/>
@@ -60,6 +61,7 @@
     <service
         android:name=".Services.BacKService"
         android:process=":backservice"/>
+
 
     <activity android:name=".Activity.SwitchPrivatePublicActivity"/>
     <activity android:name=".PrivateVehicles.App.Activities.Main"/>
