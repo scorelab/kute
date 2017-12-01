@@ -13,35 +13,41 @@ People travel to the same destination on a regular basis for various reasons usi
 
 1. Go to your terminal and execute this command
 
- git clone https://github.com/scorelab/kute.git
- or
- download the zip file.
+     `git clone https://github.com/scorelab/kute.git`
+     
+     or download the zip file.
 
-2. Launch android studio(version 1.4 above).
+2. Checkout the branch 'c_in_refine'
 
-3. Click on File, then New and then Import Project Or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub).
+    `cd kute`
+    
+    `git checkout c_in_refine`
 
-4. Browse to the directory where you cloned (extracte the zip).
+3. Launch android studio(version 1.4 above).
 
-5. Run and build the Gradle.
+4. Click on File, then New and then Import Project Or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub).
 
-6. If Gradle finishes to build without error run the project by clicking on the play button on the tool bar.
+5. Browse to the directory where you cloned (extracte the zip).
 
-7. Wait for a few seconds and the app should start on your device(android phone or emulator).
+6. Run and build the Gradle.
 
-8. Make sure you are connected to internet.
+7. If Gradle finishes to build without error run the project by clicking on the play button on the tool bar.
 
-Note: Please use Facebook credentails given below to access the application.
+8. Wait for a few seconds and the app should start on your device(android phone or emulator).
+
+9. Make sure you are connected to internet.
+
+Note: Please use the Facebook credentails given below to access the application.
 
 ## Test users
 
  user 01
- email:- kute_rukdjlk_one@tfbnw.net
- pwd:- kute123
+ - email: kute_rukdjlk_one@tfbnw.net
+ - pwd: kute123
 
  user 02
- email:- kute_jmzumqg_two@tfbnw.net
- pwd:- kute123
+ - email: kute_jmzumqg_two@tfbnw.net
+ - pwd: kute123
 
 ## License
 
