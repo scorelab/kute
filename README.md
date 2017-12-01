@@ -26,6 +26,8 @@ download the zip file.
 7. Wait for a few seconds and the app should start on your device(android phone or emulator)
 8. Make sure you are connected to internet.
 
+Note currently use facebook credentails given below to access the application.
+
 ## Test users.
 
 user 01
