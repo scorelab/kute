@@ -1,14 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:background="@color/splashBackground"
+
     android:orientation="vertical"
     tools:context=".Activity.RegisterActivity">
+
 
     <TextView
         android:id="@+id/login_status"
@@ -21,24 +21,85 @@
 
 
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/login_with_google"
-        android:text="login_with_google"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/connectWithFbButton"
+    <ImageView android:src="@drawable/trainc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:scaleType = "centerCrop"
+        android:layout_height="260dp"
+        android:id="@+id/imageView5"
+        android:layout_below="@+id/login_status"
+        android:layout_alignLeft="@+id/gifImageView"
+        android:layout_alignStart="@+id/gifImageView" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:text="  connect_with_facebook" />
+        android:src="@drawable/kute"
+        android:id="@+id/gifImageView"
+        android:layout_below="@+id/login_status"
+        android:layout_toRightOf="@+id/login_status"
+        android:layout_toEndOf="@+id/login_status"
+        android:layout_marginTop="92dp" />
 
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView" />
+        android:text="TO CONTINUE"
+        android:gravity="center"
+        android:fontFamily="sans-serif-light"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView3" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SignIn"
+        android:gravity="center"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="35dp"
+        android:textColor="#ffffff"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/gifImageView"
+        android:layout_toRightOf="@+id/login_status"
+        android:layout_toEndOf="@+id/login_status"
+        android:layout_marginTop="101dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/round"
+        android:layout_gravity="center"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true">
 
 
-</LinearLayout>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/connectWithFbButton"
+            android:layout_width="220dp"
+            android:layout_height="36dp"
+            android:text="  connect_with_facebook"
+      />
+
+        <com.google.android.gms.common.SignInButton
+
+            android:layout_marginTop="8dp"
+            android:layout_width="220dp"
+            android:layout_height="36dp"
+            android:id="@+id/login_with_google"
+            android:text="login_with_google"
+            android:layout_above="@+id/gifImageView"
+            android:layout_centerHorizontal="true"  />
+
+    </LinearLayout>
+
+</RelativeLayout>
