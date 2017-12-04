@@ -15,9 +15,9 @@ People travel to the same destination on a regular basis for various reasons usi
 
      `git clone https://github.com/scorelab/kute.git`
      
-     or download the zip file.
+     or download the zip file and then unzip the contents.
 
-2. Checkout the branch 'c_in_refine'
+2. Checkout the branch 'c_in_refine' (Only for Google Code In participants).
 
     `cd kute`
     
@@ -25,17 +25,25 @@ People travel to the same destination on a regular basis for various reasons usi
 
 3. Launch android studio(version 1.4 above).
 
-4. Click on File, then New and then Import Project Or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub).
+4. To import the project: Click on File, then New and then Import Project or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub).
 
-5. Browse to the directory where you cloned (extracte the zip).
+5. Browse to the location where you had extracted the zip and then select the folder kute-android-app in it.
 
-6. Run and build the Gradle.
+6. Android studio will automatically run and build the Gradle for you. In case of anything missing, studio will prompt you to download the needed file and sync project, click on it.
 
-7. If Gradle finishes to build without error run the project by clicking on the play button on the tool bar.
+7. If Gradle finishes to build without error, connect your phone or emulator and run the project by clicking on the play button on the tool bar.
 
-8. Wait for a few seconds and the app should start on your device(android phone or emulator).
+8. Wait for a few seconds and the app should start on your device(android phone or emulator), make sure you are connected to Internet.
 
-9. Make sure you are connected to internet.
+9. Possible errors while building the app:
+   a) Colors not found
+   Solution- Within studio, navigate to res-> values -> colors.xml and add the missing colors here.
+   b) String not found
+   Solution- Within studio, navigate to res-> values -> strings.xml and add the missing strings here.
+   c) Dusplicate strings found
+   Solution- Within studio, navigate to res-> values -> strings.xml and remove the strings that are mentioned more than once.
+  
+10. The app should now build successfully and run without any errors
 
 Note: Please use the Facebook credentails given below to access the application.
 
