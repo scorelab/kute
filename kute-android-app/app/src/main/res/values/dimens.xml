@@ -17,4 +17,7 @@
     <dimen name="margin_top_signup_btn">20dp</dimen>
     <dimen name="button_height">80dp</dimen>
     <dimen name="button_width">80dp</dimen>
+    <!--material -->
+    <dimen name="left_padding">16dp</dimen>
+    <dimen name="right_padding">16dp</dimen>
 </resources>

@@ -4,24 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_splash"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     tools:context="com.scorelab.kute.kute.SplashActivity"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@color/splashBackground"
-        android:id="@+id/imageView2" />
 
-    <TextView
-        android:text="Kute"
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView"
-        android:textSize="36sp"
-        android:textColor="@android:color/background_light"
-        android:textStyle="normal|bold"
-        android:fontFamily="sans-serif-smallcaps" />
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="440dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/score" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="Kute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView"
+            android:textSize="36sp"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold"
+            android:fontFamily="sans-serif-smallcaps" />
+        <com.hanks.htextview.typer.TyperTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:id="@+id/ttv"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold"
+            app:charIncrease="2"
+            app:typerSpeed="70"/>
+
+
+    </LinearLayout>
+
+
 </RelativeLayout>
