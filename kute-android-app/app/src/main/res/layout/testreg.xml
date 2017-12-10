@@ -1,44 +1,117 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".Activity.RegisterActivity">
-
-    <TextView
-        android:id="@+id/login_status"
-        android:visibility="gone"
+    <com.scorelab.kute.kute.Library.TextureVideoView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:layout_marginTop="20dp" />
-
-
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/login_with_google"
-        android:text="login_with_google"
+        android:id="@+id/videoview"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_height="match_parent"
+        />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/login_status"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp" />
+        <com.hanks.htextview.typer.TyperTextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:text="Kute"
+            android:textSize="36sp"
+            android:id="@+id/textView"
+            app:animationDuration="3000"
+            app:lineColor="#fff"
+            android:textColor="@android:color/white"
+            android:textStyle="normal|bold"
+            android:fontFamily="sans-serif-smallcaps"
+            app:lineWidth="4dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in with"
+            android:textColor="@android:color/white"
+            android:textStyle="normal"
+            android:padding="8dp"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/left_padding"
+                android:paddingRight="@dimen/right_padding"
+                android:text="google"
+                android:textColor="#000"
+                android:id="@+id/btn_inG"
+                android:background="#fff"
+                android:drawableLeft="@drawable/google_g_logo"
+                android:drawablePadding="8dp"/>
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/login_with_google"
+                android:text="login_with_google"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="or"
+            android:textColor="@android:color/white"
+            android:textStyle="normal"
+            android:padding="8dp"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/connectWithFbButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:text="  connect_with_facebook" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/left_padding"
+                android:paddingRight="@dimen/right_padding"
+                android:text="Facebook"
+                android:id="@+id/btn_inFB"
+                android:textColor="#fff"
+                android:background="#3C5A96"
+                android:drawableLeft="@drawable/fb_icon"
+                android:drawablePadding="8dp"/>
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/connectWithFbButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:text="  connect_with_facebook" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView" />
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

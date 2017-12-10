@@ -50,6 +50,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile "com.hanks:htextview-base:$htextview_version"        // base library
     compile "com.hanks:htextview-typer:$htextview_version"       // optional
+    compile "com.hanks:htextview-line:$htextview_version"        // optional
     compile 'com.android.support:design:25.1.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

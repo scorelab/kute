@@ -4,13 +4,16 @@ package com.scorelab.kute.kute.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -42,9 +45,16 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.hanks.htextview.line.LineTextView;
+import com.hanks.htextview.typer.TyperTextView;
+import com.scorelab.kute.kute.Library.TextureVideoView;
 import com.scorelab.kute.kute.R;
 import com.scorelab.kute.kute.SplashActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
+
+import java.io.IOException;
+
+import static java.lang.Thread.sleep;
 
 public class RegisterActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -55,12 +65,16 @@ public class RegisterActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 9001;
 
     private SignInButton mSignInButton;
+    LoginButton loginButton;
+    TyperTextView lineTextView;
+    String animText = "Kute";
+    CountDownTimer timer;
 
     private GoogleApiClient mGoogleApiClient;
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
-
+    TextureVideoView videoview;
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
@@ -68,14 +82,18 @@ public class RegisterActivity extends AppCompatActivity implements
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private CallbackManager mCallbackManager; //Facebook
+    Button inG, inFB;
 
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.login_with_google:
+            case R.id.btn_inG:
                 signIn();
+                break;
+            case R.id.btn_inFB:
+                loginButton.performClick();
                 break;
         }
     }
@@ -150,7 +168,61 @@ public class RegisterActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         try {
+
             setContentView(R.layout.testreg);
+            videoview = (TextureVideoView) findViewById(R.id.videoview);
+            Uri myUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.videoview_kute);
+            videoview.setDataSourceURI(this, myUri);
+
+            videoview.setScaleType(TextureVideoView.ScaleType.CENTER_CROP);
+            videoview.setLooping(true);
+            videoview.play();
+            lineTextView = (TyperTextView) findViewById(R.id.textView);
+            inG = (Button) findViewById(R.id.btn_inG);
+            inFB = (Button) findViewById(R.id.btn_inFB);
+            inG.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    signIn();
+                }
+            });
+            inFB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loginButton.performClick();
+                }
+            });
+            lineTextView.setSoundEffectsEnabled(false);
+            lineTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((TyperTextView)v).animateText(animText);
+                    if (animText.equals("A Commute App for Sri Lanka")){
+                        animText = "Kute";
+                    }
+                    else if (animText.equals("Kute")){
+                        animText = "A Commute App for Sri Lanka";
+                    }
+                }
+            });
+
+
+            timer = new CountDownTimer(5000, 3000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    lineTextView.performClick();
+                }
+
+                @Override
+                public void onFinish() {
+                    try{
+                        yourMethod();
+                    }catch(Exception e){
+                        Log.e("Error", "Error: " + e.toString());
+                    }
+                }
+            }.start();
 
             // Assign fields
             mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
@@ -170,7 +242,6 @@ public class RegisterActivity extends AppCompatActivity implements
 
             // Initialize FirebaseAuth
             mFirebaseAuth = FirebaseAuth.getInstance();
-
 
             //Facebook
             mAuth = FirebaseAuth.getInstance();
@@ -205,7 +276,7 @@ public class RegisterActivity extends AppCompatActivity implements
             };
 
             mCallbackManager = CallbackManager.Factory.create();
-            LoginButton loginButton = (LoginButton) findViewById(R.id.connectWithFbButton);
+            loginButton = (LoginButton) findViewById(R.id.connectWithFbButton);
             loginButton.setReadPermissions("email", "public_profile","user_friends");
 
             loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
@@ -285,10 +356,14 @@ public class RegisterActivity extends AppCompatActivity implements
 
         rq= Volley.newRequestQueue(this);
     }
+    void yourMethod(){
+        timer.start();
+    }
 
     @Override
     protected void onStop() {
         super.onStop();
+        videoview.stop();
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
@@ -296,8 +371,18 @@ public class RegisterActivity extends AppCompatActivity implements
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        videoview.stop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
+
         mAuth.addAuthStateListener(mAuthListener);
     }
 
