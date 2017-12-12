@@ -17,26 +17,31 @@ People travel to the same destination on a regular basis for various reasons usi
    ```     
 2. Download the Android SDK from the IDE on SDK Manager.
 
-3. Launch android studio(version 1.4 above).   
+3. Go to your terminal and execute this command
 
-4. Go to your terminal and execute this command
+     `git clone https://github.com/scorelab/kute.git`
+     
+     or download the zip file and then unzip the contents.
 
-   ```
-   git clone https://github.com/scorelab/kute.git
-   ```
-   or download the zip file
+4. Checkout the branch 'c_in_refine' (Only for Google Code In participants).
 
-5. To import the project: Click on file, then click Open or from the welcome screen of android studio click Open an existing Android Studio Project. (If you wish to contribute, you can directly link to GitHub)
+    `cd kute`
+    
+    `git checkout c_in_refine`
 
-6. Browse to the location where you had extracted the zip and then select the folder kute-android-app in it.
+5. Launch android studio(version 1.4 above).
 
-7. Android studio will automatically run and build the Gradle for you. In case of anything missing, studio will prompt you on the messages tab to download the needed file and sync project, click on it.
+6. To import the project: Click on File, then New and then Import Project or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub).
 
-8. If Gradle finishes to build without error, connect your phone or emulator and run the project by clicking on the play button on the tool bar.
+7. Browse to the location where you had extracted the zip and then select the folder kute-android-app in it.
 
-9. Wait for a few seconds and the app should start on your device(android phone or emulator), make sure you are connected to Internet.
+8. Android studio will automatically run and build the Gradle for you. In case of anything missing, studio will prompt you to download the needed file and sync project, click on it.
 
-10. Possible errors while building the app:
+9. If Gradle finishes to build without error, connect your phone or emulator and run the project by clicking on the play button on the tool bar.
+
+10. Wait for a few seconds and the app should start on your device(android phone or emulator), make sure you are connected to Internet.
+
+11. Possible errors while building the app:
    a) Colors not found
    Solution- Within studio, navigate to res-> values -> colors.xml and add the missing colors here.
    b) String not found
@@ -44,7 +49,7 @@ People travel to the same destination on a regular basis for various reasons usi
    c) Dusplicate strings found
    Solution- Within studio, navigate to res-> values -> strings.xml and remove the strings that are mentioned more than once.
   
-11. The app should now build successfully and run without any errors
+12. The app should now build successfully and run without any errors
 
 Note: Please use the Facebook credentails given below to access the application.
 
