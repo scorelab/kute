@@ -15,15 +15,9 @@ People travel to the same destination on a regular basis for various reasons usi
    ```
    https://developer.android.com/studio/index.html?hl=id
    ```     
-2. Download the Android SDK from the IDE on SDK Manager
+2. Download the Android SDK from the IDE on SDK Manager.
 
 3. Launch android studio(version 1.4 above).   
-
-3. From the welcome screen you can choose Check out project from Version Control and click on git then paste this url, and android studio will automatically clone th
-   ```
-   git clone https://github.com/scorelab/kute.git
-   ```
-# Manualy
 
 4. Go to your terminal and execute this command
 
@@ -32,7 +26,7 @@ People travel to the same destination on a regular basis for various reasons usi
    ```
    or download the zip file
 
-5. To import the project: Click on file, then click Open or from the welcome screen of android studio click Open an existing Android Studio Project or . (If you wish to contribute, you can directly link to GitHub)
+5. To import the project: Click on file, then click Open or from the welcome screen of android studio click Open an existing Android Studio Project. (If you wish to contribute, you can directly link to GitHub)
 
 6. Browse to the location where you had extracted the zip and then select the folder kute-android-app in it.
 
