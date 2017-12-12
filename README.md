@@ -42,11 +42,11 @@ People travel to the same destination on a regular basis for various reasons usi
 10. Wait for a few seconds and the app should start on your device(android phone or emulator), make sure you are connected to Internet.
 
 11. Possible errors while building the app:
-   a) Colors not found
+   - Colors not found
    Solution- Within studio, navigate to res-> values -> colors.xml and add the missing colors here.
-   b) String not found
+   - String not found
    Solution- Within studio, navigate to res-> values -> strings.xml and add the missing strings here.
-   c) Dusplicate strings found
+   - Dusplicate strings found
    Solution- Within studio, navigate to res-> values -> strings.xml and remove the strings that are mentioned more than once.
   
 12. The app should now build successfully and run without any errors
