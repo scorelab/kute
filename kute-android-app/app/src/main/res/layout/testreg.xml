@@ -45,7 +45,7 @@ Unlock a world of possibilities"
         android:layout_height="300dp"
         android:layout_marginTop="90dp"
         android:background="#2962FF"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
     </LinearLayout>
 
@@ -84,6 +84,7 @@ Unlock a world of possibilities"
         android:paddingLeft="6dp"
         android:background="#e0e0e0"/>
 
+
     <Button
         android:layout_width="180dp"
         android:layout_height="40dp"
@@ -91,8 +92,41 @@ Unlock a world of possibilities"
         android:layout_marginTop="15dp"
         android:background="#2979ff"
         android:text="Sign In"
-        android:textColor="#fff"/>
+        android:textColor="#fff" />
 
+    <TextView
+        android:id="@+id/login_status"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="-47dp"
+        android:layout_gravity="center"
+        android:text="OR"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:visibility="visible" />
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/login_with_google"
+        android:text="login_with_google"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        />
+                 <com.facebook.login.widget.LoginButton
+                     android:id="@+id/connectWithFbButton"
+                     android:layout_width="150dp"
+                     android:layout_height="50dp"
+                     android:layout_marginLeft="210dp"
+                     android:layout_marginRight="3dp"
+                     android:layout_marginTop="-50dp"
+                     android:paddingTop="10dp"
+                     android:text="connect_with_facebook"
+                     android:textSize="18sp" />
 </LinearLayout>
 
 </LinearLayout>
