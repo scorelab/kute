@@ -1,15 +1,20 @@
 package com.scorelab.kute.kute.Activity;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,7 +30,6 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -44,6 +48,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.scorelab.kute.kute.R;
 import com.scorelab.kute.kute.SplashActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
+
+import java.util.Arrays;
 
 public class RegisterActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -202,10 +208,10 @@ public class RegisterActivity extends AppCompatActivity implements
             };
 
             mCallbackManager = CallbackManager.Factory.create();
-            LoginButton loginButton = findViewById(R.id.connectWithFbButton);
-            loginButton.setReadPermissions("email", "public_profile", "user_friends");
+            //LoginButton loginButton = findViewById(R.id.connectWithFbButton);
+            //loginButton.setReadPermissions("email", "public_profile", "user_friends");
 
-            loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                 private ProfileTracker mProfileTracker;
 
                 @Override
@@ -271,12 +277,41 @@ public class RegisterActivity extends AppCompatActivity implements
                 }
             });
 
+            Button newLoginButton = findViewById(R.id.connectWithFbButtonNew);
+            final Activity thisActivity = this;
+            newLoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LoginManager.getInstance().logInWithReadPermissions(thisActivity, Arrays.asList("email", "public_profile", "user_friends"));
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
+        try {
+            Toolbar toolbar = findViewById(R.id.toolbar_sign_in);
+            setSupportActionBar(toolbar);
+            //noinspection ConstantConditions
+            getSupportActionBar().setTitle("Register or log in");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
+            }
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+
         rq = Volley.newRequestQueue(this);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public boolean onSupportNavigateUp() {
+        finishAffinity();
+        return false;
     }
 
     @Override

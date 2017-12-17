@@ -1,42 +1,123 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/login_bg"
     tools:context=".Activity.RegisterActivity">
 
-    <TextView
-        android:id="@+id/login_status"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"
-        android:visibility="gone" />
+        android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:contentInsetStartWithNavigation="0dp"
+            app:elevation="0dp"
+            app:title="Register or log in"
+            app:titleTextColor="@android:color/white" />
+    </android.support.design.widget.AppBarLayout>
 
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/login_with_google"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="login_with_google" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/connectWithFbButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:text="  connect_with_facebook" />
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:cardBackgroundColor="#B3FFFFFF"
+        app:cardCornerRadius="4dp"
+        app:contentPadding="@dimen/activity_horizontal_margin">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/appname_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/app_name"
+                android:textAllCaps="true"
+                android:textSize="72sp"
+                android:textStyle="normal|bold" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/login_info"
+                style="@style/TextAppearance.AppCompat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appname_login"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/login_info"
+                android:textAlignment="center" />
+
+            <View
+                android:id="@+id/login_separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/login_info"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/login_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:visibility="gone" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/login_with_google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_separator"
+                android:text="login_with_google" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/connectWithFbButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/login_with_google"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="  connect_with_facebook"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/connectWithFbButtonNew"
+                style="@style/FacebookButtonLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_with_google"
+                android:layout_marginTop="@dimen/content_area_margin"
+                android:height="48dp"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_login_facebook_white_24"
+                android:drawableStart="@drawable/ic_login_facebook_white_24"
+                android:focusable="true"
+                android:text="@string/login_fb_login_button"
+                android:textAllCaps="false"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/connectWithFbButtonNew" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
