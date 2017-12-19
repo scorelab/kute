@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_splash"
     android:layout_width="match_parent"
-    tools:context="com.scorelab.kute.kute.SplashActivity"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#3498db"
+    tools:context="com.example.raghav.myapplication.MainActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@color/splashBackground"
-        android:id="@+id/imageView2" />
+        android:id="@+id/imageView"
+        android:layout_width="270dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="100dp"
+        android:background="#3498db" />
 
     <TextView
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:text="Kute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView"
-        android:textSize="36sp"
-        android:textColor="@android:color/background_light"
-        android:textStyle="normal|bold"
-        android:fontFamily="sans-serif-smallcaps" />
-</RelativeLayout>
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="-180dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="35dp" />
+
+    <TextView
+        android:layout_width="240dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="-145dp"
+        android:layout_marginTop="440dp"
+        android:text="Loading Kute..."
+        android:textColor="#fff"
+        android:textSize="30dp" />
+
+</LinearLayout>
