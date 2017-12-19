@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.scorelab.kute.kute.Activity.RegisterActivity;
@@ -15,6 +16,23 @@ import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class SplashActivity extends AppCompatActivity {
     static  FirebaseDatabase fb;
+    ImageView imageView;
+    AnimationDrawable anim;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+
+        imageView = (ImageView)findViewById(R.id.imageView);
+        if(imageView == null) throw new AssertionError();
+        imageView.setBackgroundResource(R.drawable.loading_animation);
+        imageView.setVisibility(View.VISIBLE);
+
+        anim = (AnimationDrawable)imageView.getBackground();
+        anim.start();
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
