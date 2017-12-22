@@ -284,4 +284,5 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-# End of https://www.gitignore.io/api/java,macos,gradle,python
+# End of https://www.gitignore.io/api/java,macos,gradle,python,android,intellij
+
