@@ -7,6 +7,11 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.scorelab.kute.kute.Activity.RegisterActivity;
@@ -14,11 +19,23 @@ import com.scorelab.kute.kute.Activity.SwitchPrivatePublicActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
 
 public class SplashActivity extends AppCompatActivity {
+    Animation myAnimation;
+    TextView myText;
     static  FirebaseDatabase fb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        myText = (TextView)findViewById(R.id.textView);
+
+        myAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+        myText.setOnClickListener(new OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                myText.startAnimation(myAnimation);
+            }});
 
         new DelayTask().execute(); // This will delay the spalsh scrren and redierct to the login/register screen based
         //on the ststus of the user.
