@@ -1,69 +1,62 @@
-# Kute
-A Commute App for Sri Lanka
-
-People travel to the same destination on a regular basis for various reasons using public and private transport. In Kute, the users (also known as travellers) themselves are allowed to share their current location, so that the other travellers can see the current location of the vehicle. A common type of vehicle used for public transport in Sri Lanka is the passenger train. Kute is currently implemented for trains. A registered user can update the current location of a train when travelling by sharing the current location. Another user can view location of a selected train and the expected time a particular train arrives at the nearest station using the location data updated by another user. 
+Kute App
+===================
 
 
-![alt tag](https://github.com/Dilu9218/kute/blob/master/shareShow.png)
-![alt tag](https://github.com/Dilu9218/kute/blob/master/search.png)
+**Kute** is an app that makes navigation and transportation easier and more efficient for people travelling to the same destination.People can easily navigate and identify public transport services around them without having to look through the schedules and timings.Travellers can share their location and tackle the problems of ever-changing schedules together.
+
+![enter image description here](http://res.cloudinary.com/raghavp/image/upload/v1513531690/kute1_bhhvhj.png)
+
+![enter image description here](http://res.cloudinary.com/raghavp/image/upload/v1513531691/kute2_vtvneu.png)
+
+----------
+
+
+Installation
+-------------
+
+You can install and run **Kute App** easily on your android device or emulator using the following instructions
+
+1)Download the zip file from the repository at 
+https://github.com/scorelab/kute/tree/c_in_refine or,use the following git command to clone the file 
+> git clone https://github.com/scorelab/kute.git
+
+2)Next set up Android Studio on your device,using the following link 
+https://developer.android.com/studio/install.html
+
+3)Start Android studio and download the SDK's
+
+4)Set Up your emulator in Android Studio,you can do so by going to Tools>Android>AVD Manager,next you will be prompted with instructions to set up your emulator.
+
+5)Go to the zip file or navigate to the directory using the "Cd" command and launch the project
+
+6)The project will build automatically,there might be some errors but android studio will provide you with the problem and even give you an option to install the required components causing the error.
+
+7)After this Run the app and select the emulator or your android device.
+
+8)Wait for the emulator to start up and turn on,later the APK file will install automatically 
+
+9)Kute App will start up once you open the APK file you can use the following facebook credentials to log in 
+
+**Login 1**
+
+Email: kute_rukdjlk_one@tfbnw.net
+Password: kute123
+
+**Login 2**
+
+Email: kute_jmzumqg_two@tfbnw.net
+Password: kute123
+
+**That's It :)**
+
+Troubleshooting
+-------------
+1)Android Manifest incorrect root - In this case restart the project and on the bottom left you will see an option to configure android framework ,do so.
+
+2)Google Maven files not installed - in this case just follow the prompt provided by android studio.
+
+3)SDK Files for emulator not installed - in this case you can try restarting the project and set up the emulator.
 
 
 
-## Installation
 
-1. Download and install android studio for IDE
-   ```
-   https://developer.android.com/studio/index.html?hl=id
-   ```     
-2. Download the Android SDK from the IDE on SDK Manager.
-
-3. Go to your terminal and execute this command
-
-     `git clone https://github.com/scorelab/kute.git`
-     
-     or download the zip file and then unzip the contents.
-
-4. Checkout the branch 'c_in_refine' (Only for Google Code In participants).
-
-    `cd kute`
-    
-    `git checkout c_in_refine`
-
-5. Launch android studio(version 1.4 above).
-
-6. To import the project: Click on File, then New and then Import Project or from the welcome screen of android studio click on Import project. (If you wish to contribute, you can directly link to GitHub).
-
-7. Browse to the location where you had extracted the zip and then select the folder kute-android-app in it.
-
-8. Android studio will automatically run and build the Gradle for you. In case of anything missing, studio will prompt you to download the needed file and sync project, click on it.
-
-9. If Gradle finishes to build without error, connect your phone or emulator and run the project by clicking on the play button on the tool bar.
-
-10. Wait for a few seconds and the app should start on your device(android phone or emulator), make sure you are connected to Internet.
-
-11. Possible errors while building the app:
-   - Colors not found
-   Solution- Within studio, navigate to res-> values -> colors.xml and add the missing colors here.
-   - String not found
-   Solution- Within studio, navigate to res-> values -> strings.xml and add the missing strings here.
-   - Dusplicate strings found
-   Solution- Within studio, navigate to res-> values -> strings.xml and remove the strings that are mentioned more than once.
-  
-12. The app should now build successfully and run without any errors
-
-Note: Please use the Facebook credentails given below to access the application.
-
-## Test users
-
- user 01
- - email: kute_rukdjlk_one@tfbnw.net
- - pwd: kute123
-
- user 02
- - email: kute_jmzumqg_two@tfbnw.net
- - pwd: kute123
-
-## License
-
-This project is licensed under the terms of the Apache License 2.0.
- 
