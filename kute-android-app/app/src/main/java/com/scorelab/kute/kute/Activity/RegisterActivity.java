@@ -1,16 +1,20 @@
 package com.scorelab.kute.kute.Activity;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,7 +30,6 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -46,14 +49,15 @@ import com.scorelab.kute.kute.R;
 import com.scorelab.kute.kute.SplashActivity;
 import com.scorelab.kute.kute.Util.ImageHandler;
 
+import java.util.Arrays;
+
 public class RegisterActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener{
+        View.OnClickListener {
 
-    RequestQueue rq;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
-
+    RequestQueue rq;
     private SignInButton mSignInButton;
 
     private GoogleApiClient mGoogleApiClient;
@@ -109,8 +113,7 @@ public class RegisterActivity extends AppCompatActivity implements
                 // Google Sign In failed
                 Log.e(TAG, "Google Sign In failed.");
             }
-        }
-        else{
+        } else {
             mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -132,11 +135,11 @@ public class RegisterActivity extends AppCompatActivity implements
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Authentication Done."+task.getResult().getUser().getDisplayName()+" - "+task.getResult().getUser().getDisplayName()+" - "+task.getResult().getUser().getEmail()+" - "+task.getResult().getUser().getPhotoUrl().getPath()+" - ",
+                            Toast.makeText(RegisterActivity.this, "Authentication Done." + task.getResult().getUser().getDisplayName() + " - " + task.getResult().getUser().getDisplayName() + " - " + task.getResult().getUser().getEmail() + " - " + task.getResult().getUser().getPhotoUrl().getPath() + " - ",
                                     Toast.LENGTH_SHORT).show();
                             getImage(task.getResult().getUser().getPhotoUrl().toString());
 
-                            Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
+                            Intent intentdone = new Intent(RegisterActivity.this, SplashActivity.class);
                             startActivity(intentdone);
 
                         }
@@ -153,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity implements
             setContentView(R.layout.testreg);
 
             // Assign fields
-            mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
+            mSignInButton = findViewById(R.id.login_with_google);
 
             // Set click listeners
             mSignInButton.setOnClickListener(this);
@@ -186,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity implements
                         getImage(user.getPhotoUrl().toString());
 
 
-                        Intent intentdone=new Intent(RegisterActivity.this, SplashActivity.class);
+                        Intent intentdone = new Intent(RegisterActivity.this, SplashActivity.class);
                         startActivity(intentdone);
                         finish();
 
@@ -205,22 +208,23 @@ public class RegisterActivity extends AppCompatActivity implements
             };
 
             mCallbackManager = CallbackManager.Factory.create();
-            LoginButton loginButton = (LoginButton) findViewById(R.id.connectWithFbButton);
-            loginButton.setReadPermissions("email", "public_profile","user_friends");
+            //LoginButton loginButton = findViewById(R.id.connectWithFbButton);
+            //loginButton.setReadPermissions("email", "public_profile", "user_friends");
 
-            loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                 private ProfileTracker mProfileTracker;
+
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     try {
                         Log.d(TAG, "facebook:onSuccess:" + loginResult);
                         //Saving Facebook Credentials of the user
-                        if(Profile.getCurrentProfile() == null) {
+                        if (Profile.getCurrentProfile() == null) {
                             mProfileTracker = new ProfileTracker() {
                                 @Override
                                 protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
                                     // profile2 is the new profile
-                                    Log.d("check",profile2.getCurrentProfile().toString());
+                                    Log.d("check", Profile.getCurrentProfile().toString());
                                     saveFacebookProfile(profile2);
                                     mProfileTracker.stopTracking();
                                 }
@@ -228,18 +232,16 @@ public class RegisterActivity extends AppCompatActivity implements
                             mProfileTracker.startTracking();
                             // no need to call startTracking() on mProfileTracker
                             // because it is called by its constructor, internally.
-                        }
-                        else {
-                            Log.d("check",Profile.getCurrentProfile().toString());
+                        } else {
+                            Log.d("check", Profile.getCurrentProfile().toString());
                             saveFacebookProfile(Profile.getCurrentProfile());
                         }
 
-                        Log.d(TAG,"Facebook Login:Saved Credentials to Shared Prefs");
+                        Log.d(TAG, "Facebook Login:Saved Credentials to Shared Prefs");
                         //Auth with Firebase
                         handleFacebookAccessToken(loginResult.getAccessToken());
 
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
 
                     }
@@ -247,14 +249,13 @@ public class RegisterActivity extends AppCompatActivity implements
 
                 @Override
                 public void onCancel() {
-                    try{
-                    Log.d(TAG, "facebook:onCancel");
-                    // [START_EXCLUDE]
-                    Toast.makeText(getApplicationContext(), "Facebook  Cancel", Toast.LENGTH_LONG).show();
-                    //updateUI(null);
-                    // [END_EXCLUDE]
-                    }
-                    catch (Exception e){
+                    try {
+                        Log.d(TAG, "facebook:onCancel");
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(), "Facebook  Cancel", Toast.LENGTH_LONG).show();
+                        //updateUI(null);
+                        // [END_EXCLUDE]
+                    } catch (Exception e) {
                         e.printStackTrace();
 
                     }
@@ -262,28 +263,55 @@ public class RegisterActivity extends AppCompatActivity implements
 
                 @Override
                 public void onError(FacebookException error) {
-                    try{
+                    try {
 
-                    Log.d(TAG, "facebook:onError", error);
-                    // [START_EXCLUDE]
-                    Toast.makeText(getApplicationContext(), "Facebook  Error "+error.getMessage(), Toast.LENGTH_LONG).show();
-                    //updateUI(null);
-                    // [END_EXCLUDE]
-                    }
-                    catch (Exception e){
+                        Log.d(TAG, "facebook:onError", error);
+                        // [START_EXCLUDE]
+                        Toast.makeText(getApplicationContext(), "Facebook  Error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        //updateUI(null);
+                        // [END_EXCLUDE]
+                    } catch (Exception e) {
                         e.printStackTrace();
 
                     }
                 }
             });
 
-        }
-        catch (Exception e){
+            Button newLoginButton = findViewById(R.id.connectWithFbButtonNew);
+            final Activity thisActivity = this;
+            newLoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LoginManager.getInstance().logInWithReadPermissions(thisActivity, Arrays.asList("email", "public_profile", "user_friends"));
+                }
+            });
+
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        rq= Volley.newRequestQueue(this);
+        try {
+            Toolbar toolbar = findViewById(R.id.toolbar_sign_in);
+            setSupportActionBar(toolbar);
+            //noinspection ConstantConditions
+            getSupportActionBar().setTitle("Register or log in");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
+            }
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+
+        rq = Volley.newRequestQueue(this);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public boolean onSupportNavigateUp() {
+        finishAffinity();
+        return false;
     }
 
     @Override
@@ -305,7 +333,7 @@ public class RegisterActivity extends AppCompatActivity implements
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
         // [START_EXCLUDE silent]
-        Toast.makeText(getApplicationContext(),"Facebook  show dialog",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Facebook  show dialog", Toast.LENGTH_LONG).show();
         //showProgressDialog();
         // [END_EXCLUDE]
 
@@ -314,24 +342,23 @@ public class RegisterActivity extends AppCompatActivity implements
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        try{
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                        try {
+                            Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "signInWithCredential", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                        // [START_EXCLUDE]
-                        Toast.makeText(getApplicationContext(),"Facebook  hide dialog",Toast.LENGTH_LONG).show();
-                        //hideProgressDialog();
-                        // [END_EXCLUDE]
-                        }
-                        catch (Exception e){
+                            // [START_EXCLUDE]
+                            Toast.makeText(getApplicationContext(), "Facebook  hide dialog", Toast.LENGTH_LONG).show();
+                            //hideProgressDialog();
+                            // [END_EXCLUDE]
+                        } catch (Exception e) {
                             e.printStackTrace();
 
                         }
@@ -345,33 +372,33 @@ public class RegisterActivity extends AppCompatActivity implements
     public void signOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
-        Toast.makeText(getApplicationContext(),"You have been Signout from the Kute",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "You have been Signout from the Kute", Toast.LENGTH_LONG).show();
         //updateUI(null);
     }
-    public void saveFacebookProfile(Profile pf)
-    {
-        SharedPreferences pref=getApplicationContext().getSharedPreferences("user_credentials",0);
-        SharedPreferences.Editor editor=pref.edit();
-        editor.putString("Login_Method","Facebook");
+
+    public void saveFacebookProfile(Profile pf) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("user_credentials", 0);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("Login_Method", "Facebook");
         editor.putString("Name", pf.getName());
-        editor.putString("Id",pf.getId());
-        editor.putString("Profile_Image","null");
-        editor.putBoolean("Register_db",true);
-        editor.putBoolean("Sync_Friends_db",true);
+        editor.putString("Id", pf.getId());
+        editor.putString("Profile_Image", "null");
+        editor.putBoolean("Register_db", true);
+        editor.putBoolean("Sync_Friends_db", true);
         editor.apply();
     }
 
-    public void getImage(String url){
+    public void getImage(String url) {
         ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
-        @Override
-        public void onResponse(Bitmap response) {
-            ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey,MODE_PRIVATE),response);
-            ImageView iv=(ImageView)findViewById(R.id.imageView);
-            iv.setImageBitmap(response);
-        }
-    }, 0, 0, null, null);
-    rq.add(ir);
+            @Override
+            public void onResponse(Bitmap response) {
+                ImageHandler.saveImageToprefrence(getSharedPreferences(ImageHandler.MainKey, MODE_PRIVATE), response);
+                ImageView iv = findViewById(R.id.imageView);
+                iv.setImageBitmap(response);
+            }
+        }, 0, 0, null, null);
+        rq.add(ir);
 
-}
+    }
 
 }
