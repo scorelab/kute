@@ -8,37 +8,125 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="#2979FF"
     tools:context=".Activity.RegisterActivity">
 
+
+    <TextView
+        android:text="Kute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView"
+        android:textSize="46sp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="137dp"
+        android:layout_marginTop="48dp"
+        android:textColor="@android:color/background_light"
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif-smallcaps" />
     <TextView
         android:id="@+id/login_status"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="  Sign in to the Kute App and
+Unlock a world of possibilities"
         android:textAlignment="center"
-        android:layout_marginTop="20dp" />
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:visibility="visible" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="90dp"
+        android:background="#2962FF"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="-360dp"
+        android:layout_gravity="center"
+        android:background="#FFF"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@android:drawable/ic_lock_lock" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:text="Username"
+        android:layout_gravity="center"
+        android:background="#e0e0e0"
+        android:layout_marginTop="-149dp"
+        android:paddingTop="2dp"
+        android:paddingLeft="6dp"/>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:text="Password"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingTop="2dp"
+        android:paddingLeft="6dp"
+        android:background="#e0e0e0"/>
+
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="#2979ff"
+        android:text="Sign In"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/login_status"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="-47dp"
+        android:layout_gravity="center"
+        android:text="OR"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:visibility="visible" />
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/login_with_google"
         android:text="login_with_google"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/connectWithFbButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:text="  connect_with_facebook" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView" />
-
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        />
+                 <com.facebook.login.widget.LoginButton
+                     android:id="@+id/connectWithFbButton"
+                     android:layout_width="150dp"
+                     android:layout_height="50dp"
+                     android:layout_marginLeft="210dp"
+                     android:layout_marginRight="3dp"
+                     android:layout_marginTop="-50dp"
+                     android:paddingTop="10dp"
+                     android:text="connect_with_facebook"
+                     android:textSize="18sp" />
+</LinearLayout>
 
 </LinearLayout>
