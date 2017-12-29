@@ -1,60 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_splash"
     android:layout_width="match_parent"
-    android:background="@color/splashBackground"
-    tools:context="com.scorelab.kute.kute.SplashActivity"
-    android:layout_height="match_parent">
+ android:layout_height="match_parent"
+    android:background="#3498db"
+    tools:context="com.example.raghav.myapplication.MainActivity">
 
 
 
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="358dp"
-        android:src="@drawable/cityfade"
-        android:scaleType = "centerCrop"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/imageView2" />
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="358dp"
-        android:src="@drawable/marker"
-        android:scaleType = "centerCrop"
-        android:id="@+id/gifImageView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+   android:id="@+id/imageView"
+        android:layout_width="270dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="100dp"
+        android:background="#3498db" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="A Commute App for Sri Lanka"
-        android:textSize="15sp"
-        android:fontFamily="sans-serif-light"
-        android:layout_marginTop="50dp"
-        android:id="@+id/textView2"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="80dp"
         android:layout_height="40dp"
-        android:id="@+id/textView"
-        android:src="@drawable/kute"
+        android:text="Kute"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="-180dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="35dp" />
 
-        android:layout_above="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp" />
+    <TextView
+        android:layout_width="240dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="-145dp"
+        android:layout_marginTop="440dp"
+        android:text="Loading Kute..."
+        android:textColor="#fff"
+        android:textSize="30dp" />
 
-
-</RelativeLayout>
+</LinearLayout>

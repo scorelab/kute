@@ -42,5 +42,7 @@
 
     <!--Url for kute backend server -->
     <string name="server_url">http://139.59.40.238:88/</string>
+    <string name="login_info">To use the Kute app, you need to log in or sign up. Try one of the login options below.</string>
+    <string name="login_fb_login_button">Continue with Facebook</string>
 
 </resources>

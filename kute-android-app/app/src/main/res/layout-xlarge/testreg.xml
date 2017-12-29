@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background="@drawable/login_bg"
+    android:background="@drawable/login_bg"
     tools:context=".Activity.RegisterActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -26,8 +26,8 @@ android:background="@drawable/login_bg"
     </android.support.design.widget.AppBarLayout>
 
 
-<android.support.v7.widget.CardView
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
