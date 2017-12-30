@@ -42,6 +42,11 @@ Enable USB Debugging in your phone. Click Run on the Android Studio tool bar, or
 - Setup a Android Virtual Device in the IDE.
 Then running the application by clicking on Run on the Android Studio tool bar, or `Shift + F10` and then choose the newly created virtual device to run the app.
 
+**Login 1**
+Email: kute_rukdjlk_one@tfbnw.net Password: kute123
+**Login 2**
+Email: kute_jmzumqg_two@tfbnw.net Password: kute123
+
 # Google Code-in 2017
 
 Google Code-in users should checkout the c_in_refine branch for all tasks.
