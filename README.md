@@ -1,4 +1,4 @@
-.# Kute
+## Kute
 A Commute App for Sri Lanka
 
 People travel to the same destination on a regular basis for various reasons using public and private transport. In Kute, the users (also known as travellers) themselves are allowed to share their current location, so that the other travellers can see the current location of the vehicle. A common type of vehicle used for public transport in Sri Lanka is the passenger train. Kute is currently implemented for trains. A registered user can update the current location of a train when travelling by sharing the current location. Another user can view location of a selected train and the expected time a particular train arrives at the nearest station using the location data updated by another user. 
