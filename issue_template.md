@@ -2,12 +2,14 @@ Hello everyone. Before you make an issue, please refer to this template. Thank y
 
 ## Short, Informative Title
 
-# Issue Overview
+## Issue Overview
 
-# Expected Behaviour
+## Issue Explanation (Background, Importance, etc.)
 
-# Actual Behaviour
+## Expected Behaviour
 
-# Steps to Reproduce Actual Behaviour
+## Actual Behaviour
 
-# Additional Information
+## Steps to Reproduce Actual Behaviour
+
+## Additional Information
