@@ -30,13 +30,13 @@ People travel to the same destination on a regular basis for various reasons usi
     <string name="googlemapApi">YOUR_GOOGLE_MAPS_API_KEY</string>
    ...
    ```
-  Also delete the sample strings i.e
-   ```
-   ...
-    <string name="facebook_app_id">sample</string>
-    <string name="googlemapApi">sample</string>
-   ...
-   ```
+     Also delete the sample strings i.e
+     ```
+     ...
+       <string name="facebook_app_id">sample</string>
+       <string name="googlemapApi">sample</string>
+     ...
+     ```
   
 6. Run and build the Gradle
 
