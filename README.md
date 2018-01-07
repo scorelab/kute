@@ -15,7 +15,7 @@ People travel to the same destination on a regular basis for various reasons usi
    ```
    git clone https://github.com/scorelab/kute.git
    ```
-   or download the zip file
+   or download the zip file.
 
 2. Launch android studio (version 1.4 above).
 
@@ -38,7 +38,7 @@ People travel to the same destination on a regular basis for various reasons usi
      ...
      ```
   
-6. Run and build the Gradle
+6. Run and build the Gradle.
 
 7. If Gradle finishes to build without error run the project by clicking on the play button on the tool bar.
 
