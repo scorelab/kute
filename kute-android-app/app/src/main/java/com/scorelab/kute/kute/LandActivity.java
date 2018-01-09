@@ -320,6 +320,10 @@ public class LandActivity extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        UiSettings uiSettings = googleMap.getUiSettings();
+        uiSettings.setCompassEnabled(false);
+        uiSettings.setZoomControlsEnabled(true);
+        uiSettings.setMyLocationButtonEnabled(false);
         mGoogleMap.setMyLocationEnabled(true);
     }
 
