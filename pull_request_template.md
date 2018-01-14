@@ -4,9 +4,10 @@ Hey there contributors! Before you make your contribution, please consider using
 
 
 ## Type of change
-- [] Bug Fix
-- [] Improvement
-- [] New Feature
+
+- [ ] Bug Fix
+- [ ] Improvement
+- [ ] New Feature
 
 ## Impacted Areas in Application
 
