@@ -3,7 +3,11 @@ Hey there contributors! Before you make your contribution, please consider using
 ## What was changed?
 
 
-## In what way will it help other users?
+## Type of change
+- [] Bug Fix
+- [] Improvement
+- [] New Feature
 
+## Impacted Areas in Application
 
 ## A description about your changes
