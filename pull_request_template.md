@@ -1,14 +1,15 @@
-Hey there contributors! Before you make your contribution, please consider using this template.
-
-## What was changed?
-
+<!-- Hey there contributors! Before you make your contribution, please consider using this template -->
 
 ## Type of change
-
-- [ ] Bug Fix
+- [ ] Bug fix
 - [ ] Improvement
-- [ ] New Feature
+- [ ] New feature
 
-## Impacted Areas in Application
+## What was changed?
+(What bug was fixed, what feature was added, etc. Make sure to reference issues if applicable)
+
+## Impacted areas in the application
+(What screens or files where changed)
 
 ## A description about your changes
+(What does this code do exactly. Explain why it's the most effective)
