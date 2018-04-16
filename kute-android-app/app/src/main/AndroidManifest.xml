@@ -33,7 +33,8 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/googlemapApi"/>
 
-    <activity android:name=".SplashActivity">
+    <activity android:name=".SplashActivity"
+        android:noHistory="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

@@ -326,7 +326,10 @@ public class RegisterActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        if (mAuth != null){
+            mAuth.addAuthStateListener(mAuthListener);
+
+        }
     }
 
     // [START auth_with_facebook]

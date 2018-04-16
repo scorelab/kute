@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
     tools:context=".Activity.RegisterActivity">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/login_bg"
+        android:scaleType="centerCrop"
+        android:layout_height="match_parent" />
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarlayout_sign_in"
         android:layout_width="match_parent"
