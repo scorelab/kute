@@ -1,5 +1,8 @@
 ## Kute
 A Commute App for Sri Lanka
+# Build Status
+[![Build Status](TRAVIS CI LINK HERE)](TRAVIS CI LINK HERE)
+[![Codacy Badge](CODACY LINK HERE)](CODACY LINK HERE)
 
 [![Join the chat at https://gitter.im/scorelab/scorelab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scorelab/scorelab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
