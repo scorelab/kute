@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,16 +34,18 @@ public class SplashActivity extends AppCompatActivity {
         anim = (AnimationDrawable)imageView.getBackground();
         anim.start();
 
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-
         new DelayTask().execute(); // This will delay the spalsh scrren and redierct to the login/register screen based
-        //on the ststus of the user.
+       //on the ststus of the user.
 
     }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_splash);
+//
+//
+//
+//    }
 
     class DelayTask extends AsyncTask<Void,Void,Void>{
 
