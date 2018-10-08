@@ -177,12 +177,10 @@ public class LandActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-
         //Map area
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mainMapView);
         mapFragment.getMapAsync(this);
-
     }
 
     @Override
