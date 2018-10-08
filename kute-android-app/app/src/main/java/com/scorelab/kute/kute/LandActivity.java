@@ -183,6 +183,7 @@ public class LandActivity extends AppCompatActivity
                 .findFragmentById(R.id.mainMapView);
         mapFragment.getMapAsync(this);
 
+
     }
 
     @Override
@@ -309,6 +310,10 @@ public class LandActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+        
+        //to zoom in
+        mGoogleMap.setOnCameraMoveStartedListener(this);
+        mGoogleMap.setMaxZoomPreference(14.0f);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -321,6 +326,16 @@ public class LandActivity extends AppCompatActivity
             return;
         }
         mGoogleMap.setMyLocationEnabled(true);
+    }
+
+    @Override
+    public void onCameraMoveStarted(int reason) {
+
+        if (reason == OnCameraMoveStartedListener.REASON_GESTURE) {
+            mGoogleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            Toast.makeText(this, "The user gestured on the map.",
+                           Toast.LENGTH_SHORT).show();
+        } 
     }
 
     @Override
