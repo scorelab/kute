@@ -54,7 +54,7 @@ Google Code-in users should checkout the **c_in_refine** branch for all tasks.
 
    ```git checkout c_in_refine```
    
-You'll have all the necessary information to procede in there.
+You'll have all the necessary information to proceed in there.
 
 
 ## License
